@@ -92,7 +92,7 @@ public class RegistrationServlet extends HttpServlet {
 
             // Enter your correct gmail UserID and Password
             // if you have 2FA enabled then provide App Specific Password
-            transport.connect("smtp.gmail.com", "hrajpal96@gmail.com", "Scarfaceis964@");
+            transport.connect("smtp.gmail.com", "yourid", "yourpass");
             transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
             transport.close();
             transport = null;
