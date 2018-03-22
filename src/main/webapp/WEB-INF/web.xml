@@ -13,16 +13,16 @@
         <servlet-class>com.shelf.session.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegistrationServlet</servlet-name>
-        <servlet-class>com.shelf.registration.RegistrationServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EmailVerificationServlet</servlet-name>
         <servlet-class>com.shelf.registration.EmailVerificationServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>com.shelf.search.SearchServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <servlet-class>com.shelf.registration.RegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RecommendationTestServlet</servlet-name>
@@ -37,16 +37,16 @@
         <url-pattern>/logout.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RegistrationServlet</servlet-name>
-        <url-pattern>/register.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>EmailVerificationServlet</servlet-name>
         <url-pattern>/verify.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <url-pattern>/register.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

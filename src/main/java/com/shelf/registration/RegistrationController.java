@@ -45,7 +45,7 @@ public class RegistrationController {
             rowSet.setReadOnly(false);
 //             Fills this RowSet object with data.
             context.setAttribute("connection", rowSet);
-            rowSet.setCommand("");
+            rowSet.setCommand("SELECT MAX(UID) FROM ROOT.userdetails");
             rowSet.execute();
             rowSet.absolute(1);
             uid = rowSet.getInt(1);
