@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shelf.registration;
 
 import static com.shelf.registration.RegistrationController.validateEmail;
@@ -25,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Lenovo
+ * @author Harsh
  */
 public class RegistrationServlet extends HttpServlet {
 
@@ -46,15 +41,26 @@ public class RegistrationServlet extends HttpServlet {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String password = request.getParameter("password");
-        String contactNumber=request.getParameter("contactNumber");
+        String contactNumber = request.getParameter("contactNumber");
         RegistrationController controller = new RegistrationController();
         System.out.println(emailID);
         if (validateEmail(emailID)) {
             UserBean user = controller.addUser(firstName, lastName, emailID, contactNumber, password, this.getServletContext());
-            sendVerificationMail(user);
+            if (!(user == null)) {
+                sendVerificationMail(user);
+                request.setAttribute("isregistered", true);
+                request.getRequestDispatcher("registered.jsp").forward(request, response);
+            } else {
+                request.setAttribute("message", "Please enter valid details");
+                response.setHeader("Refresh", "1");
+            }
         }
     }
 
+    /**
+     *
+     * @param aUser UserBean
+     */
     private void sendVerificationMail(UserBean aUser) {
         Properties mailServerProperties;
         Session getMailSession;
@@ -92,7 +98,7 @@ public class RegistrationServlet extends HttpServlet {
 
             // Enter your correct gmail UserID and Password
             // if you have 2FA enabled then provide App Specific Password
-            transport.connect("smtp.gmail.com", "yourid", "yourpass");
+            transport.connect("smtp.gmail.com", "<youremail@abc.com", "yourpassword");
             transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
             transport.close();
             transport = null;

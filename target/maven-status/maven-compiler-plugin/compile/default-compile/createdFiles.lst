@@ -1,9 +1,0 @@
-com\shelf\registration\EmailVerificationServlet.class
-com\shelf\registration\RegistrationController.class
-com\shelf\session\LogoutServlet.class
-com\shelf\registration\RegistrationServlet.class
-com\shelf\session\LoginController.class
-com\shelf\search\SearchServlet.class
-com\shelf\recommender\RecommendationTestServlet.class
-com\shelf\session\UserBean.class
-com\shelf\session\LoginServlet.class

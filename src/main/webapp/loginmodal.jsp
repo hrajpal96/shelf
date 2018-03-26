@@ -5,6 +5,7 @@
 --%>
 
 <!--Account Modal Structure-->
+<%@include file="base.html" %>
 <%@include file="cachecontroller.jsp" %>
 <div id="login" class="modal">
     <div class="collapsible-header btn red accent-4 active"><i class="material-icons prefix ">account_circle</i>

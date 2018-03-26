@@ -29,11 +29,13 @@ public class LogoutServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+//        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            request.getSession(true).invalidate();
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getSession().invalidate();
+//            request.getRequestDispatcher("index.jsp").forward(request, response);
+            String url = response.encodeRedirectURL("success.jsp");
+            response.sendRedirect(url);
         }
     }
 

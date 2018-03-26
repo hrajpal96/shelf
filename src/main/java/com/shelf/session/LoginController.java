@@ -6,11 +6,8 @@
 package com.shelf.session;
 
 import com.sun.rowset.JdbcRowSetImpl;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import connectionproperties.ConnectionBean;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.sql.rowset.JdbcRowSet;
 
@@ -20,40 +17,34 @@ import javax.sql.rowset.JdbcRowSet;
  */
 class LoginController {
 
-    private static JdbcRowSet rowSet = null;
     UserBean user = new UserBean();
-    private final static String DB_DRIVER_CLASS = "org.apache.derby.jdbc.ClientDriver";
-    private final static String DB_URL = "jdbc:derby://localhost:1527/shelf";
-    private final static String DB_USERNAME = "root";
-    private final static String DB_PASSWORD = "shelf123@";
 
-    public UserBean authenticate(ServletContext context, String emailID, String password) throws ClassNotFoundException {
+    public UserBean authenticate(String emailID, String password, ServletContext context) throws ClassNotFoundException {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-            Class.forName(DB_DRIVER_CLASS);
-            rowSet = new JdbcRowSetImpl(conn);
-            rowSet.setCommand("SELECT * from ROOT.userdetails where emailID = '" + emailID + "'");
-            rowSet.setReadOnly(true);
+
+            ConnectionBean conn = (ConnectionBean) context.getAttribute("db");
+            final JdbcRowSet rowSet = new JdbcRowSetImpl(conn.getConnection());
+//            rowSet.setReadOnly(true);
+            System.out.println("Login "+ emailID);
+            rowSet.setCommand("SELECT * FROM user where emailID = '" + emailID + "'");
             rowSet.execute();
             if (rowSet.first()) {
                 System.out.println("executed query");
                 if (password.equals(rowSet.getString("password"))) {
                     System.out.println("Success");
+                    user.setUID(rowSet.getInt("uid"));
                     user.setEmailID(rowSet.getString("emailID"));
                     user.setFirstName(rowSet.getString("firstName"));
                     user.setLastName(rowSet.getString("lastName"));
+                    user.setContactNumber(rowSet.getLong("contactNumber"));
                     user.setIsValid(true);
                 }
             }
         } catch (SQLException ex) {
             System.err.println("Error:" + ex.getMessage());
-        } finally {
-            try {
-                rowSet.close();
-            } catch (SQLException ex) {
-                System.err.println("Error:" + ex.getMessage());
-            }
         }
+
+//        session.setAttribute("user", rowSet);
         return user;
     }
 }

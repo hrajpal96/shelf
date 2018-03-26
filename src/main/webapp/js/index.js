@@ -1,6 +1,7 @@
 /* global strength */
 
 $(document).ready(function () {
+
     $('.modal').modal({opacity: .1, ending_top: '50%'});
     $('.collapsible').collapsible();
     $(".logo-collapse").sideNav();
@@ -14,10 +15,16 @@ $(document).ready(function () {
         closeOnClick: true
 
     });
-    $('tabs-swipe-demo').tabs({
-        swipeable: 'true',
-        responsiveThreshold: 1024
-    });
+//    $("#icon_prefix").prop("disabled", true);
+    var enableSelection = function () {
+        $("#icon_prefix").prop("disabled", false);
+    };
+    $('#edit').on('click', enableSelection);
+    
+//    $('ul.tabs').tabs({
+//      swipeable : true,
+//      responsiveThreshold : 1920
+//    });
     $('.input-field input').each(function () {
         ($(this).val() === '') ? $(this).addClass('empty') : $(this).removeClass('empty');
     });
@@ -45,6 +52,9 @@ $("#checkpass").on("keyup", function (e) {
 
 //Function to open the login modal if device/window width > 739 px
 $(window).on("load", function () {
+    if(window.innerWidth<1024){
+        $("#login").width('90%');
+    }
     $('#login').modal('open');
 });
 
@@ -82,7 +92,7 @@ function checkExist() {
     var xmlhttp = new XMLHttpRequest();
     var emailID = document.forms["registration"]["email"].value;
     if (emailID.toString().endsWith("@")) {
-        document.getElementById("isE").innerHTML="";
+        document.getElementById("isE").innerHTML = "";
     } else {
         var url = "exist.jsp?emailID=" + emailID;
         xmlhttp.onreadystatechange = function () {
@@ -95,14 +105,17 @@ function checkExist() {
                     document.getElementById("isE").innerHTML = xmlhttp.responseText;
                 }
             }
-
         };
         try {
             xmlhttp.open("GET", url, true);
             xmlhttp.send();
         } catch (e) {
-            alert("unable to connect to server");
+            alert("Unable to connect to server");
         }
     }
-
 }
+//if ($(window).width() > 500) {
+//    document.getElementById("login").style.setProperty("width","40%");
+//} else {
+//    document.getElementById("login").style.setProperty("width","90%");
+//}

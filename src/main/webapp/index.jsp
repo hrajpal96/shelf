@@ -13,8 +13,9 @@
             <c:when test="${sessionScope.user eq null}">
                 <%@include file="basetemplate.jsp" %>
                 <%@include file="loginmodal.jsp" %>
-                <%@include file="signuphandler.html" %>
-                <div class="parallax-container">
+                <%@include file="signuphandler.jsp" %>
+                <main>
+                    <div class="parallax-container">
                     <div class="parallax"><img src="images/para.jpg"></div>
                 </div>
                 <div class="container">
@@ -59,19 +60,20 @@
                 </div>
                 <div class="section white">
                     <div class="row container">
-                        <h2 class="header">Parallax</h2>
-                        <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+                        <h2 class="header">Recommendations</h2>
+                        <p class="grey-text text-darken-3 lighten-3">Recommendations are an effective way of providing users with sugesstions with what they want.</p>
                     </div>
                 </div>
                 <div class="parallax-container">
                     <div class="parallax"><img src="images/parallax3.jpg"></div>
                 </div>
+                </main>
             </c:when>
             <c:otherwise>
                 <c:redirect url="success.jsp"/>
             </c:otherwise>
         </c:choose>
-        
+
         <script src="js/zxcvbn.js"></script>
     </body>
 </html>     

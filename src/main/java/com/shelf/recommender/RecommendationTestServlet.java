@@ -1,10 +1,12 @@
 package com.shelf.recommender;
 
+import com.shelf.session.UserBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 
 import javax.annotation.Resource;
+import javax.ejb.Asynchronous;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,15 +27,16 @@ import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 /**
  * Servlet implementation class RecommendationTestServlet
  */
+@Asynchronous
 public class RecommendationTestServlet extends HttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
     private @Resource(name = "jdbc/taste_preferences",
             lookup = "jdbc/taste_preferences",
             authenticationType = Resource.AuthenticationType.APPLICATION,
             shareable = false)
     DataSource tasteDS;
-    
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -51,6 +54,52 @@ public class RecommendationTestServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        DataModel dataModel;
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        System.out.println(user.getUID());
+        int USER_ID = user.getUID();
+//        int USER_ID = 411;
+
+        try {
+
+            // create the data model object
+            dataModel = new PostgreSQLJDBCDataModel(tasteDS, "PREFERENCES.TASTE_PREFERENCES", "USER_ID", "ITEM_ID", "PREFERENCE", "TIMESTAMP");
+
+//            out.println("<head>");
+//            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">");
+//            out.println("</head>");
+//            out.println("<h1 class=\"text-center\">Used based recommendations<h1>");
+//            out.println("<div class=\"text-center\"");
+//            out.println("");
+//            out.println("<h2>User id:" + USER_ID + "</h2>");
+//            out.println("<h3 class=\"text-center\">This user rated:" + dataModel.getItemIDsFromUser(USER_ID).size() + " items</h3>");
+//            out.println("</div>");
+//            out.println("<div class=\"container col-md-10\">");
+//            out.println("<table class=\"table table-striped table-dark text-center\">\n"
+//                    + "  <thead class=\"thead-dark\">\n"
+//                    + "    <tr>\n"
+//                    + "      <th scope=\"col\">itemID</th>\n"
+//                    + "      <th scope=\"col\">Similarity</th>\n"
+//                    + "    </tr>\n"
+//                    + "  </thead>");
+            UserSimilarity similarity = new LogLikelihoodSimilarity(dataModel);
+            // new PearsonCorrelationSimilarity(dataModel)
+//            System.out.println(similarity.userSimilarity(211, 200));
+            UserNeighborhood neighborhood = new NearestNUserNeighborhood(5, similarity, dataModel);
+            Recommender recommender = new GenericUserBasedRecommender(dataModel, neighborhood, similarity);
+            java.util.List<RecommendedItem> list = recommender.recommend(USER_ID, 10);
+//            Iterator<RecommendedItem> iter = list.iterator();
+//
+//            while (iter.hasNext()) {
+//                RecommendedItem item = iter.next();
+//                out.println("<tr><td>" + item.getItemID() + "</td><td>" + item.getValue() + "</td></tr>");
+//            }
+            request.getSession().setAttribute("Recommendations", list);
+//            out.println("</table>");
+//            out.println("</div>");
+        } catch (TasteException e) {
+        }
 
     }
 
@@ -58,7 +107,9 @@ public class RecommendationTestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         DataModel dataModel;
-        int USER_ID = Integer.parseInt(request.getParameter("userID"));
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        System.out.println(user.getUID());
+        int USER_ID = user.getUID();
 //        int USER_ID = 411;
 
         try {
@@ -95,6 +146,7 @@ public class RecommendationTestServlet extends HttpServlet {
                 RecommendedItem item = iter.next();
                 out.println("<tr><td>" + item.getItemID() + "</td><td>" + item.getValue() + "</td></tr>");
             }
+            request.getSession().setAttribute("Recommendations", list);
             out.println("</table>");
             out.println("</div>");
         } catch (TasteException e) {

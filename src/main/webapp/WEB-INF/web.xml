@@ -24,6 +24,11 @@
         <servlet-name>RegistrationServlet</servlet-name>
         <servlet-class>com.shelf.registration.RegistrationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PrintRecommendationServlet</servlet-name>
+        <servlet-class>com.shelf.recommender.PrintRecommendationServlet</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RecommendationTestServlet</servlet-name>
         <url-pattern>/recommendations.do</url-pattern>
@@ -48,6 +53,26 @@
         <servlet-name>RegistrationServlet</servlet-name>
         <url-pattern>/register.do</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrintRecommendationServlet</servlet-name>
+        <url-pattern>/printrecommendations.do</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>DB_URL</param-name>
+        <param-value>jdbc:mysql://localhost:3306/</param-value>
+    </context-param>
+    <context-param> 
+        <param-name>DB_DATABASE</param-name>
+        <param-value>shelf</param-value>
+    </context-param>
+    <context-param>
+        <param-name>DB_USERNAME</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    <context-param>
+        <param-name>DB_PASSWORD</param-name>
+        <param-value></param-value>
+    </context-param>
     <session-config>
         <session-timeout>
             15

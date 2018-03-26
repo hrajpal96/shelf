@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shelf.registration;
 
 import com.sun.rowset.JdbcRowSetImpl;
+import connectionproperties.ConnectionBean;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +15,7 @@ import javax.sql.rowset.JdbcRowSet;
 
 /**
  *
- * @author Lenovo
+ * @author Harsh
  */
 public class EmailVerificationServlet extends HttpServlet {
 
@@ -30,37 +27,32 @@ public class EmailVerificationServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        boolean isValid = false;
+            throws ServletException, IOException, SQLException {
+        boolean isValid;
         Integer uid = new Integer(request.getParameter("uid"));
         String validationKey = request.getParameter("key");
         ServletContext context = getServletContext();
-        String query;
-        Connection conn = (Connection) context.getAttribute("connection");
-        try (JdbcRowSet rowset = new JdbcRowSetImpl(conn)) {
-            System.out.println("Inside try catch block");
-            rowset.setType(rowset.TYPE_SCROLL_SENSITIVE);
-            rowset.setConcurrency(rowset.CONCUR_UPDATABLE);
+        ConnectionBean conn = (ConnectionBean) context.getAttribute("db");
+        try (final JdbcRowSet rowset = new JdbcRowSetImpl(conn.getConnection())) {
+            rowset.setType(JdbcRowSet.TYPE_SCROLL_SENSITIVE);
+            rowset.setConcurrency(JdbcRowSet.CONCUR_UPDATABLE);
             rowset.setReadOnly(false);
-            rowset.setCommand("select VERIFICATION_KEY from ROOT.userdetails where UID=" + uid);
+            rowset.setCommand("SELECT VERIFICATION_KEY from user where uid=" + uid);
             rowset.execute();
-            System.out.println("Query Executed");
             rowset.absolute(1);
             String key = rowset.getString(1);
-            System.out.println("getString executed");
             if (key.equalsIgnoreCase(validationKey)) {
-                System.out.println("Inside IF");
                 isValid = true;
-                rowset.setCommand("select *FROM ROOT.userdetails where UID=" + uid);
+                rowset.setCommand("SELECT * FROM user where uid=" + uid);
                 rowset.execute();
                 rowset.absolute(1);
                 rowset.moveToCurrentRow();
                 rowset.updateBoolean("isValid", isValid);
                 rowset.updateRow();
-                System.out.println("Executed Query");
-                response.setHeader("Refresh", "0;url=" + "verified.jsp");
+                request.getRequestDispatcher("verified.jsp").forward(request, response);
             }
 
         } catch (SQLException e) {
@@ -80,7 +72,11 @@ public class EmailVerificationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EmailVerificationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -94,7 +90,11 @@ public class EmailVerificationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EmailVerificationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

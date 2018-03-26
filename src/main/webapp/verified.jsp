@@ -18,7 +18,7 @@
                     <center>
                         <div class="card-content black-text">
                             <div class="green-text">
-                                <i class="material-icons large">check_circle</i>
+                                <i class="material-icons large">check_box</i>
                             </div>
                             <p>Your Account has been successfully verified.</p>
                             <a href="index.jsp" class="large blue-text">Continue to Sign In</a>
