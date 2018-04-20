@@ -4,8 +4,8 @@ A small maven J2EE recommendation application based on Apache Mahout.
 #### Mahout
 
 https://mahout.apache.org/
-
 https://github.com/apache/mahout
+
 Used for creating a recommender web service to provide recommendations to the user upon login, based on the similarity of users.
 
 
