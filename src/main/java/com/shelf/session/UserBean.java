@@ -22,6 +22,15 @@ public class UserBean implements Serializable {
     private long contactNumber;
     private String password;
     private final String VERIFICATIONKEY;
+    private boolean doesexist;
+
+    public void setDoesexist(boolean doesexist) {
+        this.doesexist = doesexist;
+    }
+
+    public boolean isDoesexist() {
+        return doesexist;
+    }
 
     public Integer getUID() {
         return UID;

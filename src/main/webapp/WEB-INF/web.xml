@@ -25,6 +25,18 @@
         <servlet-class>com.shelf.registration.RegistrationServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RecommenderServlet</servlet-name>
+        <servlet-class>org.apache.mahout.cf.taste.web.RecommenderServlet</servlet-class>
+        <init-param>
+            <param-name>recommender-class</param-name>
+            <param-value>org.apache.mahout.cf.taste.web.RecommenderWrapper</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RecommenderServlet</servlet-name>
+        <url-pattern>/recommenderservlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>PrintRecommendationServlet</servlet-name>
         <servlet-class>com.shelf.recommender.PrintRecommendationServlet</servlet-class>
         <async-supported>true</async-supported>
@@ -57,6 +69,10 @@
         <servlet-name>PrintRecommendationServlet</servlet-name>
         <url-pattern>/printrecommendations.do</url-pattern>
     </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/notfound.jsp</location>
+    </error-page>
     <context-param>
         <param-name>DB_URL</param-name>
         <param-value>jdbc:mysql://localhost:3306/</param-value>

@@ -37,7 +37,12 @@ class LoginController {
                     user.setFirstName(rowSet.getString("firstName"));
                     user.setLastName(rowSet.getString("lastName"));
                     user.setContactNumber(rowSet.getLong("contactNumber"));
-                    user.setIsValid(true);
+                    user.setIsValid(rowSet.getBoolean("isValid"));
+                    user.setDoesexist(true);
+                }
+                else{
+                    user.setIsValid(false);
+                    System.out.println("Is the user valid? "+user.isIsValid());
                 }
             }
         } catch (SQLException ex) {

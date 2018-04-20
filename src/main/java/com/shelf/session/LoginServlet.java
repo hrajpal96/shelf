@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
      * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, InterruptedException {
         response.setContentType("text/html;charset=UTF-8");
         String emailID = request.getParameter("emailID");
         String password = request.getParameter("password");
@@ -55,18 +55,21 @@ public class LoginServlet extends HttpServlet {
         UserBean user = logincontroller.authenticate(emailID, password, this.getServletContext());
         HttpSession session = request.getSession(true);
         session.setAttribute("user", user);
-        if (user.isIsValid()) {
-//            request.getRequestDispatcher("/recommendations.do").forward(request, response);
+        if (user.isDoesexist()) {
             scheduler = Executors.newScheduledThreadPool(20);
             session.setAttribute("uid", user.getUID());
-            scheduler.schedule(new RecommendationGenerator(session, tasteDS), 2, TimeUnit.SECONDS);
-            scheduler.shutdown();
+//            ScheduledExecutorService scheduler = (ScheduledExecutorService) this.getServletContext().getAttribute("executor");
+            System.out.println("Created Scheduler");
+            scheduler.schedule(new RecommendationGenerator(session, tasteDS), 0, TimeUnit.SECONDS);
+            System.out.println("Scheduled Recommendation Task");
             String url = response.encodeRedirectURL("success.jsp");
+            scheduler.shutdown();
+            scheduler.awaitTermination(0, TimeUnit.HOURS);
             response.sendRedirect(url);
-            response.setHeader("Refresh","2");
-//            dispatcher. forward(request, response);
+//            response.setHeader("Refresh", "2");
+//            dispatcher.forward(request, response);
         } else {
-            request.getRequestDispatcher("index.jsp").include(request, response);
+            request.getRequestDispatcher("/index.jsp").include(request, response);
         }
     }
 
@@ -85,7 +88,7 @@ public class LoginServlet extends HttpServlet {
         try {
             processRequest(request, response);
 
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException | SQLException | InterruptedException ex) {
             Logger.getLogger(LoginServlet.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
@@ -105,7 +108,7 @@ public class LoginServlet extends HttpServlet {
         try {
             processRequest(request, response);
 
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException | SQLException | InterruptedException ex) {
             Logger.getLogger(LoginServlet.class
                     .getName()).log(Level.SEVERE, null, ex);
         }

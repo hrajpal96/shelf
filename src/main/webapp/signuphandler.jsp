@@ -1,5 +1,6 @@
 <!--Account Modal Structure-->
 <%@include file="base.html" %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
 <div id="signup" class="modal  fade s6">
     <div class="modal-fixed-header">
         <div class="collapsible-header btn white red accent-4 active"><i class="material-icons prefix ">account_circle</i>
@@ -61,6 +62,6 @@
             </form>
         </div>
         <p class="red-text">${message}</p>
-        <script src="js/index.js"></script>
+        <script src="materialize/js/index.js"></script>
     </div>
 </div>

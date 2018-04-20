@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import org.apache.mahout.cf.taste.web.RecommenderWrapper;
 /**
  *
  * @author Lenovo
  */
+//@WebServlet("/printrecommendations.do")
 public class PrintRecommendationServlet extends HttpServlet {
 
     /**
@@ -29,6 +30,7 @@ public class PrintRecommendationServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         

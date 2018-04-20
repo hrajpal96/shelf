@@ -40,7 +40,7 @@ public class EmailVerificationServlet extends HttpServlet {
             rowset.setType(JdbcRowSet.TYPE_SCROLL_SENSITIVE);
             rowset.setConcurrency(JdbcRowSet.CONCUR_UPDATABLE);
             rowset.setReadOnly(false);
-            rowset.setCommand("SELECT VERIFICATION_KEY from user where uid=" + uid);
+            rowset.setCommand("SELECT verification_key from user where uid=" + uid);
             rowset.execute();
             rowset.absolute(1);
             String key = rowset.getString(1);

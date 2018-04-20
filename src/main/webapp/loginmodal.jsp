@@ -29,7 +29,7 @@
                         <center>
                             <button class="btn waves-effect waves-light red accent-4 btn-block center-align" 
                                     type="submit" formaction="login.do"  name="action">Log In <i class="material-icons left">lock_open</i> </button>
-                            <a class="login-register btn waves-effect waves-light red accent-4 modal-trigger" href="#signup"  name="action">Sign Up <i class="material-icons left">person_add</i> </a>
+                            <a class="login-register btn red accent-4 modal-trigger" href="#signup"  name="action">Sign Up <i class="material-icons left">person_add</i> </a>
                         </center>
                     </div>
                 </div>
@@ -38,5 +38,5 @@
         </div>
     </div>
 </div>
-<script src="js/index.js"></script>
+<script src="materialize/js/index.js"></script>
 

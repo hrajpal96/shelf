@@ -1,18 +1,19 @@
 package com.shelf.registration;
 
+//import com.sendgrid.Method;
+//import com.sendgrid.Request;
+//import com.sendgrid.Response;
+//import com.sendgrid.SendGrid;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
 import static com.shelf.registration.RegistrationController.validateEmail;
 import com.shelf.session.UserBean;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -61,56 +62,59 @@ public class RegistrationServlet extends HttpServlet {
      *
      * @param aUser UserBean
      */
-    private void sendVerificationMail(UserBean aUser) {
-        Properties mailServerProperties;
-        Session getMailSession;
-        MimeMessage generateMailMessage;
-        Transport transport = null;
+    private void sendVerificationMail(UserBean aUser) throws IOException {
+//        Properties mailServerProperties;
+//        Session getMailSession;
+//        MimeMessage generateMailMessage;
+//        Transport transport = null;
         String verificationMessage;
-        try {
-            // Step1
-            // System.out.println("\n 1st ===> setup Mail Server Properties..");
-            mailServerProperties = System.getProperties();
-            mailServerProperties.put("mail.smtp.port", "587");
-            mailServerProperties.put("mail.smtp.auth", "true");
-            mailServerProperties.put("mail.smtp.starttls.enable", "true");
-            System.out.println("Mail Server Properties have been setup successfully..");
+        // Step1
+        // System.out.println("\n 1st ===> setup Mail Server Properties..");
+//            mailServerProperties = System.getProperties();
+//            mailServerProperties.put("mail.smtp.port", "587");
+//            mailServerProperties.put("mail.smtp.auth", "true");
+//            mailServerProperties.put("mail.smtp.starttls.enable", "true");
+//            System.out.println("Mail Server Properties have been setup successfully..");
 
-            // Step2
-            // System.out.println("\n\n 2nd ===> get Mail Session..");
-            getMailSession = Session.getDefaultInstance(mailServerProperties, null);
-            generateMailMessage = new MimeMessage(getMailSession);
-            System.out.println(aUser.getEmailID());
-            generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(aUser.getEmailID()));
-            //   generateMailMessage.addRecipient(Message.RecipientTmaype.CC, new InternetAddress(emailTo));
-            generateMailMessage.setSubject("Verification mail from Shelf");
-
-            verificationMessage = "http://localhost:8084/RecommenderApplication/verify.do?key="
-                    + aUser.getVERIFICATIONKEY() + "&"
-                    + "uid=" + aUser.getUID();
-            String emailBody = verificationMessage;
-            generateMailMessage.setContent(emailBody, "text/html");
+// Step2
+// System.out.println("\n\n 2nd ===> get Mail Session..");
+//            getMailSession = Session.getDefaultInstance(mailServerProperties, null);
+//            generateMailMessage = new MimeMessage(getMailSession);
+//            System.out.println(aUser.getEmailID());
+//            generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(aUser.getEmailID()));
+//            //   generateMailMessage.addRecipient(Message.RecipientTmaype.CC, new InternetAddress(emailTo));
+//            generateMailMessage.setSubject("Verification mail from Shelf");
+        verificationMessage = "http://localhost:8084/RecommenderApplication/verify.do?key="
+                + aUser.getVERIFICATIONKEY() + "&"
+                + "uid=" + aUser.getUID();
+//            String emailBody = verificationMessage;
+//            generateMailMessage.setContent(emailBody, "text/html");
 //            System.out.println("Mail Session has been created successfully..");
-
-            // Step3
+// Step3
 //            System.out.println("\n\n 3rd ===> Get Session and Send mail");
-            transport = getMailSession.getTransport("smtps");
+//            transport = getMailSession.getTransport("smtps");
+// Enter your correct gmail UserID and Password
+// if you have 2FA enabled then provide App Specific Password
+//            transport.connect("smtp.gmail.com", "yourid", "yourpass");
+//            transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
+//            transport.close();
+//            transport = null;
+        try {
+            SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+            Request req = new Request();
+            req.setMethod(Method.POST);
+            req.setEndpoint("mail/send");
+            req.setBody("{\"personalizations\":[{\"to\":[{\"email\":\"" + aUser.getEmailID() + "\"}],\"subject\":\"Account Verification link from Shelf\"}],\"from\":{\"email\":\"hrajpal96@gmail.com\"},\"content\":[{\"type\":\"text/plain\",\"value\": \"" + verificationMessage + "\"}]}");
+            Response resp = sg.api(req);
+        } catch (IOException e) {
 
-            // Enter your correct gmail UserID and Password
-            // if you have 2FA enabled then provide App Specific Password
-            transport.connect("smtp.gmail.com", "<youremail@abc.com", "yourpassword");
-            transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
-            transport.close();
-            transport = null;
-        } catch (MessagingException e) {
-        } finally {
-            try {
-                if (transport != null) {
-                    transport.close();
-                }
-            } catch (MessagingException ex) {
-            }
         }
+//try {
+//    if (transport != null) {
+//        transport.close();
+//    }
+//} catch (MessagingException ex) {
+//}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

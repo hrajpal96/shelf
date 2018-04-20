@@ -15,5 +15,24 @@ Any value defined here will override the pom.xml file value but is only applicab
 -->
         <org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_j2eeVersion>1.7-web</org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_j2eeVersion>
         <org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_deploy_2e_server>Tomcat</org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_deploy_2e_server>
+        <org-netbeans-modules-web-clientproject-api.js_2e_libs_2e_folder/>
     </properties>
+    <libraries xmlns="http://www.netbeans.org/ns/cdnjs-libraries/1">
+        <library name="materialize" version="0.99.0">
+            <file localPath="src/main/webapp/materialize/css/materialize.css" path="css/materialize.css"/>
+            <file localPath="src/main/webapp/materialize/css/materialize.min.css" path="css/materialize.min.css"/>
+            <file localPath="src/main/webapp/materialize/fonts/roboto/Roboto-Bold.woff" path="fonts/roboto/Roboto-Bold.woff"/>
+            <file localPath="src/main/webapp/materialize/fonts/roboto/Roboto-Bold.woff2" path="fonts/roboto/Roboto-Bold.woff2"/>
+            <file localPath="src/main/webapp/materialize/fonts/roboto/Roboto-Light.woff" path="fonts/roboto/Roboto-Light.woff"/>
+            <file localPath="src/main/webapp/materialize/fonts/roboto/Roboto-Light.woff2" path="fonts/roboto/Roboto-Light.woff2"/>
+            <file localPath="src/main/webapp/materialize/fonts/roboto/Roboto-Medium.woff" path="fonts/roboto/Roboto-Medium.woff"/>
+            <file localPath="src/main/webapp/materialize/fonts/roboto/Roboto-Medium.woff2" path="fonts/roboto/Roboto-Medium.woff2"/>
+            <file localPath="src/main/webapp/materialize/fonts/roboto/Roboto-Regular.woff" path="fonts/roboto/Roboto-Regular.woff"/>
+            <file localPath="src/main/webapp/materialize/fonts/roboto/Roboto-Regular.woff2" path="fonts/roboto/Roboto-Regular.woff2"/>
+            <file localPath="src/main/webapp/materialize/fonts/roboto/Roboto-Thin.woff" path="fonts/roboto/Roboto-Thin.woff"/>
+            <file localPath="src/main/webapp/materialize/fonts/roboto/Roboto-Thin.woff2" path="fonts/roboto/Roboto-Thin.woff2"/>
+            <file localPath="src/main/webapp/materialize/js/materialize.js" path="js/materialize.js"/>
+            <file localPath="src/main/webapp/materialize/js/materialize.min.js" path="js/materialize.min.js"/>
+        </library>
+    </libraries>
 </project-shared-configuration>
