@@ -6,8 +6,9 @@
     <head>
         <title>Shelf</title>
         <%@include file="basetemplate.jsp" %>
+
     </head>
-    <body>
+    <body onload="setTimeout('redirect()', 100)">
         <%@include file="cachecontroller.jsp" %>
         <c:choose>
             <c:when test="${sessionScope.user eq null}">
@@ -72,6 +73,7 @@
                 <c:redirect url="success.jsp"/>
             </c:otherwise>
         </c:choose>
-        <script src="js/zxcvbn.js"></script>
+        
+        <!--<script src="js/zxcvbn.js"></script>-->
     </body>
 </html>         

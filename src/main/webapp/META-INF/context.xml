@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/RecommenderApplication">
-    <ResourceLink name="jdbc/taste_preferences"
-                  global="jdbc/taste"
-                  auth="Container"
-                  type="javax.sql.DataSource" />
-<!--    <ResourceLink name="jdbc/taste_shelf"
+  <ResourceLink auth="Container" global="jdbc/taste" name="jdbc/taste_preferences" type="javax.sql.DataSource"/>
+  <!--    <ResourceLink name="jdbc/taste_shelf"
                   global="jdbc/shelf"
                   auth="Container"
                   type="javax.sql.DataSource" />-->

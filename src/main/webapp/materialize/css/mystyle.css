@@ -2,6 +2,20 @@
     color: #d1d1d1;
 }
 
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #fafafa;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.scrollspy{
+    color: #000000;   
+}
 /* fallback */
 @font-face {
     font-family: 'Material Icons';
@@ -207,7 +221,11 @@ ul, menu, dir {
 ::-moz-placeholder {
     color: #d1d1d1;
 }
-/*input[id="search"] {
+.container .row {
+    margin-left: -.75rem;
+    margin-right: -.75rem;
+}
+input[id="search"] {
     height: 45px !important;
     margin-top: 1%;
     border-radius: 3pt;
@@ -217,7 +235,7 @@ ul, menu, dir {
     margin-top: 1%;
     background-color: #f44336;
     border-radius: 3pt;
-}*/
+}
 .nav-wrapper .input-field input#search {
     display: block;
     font-size: 16px;
@@ -256,9 +274,17 @@ nav .input-field label{
 .modal-form-row{
     margin-bottom: 0px;
 }
+#toc {
+    position: fixed;
+}
+
+.scrollspy {
+    position: relative;
+}
 
 #login{
-    max-width: 30%;
+    /*max-width: 30%;*/
+    width: 30%;
     overflow: hidden !important;
     margin-top: 2%;
 }

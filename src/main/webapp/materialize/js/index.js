@@ -1,10 +1,36 @@
 /* global strength */
 
-$(document).ready(function () {
 
+$(document).ready(function () {
+    //To fix the 
+    $('.scrollspy').scrollSpy();
+
+    //Initializations
+    $('.editbtn').removeClass("disabled");
+    $('.modal').modal({opacity: .1, ending_top: '50%'});
+    $('.collapsible').collapsible();
+    $(".logo-collapse").sideNav();
+    $('.parallax').parallax();
+    $('.carousel').carousel();
+    $('.tooltipped').tooltip({delay: 50});
+    $('select').material_select();
+    $('.parallax').parallax();
+    $(".button-collapse").sideNav({
+        menuWidth: 300, // Default is 300
+        closeOnClick: true
+
+    });
+
+
+    //Account Information Dropdown Button
+    $('.dropdown-button').dropdown({hover: true, constrainWidth: false});
     setTimeout(appReady, 2000);
 
 
+
+
+
+    //Spinner Logic to remove the pre loader from the page as soon as the content loads.
     function appReady() {
         let appContainer = document.getElementById("spinnercon");
         while (appContainer.firstChild) {
@@ -24,32 +50,8 @@ $(document).ready(function () {
             $(this).parent().removeClass('focused');
         }
     });
-    $('.editbtn').removeClass("disabled");
-    $('.modal').modal({opacity: .1, ending_top: '50%'});
-    $('.collapsible').collapsible();
-    $(".logo-collapse").sideNav();
-    $('.parallax').parallax();
-    $('.carousel').carousel();
-    $('.tooltipped').tooltip({delay: 50});
-    $('select').material_select();
-    $('.parallax').parallax();
-    $(".button-collapse").sideNav({
-        menuWidth: 300, // Default is 300
-        closeOnClick: true
-
-    });
 
 
-
-//    $("#icon_prefix").prop("disabled", true);
-//    var enableSelection = function () {
-//        $('.editform').removeClass("disabled");
-//    };
-//    $("#edit").on('click', enableSelection);
-//    var disableSelection = function () {
-//        
-//    };
-//    $("#editdone").on('click', disableSelection);
 
     var edit = document.querySelector(".removeEdit");
     edit.addEventListener('click', function () {
@@ -57,11 +59,6 @@ $(document).ready(function () {
         edit.classList.add('disabled');
         edit.classList.remove('btn-floating');
     });
-//    var overlay = document.getElementById("overlay");
-//    window.addEventListener('load', function () {
-//        $('.overlay').fadeOut("slow");
-//        overlay.style.display = 'none';
-//    });
 
 
 
@@ -92,10 +89,15 @@ $("#checkpass").on("keyup", function (e) {
 
 //Function to open the login modal if device/window width > 739 px
 $(window).on("load", function () {
-    if (window.innerWidth > 1024) {
-        $('#login').modal('open');
+    if (window.innerWidth < 1024) {
+        $("#login").css({
+            width: '90%'
+        });
     }
+    $('#login').modal('open');
+
 });
+
 
 //Function to open the signup modal
 $(".login-register").click(function () {
@@ -103,6 +105,8 @@ $(".login-register").click(function () {
     $("#signup").modal('open');
 });
 
+
+//Function for password validation
 var strength = {
     0: "Worst ☹",
     1: "Bad ☹",
@@ -153,7 +157,5 @@ function checkExist() {
         }
     }
 }
+
 (jQuery());
-if (window.width <= 1000) {
-    document.location = "123.html";
-}

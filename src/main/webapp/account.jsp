@@ -9,19 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <%@include file="cachecontroller.jsp" %>
-
-
+        <title>My Account</title>
     </head>
     <body>
-        <%@include file="basetemplate.jsp" %>
-        <script src="js/index.js"></script>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="card col m2">
+        <header>
+            <%@include file="basetemplate.jsp" %>
+            <%@include file="cachecontroller.jsp" %>
+            <script src="js/index.js"></script>
+        </header>
+        <div class="card" style="width: 90%">
             <form action="" class="col m2 col offset-m1" method="POST" >
                 <a class="halfway-fab btn-floating btn-large waves-effect waves-light red removeEdit"><i class="material-icons" >edit</i></a>
 
@@ -66,7 +62,5 @@
                 </fieldset>
             </form>
         </div>
-        <!--</div>-->
-        <!--</p>-->
     </body>
 </html>

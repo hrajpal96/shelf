@@ -65,6 +65,7 @@ public class RecommendationGenerator implements Runnable {
                     System.out.println("List is not empty...Generated Recommendations");
                     session.setAttribute("Recommendations", list);
                     session.setAttribute("ratedItems", dataModel.getItemIDsFromUser(USER_ID));
+                    session.setAttribute("ratings", dataModel.getPreferencesFromUser(USER_ID));
                     System.out.println(list);
                 }
             } catch (TasteException | ClassNotFoundException ex) {
@@ -72,12 +73,6 @@ public class RecommendationGenerator implements Runnable {
             }
         } while (list == null);
         
-//        }
-
-        //            while (iter.hasNext()) {
-        //                RecommendedItem item = iter.next();
-        ////                out.println("<tr><td>" + item.getItemID() + "</td><td>" + item.getValue() + "</td></tr>");
-        //            }
     }
     
     private List<RecommendedItem> returnList() {

@@ -38,5 +38,6 @@
         </div>
     </div>
 </div>
+<script src="materialize/js/mobileredirect.js"></script>
 <script src="materialize/js/index.js"></script>
 

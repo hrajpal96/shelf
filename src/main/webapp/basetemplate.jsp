@@ -10,11 +10,11 @@
 <div class="navbar-fixed">
     <c:choose>
         <c:when test="${sessionScope.user ne null}">
-            <ul id="dropdown1" class="dropdown-content">
-                <li><a href="#!">My&nbsp;Account</a></li>
-                <li><a href="#!"><span class = "new badge">4</span>Notifications</a></li>
+            <ul id="dropdown1" class="dropdown-content black-text" style="color: red">
+                <li><a href="#!"><i class="material-icons">account_circle</i>Profile</a></li>
+                <li><a href="#!"><span class = "new badge">4</span>&nbsp;Notifications</a></li>
                 <li class="divider" tabindex="-1"></li>
-                <li><a href="logout.do">Logout</a></li>
+                <li><a href="logout.do"><i class="material-icons">keyboard_tab</i>Logout</a></li>
             </ul>
             <nav class="nav-extended"> 
             </c:when>
@@ -42,7 +42,7 @@
                             </form>
                         </div>
                     </ul>
-                    <ul class=" right hide-on-med-and-down">
+                    <ul class=" right">
                         <c:choose>
                             <c:when test="${sessionScope.user ne null}">
                                 <!--href for user left-->
@@ -58,7 +58,7 @@
                 <c:if test="${sessionScope.user ne null}">
                     <div class="nav-content">
                         <ul id="tabs-swipe-demo" class="tabs tabs-transparent">
-                            <li class="tab"><a  href="#test-swipe-1">Recommendations</a></li>
+                            <li class="tab"><a href="#test-swipe-1">Recommendations</a></li>
                             <li class="tab"><a id="newarrivals" class="active" href="test-swipe-2">New Arrivals</a></li>
                             <li class="tab"><a href="#test-swipe-3">My Books</a></li>
                         </ul>
@@ -100,16 +100,17 @@
 
 
 <c:if test="${sessionScope.user ne null}">
-    <li><a href="#!">My Account</a></li>
-    <li><a href="#!">Notifications<span class = "new badge"></span></a></li>
-    <li><a href="#!">My Cart</a></li>
+    <li><a href="#!"><i class="material-icons">account_circle</i>My Account</a></li>
+    <li><a href="#!"><i class="material-icons">notifications</i>Notifications<span class = "new badge"></span></a></li>
+    <li><a href="#!"><i class="material-icons">account_circle</i>My Cart</a></li>
 
 </c:if>
-<li><a href="#!">About</a></li>
-<li><a href="#!">Help</a></li>
-<li><a href="#!">Privacy Policy</a></li>
+<li><a href="#!"><i class="material-icons">info</i>About</a></li>
+<li><a href="#!"><i class="material-icons">help</i>Help</a></li>
+<li><a href="#!"><i class="material-icons">security</i>Privacy Policy</a></li>
     <c:if test="${sessionScope.user ne null}">
-    <li><a href="logout.do">Logout</a></li>
+    <li><a href="logout.do"><i class="material-icons">keyboard_tab</i>Logout</a></li>
     </c:if>
 </ul>
+<script src="materialize/js/mobileredirect.js"></script>
 <script src="materialize/js/index.js"></script>
