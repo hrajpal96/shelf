@@ -2,9 +2,18 @@
 
 
 $(document).ready(function () {
-    //To fix the 
-    $('.scrollspy').scrollSpy();
 
+    $('.slider').slider({
+        interval: 6000,
+        transition: 1000,
+    });
+    
+    window.onresize = function (event) {
+        var height = $(window).height() - 50;
+        $(".main").height(height);
+    };
+    
+    
     //Initializations
     $('.editbtn').removeClass("disabled");
     $('.modal').modal({opacity: .1, ending_top: '50%'});
@@ -24,22 +33,20 @@ $(document).ready(function () {
 
     //Account Information Dropdown Button
     $('.dropdown-button').dropdown({hover: true, constrainWidth: false});
-    setTimeout(appReady, 2000);
+    //For loading recommendations 
+    $('#showrecommendations').click(function () {
+        $('#test-swipe-1').load('recommendations.jsp#container', function () {
+            $('.scrollspy').scrollSpy();
+        });
 
+    });
 
-
-
-
-    //Spinner Logic to remove the pre loader from the page as soon as the content loads.
-    function appReady() {
-        let appContainer = document.getElementById("spinnercon");
-        while (appContainer.firstChild) {
-            appContainer.removeChild(appContainer.firstChild);
-        }
-
-        let app = document.getElementById("recommendationlist");
-        appContainer.appendChild(app);
+    function loadarrivals() {
+        $('#test-swipe-2').load('arrivals.jsp', function () {
+        });
     }
+
+    
     var height = $(window).height() - 50;
 
     $('input#search').focus(function () {
@@ -89,11 +96,6 @@ $("#checkpass").on("keyup", function (e) {
 
 //Function to open the login modal if device/window width > 739 px
 $(window).on("load", function () {
-    if (window.innerWidth < 1024) {
-        $("#login").css({
-            width: '90%'
-        });
-    }
     $('#login').modal('open');
 
 });
@@ -131,9 +133,12 @@ password.addEventListener('input', function () {
         text.innerHTML = "";
     }
 });
+
+
 function checkExist() {
     var xmlhttp = new XMLHttpRequest();
     var emailID = document.forms["registration"]["email"].value;
+
     if (emailID.toString().endsWith("@")) {
         document.getElementById("isE").innerHTML = "";
     } else {
@@ -143,10 +148,14 @@ function checkExist() {
                 if (xmlhttp.responseText.endsWith("ed")) {
                     document.getElementById("isE").style.color = "red";
                     document.getElementById("isE").innerHTML = xmlhttp.responseText;
+                } else if (emailID.toString() == "") {
+                    document.getElementById("isE").style.color = "red";
+                    document.getElementById("isE").innerHTML = "Cannot be empty"
                 } else {
                     document.getElementById("isE").style.color = "green";
                     document.getElementById("isE").innerHTML = xmlhttp.responseText;
                 }
+
             }
         };
         try {

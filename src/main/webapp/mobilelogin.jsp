@@ -19,7 +19,6 @@
                     <li><a href="notifications.html"><i class="material-icons">notifications</i></a></li>
                     <li><a href="cart.html"><i class="material-icons">shopping_cart</i></a></li>
                 </ul>
-
                 <ul id="slide-out" class="side-nav">
                     <li class="search">
                         <div class="search-wrapper card ">
@@ -58,27 +57,32 @@
                 </ul>
             </div>
         </nav>
-
+        <br>
+        <br>
         <div class="row">
-            <form class="col s12" method="POST">
+            <form  class="col s12" method="POST">
 
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input id="email" type="email" name="emailID" class="validate">
-                        <label for="email"><i class="tiny material-icons">email</i>Email</label>
+                    <div class="input-field col s12"> <i class="material-icons prefix">email</i>
+                        <input id="email_field" type="email" name="emailID" class="validate" required>
+                        <label for="email_field" >Email</label>
+
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="password" name="password" type="password" class="validate">
-                        <label for="password"><i class="tiny material-icons">lock</i>Password</label>
+                    <div class="input-field col s12"> <i class="material-icons prefix ">lock</i>
+                        <input  id="Pass" type="password" name ="password"  required>
+                        <label for="Pass">Password</label>
                     </div>
+                    <center>
+                        <button class="btn waves-effect waves-light red accent-4 btn-block center-align" 
+                                type="submit" formaction="login.do"  name="action">Log In <i class="material-icons left">lock_open</i> </button>
+                        <br>
+                        <br>
+                        <br>
+                        New to Shelf?<br><br>
+                        <a class="login-register btn blue accent-4 modal-trigger" href="signupform.jsp"  name="action">Sign Up <i class="material-icons left">person_add</i> </a>
+                    </center>
                 </div>
-                <center>
-                    <button class="btn waves-effect waves-light red accent-4 btn-block center-align" 
-                            type="submit" formaction="login.do"  name="action">Log In <i class="material-icons left">lock_open</i> </button>
-                    <a class="login-register btn red accent-4 modal-trigger" href="#signup"  name="action">Sign Up <i class="material-icons left">person_add</i> </a>
-                </center>
+
             </form>
         </div>
 

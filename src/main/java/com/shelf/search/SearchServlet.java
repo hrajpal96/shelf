@@ -5,27 +5,20 @@
  */
 package com.shelf.search;
 
-import com.sun.rowset.JdbcRowSetImpl;
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.RowSet;
-import javax.sql.rowset.JdbcRowSet;
 
 /**
  *
  * @author Lenovo
  */
 public class SearchServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,43 +31,13 @@ public class SearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String query = request.getParameter("search");
-        String encodedsearch = URLEncoder.encode(query, "US-ASCII");
-        String numberofresults = request.getParameter("numberofresults");
-        ServletContext context = request.getServletContext();
-        Connection conn = (Connection) this.getServletContext().getAttribute("connection");
-        context.setAttribute("connection", conn);
-        try (JdbcRowSet rowSet = new JdbcRowSetImpl(conn)) {
-            
-            rowSet.setType(RowSet.TYPE_SCROLL_SENSITIVE);
-            rowSet.setConcurrency(RowSet.CONCUR_UPDATABLE);
-            rowSet.setReadOnly(false);
-            
-//             Fills this RowSet object with data.
+        ServletContext context = getServletContext();
+        String search = request.getParameter("search");
 
-            context.setAttribute("connection", rowSet);
-            rowSet.setCommand("SELECT bookID from book where bookName like '"+query+"' ");
-            rowSet.execute();
-            rowSet.absolute(1);
-            context.setAttribute("searchResult", rowSet);
-            
-            if(rowSet.getInt(1) > 0)
-            {
-                RequestDispatcher rd =request.getRequestDispatcher("searchResult.jsp");
-                rd.forward(request, response);   
-            }
-            else
-            {
-                RequestDispatcher rd =request.getRequestDispatcher("searchResult.jsp");
-                rd.forward(request, response);
-                
-            }
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        searchResult searchresullt = new searchResult();
+        String result = searchresullt.lookUP(search, context);
+        System.out.println(result);
+        request.getRequestDispatcher("results.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

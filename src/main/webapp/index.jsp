@@ -5,75 +5,55 @@
 <html>
     <head>
         <title>Shelf</title>
-        <%@include file="basetemplate.jsp" %>
 
     </head>
     <body onload="setTimeout('redirect()', 100)">
-        <%@include file="cachecontroller.jsp" %>
-        <c:choose>
-            <c:when test="${sessionScope.user eq null}">
-                <%@include file="loginmodal.jsp" %>
-                <%@include file="signuphandler.jsp" %>
-                <main>
-                    <div class="parallax-container">
-                        <div class="parallax"><img src="materialize/images/para.jpg"></div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col m4 s12">
-                                <div class="icon-block">
-                                    <h2 class="center red-text">
-                                        <i class="material-icons">local_library</i>  
-                                    </h2>
-                                    <h5 class="center">On the go access</h5>
-                                    <p class="light">
-                                        We did most of the heavy lifting for you to provide an easy, on the go access to a complete collection of books and recommendations tailored for a seamless users experience.
-                                    </p>
+        <header><%@include file="basetemplate.jsp" %></header>
+        <main>
+            <c:choose>
+                <c:when test="${sessionScope.user eq null}">
+                    <%@include file="cachecontroller.jsp" %>
+                    <div class="slider fullscreen">
+                        <ul class="slides">
+                            <li>
+                                <img src="materialize/images/para1.jpg"> <!-- random image -->
+                                <div class="caption center-align">
+                                    <h3>An app that is completely focused to improve user's recommendations.</h3>
+                                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
                                 </div>
+                            </li>
+                            <li>
+                                <img src="materialize/images/para.jpg"> <!-- random image -->
+                                <div class="caption left-align">
+                                    <h3>Left Aligned Caption</h3>
+                                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="materialize/images/parallax1.jpg"> <!-- random image -->
+                                <div class="caption right-align">
+                                    <h3>Right Aligned Caption</h3>
+                                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="materialize/images/parallax1_1.png"> <!-- random image -->
+                                <div class="caption center-align">
+                                    <h3>This is our big Tagline!</h3>
+                                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                            </div>
-                            <div class="col m4 s12">
-                                <div class="icon-block">
-                                    <h2 class="center red-text">
-                                        <i class="material-icons">group</i>  
-                                    </h2>
-                                    <h5 class="center">User Experience Focused</h5>
-                                    <p class="light">
-                                        By utilizing elements and principles of Collaborative Filtering, we identify which books are best suited for you based on your reading habits to provide recommendations personalized for you.</p>
-                                </div> 
-                            </div>
-                            <div class="col m4 s12">
-                                <div class="icon-block">
-                                    <h2 class="center red-text">
-                                        <i class="material-icons">settings</i>  
-                                    </h2>
-                                    <h5 class="center">Easy to work with</h5>
-                                    <p class="light">
-                                        An uncluttered, bloat free interface with user centric functions at its core providing the features necessary to users and administrators of a library.
-                                    </p>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="parallax-container">
-                        <div class="parallax"><img src="materialize/images/parallax1.jpg"></div>
-                    </div>
-                    <div class="section white">
-                        <div class="row container">
-                            <h2 class="header">Recommendations</h2>
-                            <p class="grey-text text-darken-3 lighten-3">Recommendations are an effective way of providing users with sugesstions with what they want.</p>
-                        </div>
-                    </div>
-                    <div class="parallax-container">
-                        <div class="parallax"><img src="materialize/images/parallax3.jpg"></div>
-                    </div>
-                </main>
-            </c:when>
-            <c:otherwise>
-                <c:redirect url="success.jsp"/>
-            </c:otherwise>
-        </c:choose>
-        
+                    <%@include file="loginmodal.jsp" %>
+                    <%@include file="signuphandler.jsp" %>
+                </c:when>
+                <c:otherwise>
+                    <c:redirect url="success.jsp"/>
+                </c:otherwise>
+            </c:choose>
+        </main>
         <!--<script src="js/zxcvbn.js"></script>-->
     </body>
 </html>         

@@ -5,6 +5,7 @@
  */
 package connectionproperties;
 
+import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 import java.sql.SQLException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -48,6 +49,7 @@ public class ConnectionPropertiesListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         try {
+            AbandonedConnectionCleanupThread.checkedShutdown();
             conn.closeConnection();
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionPropertiesListener.class.getName()).log(Level.SEVERE, null, ex);

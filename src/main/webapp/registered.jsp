@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>Registered</title>
+        <title>Registration Successful</title>
         <%@include file="base.html" %>
     </head>
     <body>

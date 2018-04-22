@@ -65,6 +65,7 @@ public class LoginServlet extends HttpServlet {
             String url = response.encodeRedirectURL("success.jsp");
             scheduler.shutdown();
             scheduler.awaitTermination(0, TimeUnit.HOURS);
+            response.setHeader("Refresh", "1");
             response.sendRedirect(url);
 //            response.setHeader("Refresh", "2");
 //            dispatcher.forward(request, response);

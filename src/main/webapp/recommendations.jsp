@@ -4,6 +4,7 @@
     Author     : Lenovo
 --%>
 
+<%@page import="java.net.URLEncoder"%>
 <%@page import="org.apache.mahout.cf.taste.model.PreferenceArray"%>
 <%@page import="org.apache.mahout.cf.taste.impl.common.LongPrimitiveIterator"%>
 <%@page import="org.apache.mahout.cf.taste.impl.common.LongPrimitiveArrayIterator"%>
@@ -26,9 +27,12 @@
     <body>
         <%@include file="cachecontroller.jsp" %>
         <!--<header> </header>-->
+        <br>
+
+        <br>
+        <br>
         <main>
-            <br>
-            <br>
+
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
                     <%                            log("Recommendations Page");
@@ -43,6 +47,7 @@
                     %>
                     <div class="container" style="width: 90%">
                         <div class="row">
+                            <h2>My Rated Books</h2>
                             <div class="col s12 m9 l10" id="bodybox">
                                 <div id="ratings" class="section scrollspy">
                                     <p> 
@@ -62,7 +67,7 @@
                                     <div class="collection">
                                         <li class="collection-item">
                                             <div  class="collection-item avatar">
-                                                <img src="<%= rowset.getString("coverPath")%>" alt="" class="circle">
+                                                <img src="<%= rowset.getString("coverPath")%>" alt="" class="materialboxed circle">
                                                 <span class="title"><%= rowset.getString(1)%></span><br>
                                                 <%= rowset.getString("author")%> <br><br>
                                                 <a href="">View</a>
@@ -77,39 +82,42 @@
                                         }%>
                                     </p>
                                 </div>
-
                                 <div id="recommendations" class="section scrollspy">
-                                    <p><%
-                                        List< RecommendedItem> list = (List<RecommendedItem>) session.getAttribute("Recommendations");
-                                        Iterator<RecommendedItem> iter = list.iterator();
-                                        int size = list.size() - 1;
-                                        while (iter.hasNext()) {
-                                            RecommendedItem item = iter.next();
-                                            rowset.setCommand("SELECT bookName,author,averageRating,coverPath from book where bookid=" + item.getItemID());
-                                            rowset.execute();
-                                            if (rowset.next()) {
-                                                rowset.absolute(1);
-                                                //                        String imagepath = rowset.getString("coverPath");
-                                        %>
-                                    <div class="col s2">
-                                        <div class="card">
-                                            <div class="card-image waves-effect waves-block waves-light">
-                                                <img class="activator" src="<%= rowset.getString("coverPath")%>">
-                                            </div>
-                                            <div class="card-content">
-                                                <span class="card-title activator grey-text text-darken-4"><%= rowset.getString(1)%><i class="material-icons right">more_vert</i></span>
-                                                <p><a href="#">View Details</a></p>
-                                            </div>
-                                            <div class="card-reveal">
-                                                <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i><%= rowset.getString(1)%></span>
-                                                <p><%= rowset.getString("author")%></p>
+                                    <div class="card large grey lighten-4">
+                                        <h2 class="center-align">My Recommendations</h2>
+                                        <p><%
+                                            List< RecommendedItem> list = (List<RecommendedItem>) session.getAttribute("Recommendations");
+                                            Iterator<RecommendedItem> iter = list.iterator();
+                                            int size = list.size() - 1;
+                                            while (iter.hasNext()) {
+                                                RecommendedItem item = iter.next();
+                                                rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where bookid=" + item.getItemID());
+                                                rowset.execute();
+                                                if (rowset.next()) {
+                                                    rowset.absolute(1);
+                                                    //                        String imagepath = rowset.getString("coverPath");
+                                            %>
+                                        <div class="col s3">
+                                            <div class="card medium hoverable">
+                                                <div class="card-image waves-effect waves-block waves-light">
+                                                    <img class="activator" src="<%= rowset.getString("coverPath")%>">
+                                                </div>
+                                                <div class="card-content">
+                                                    <span class="card-title activator grey-text text-darken-4"><%= rowset.getString(1)%><i class="material-icons right">more_vert</i></span>
+                                                    <p><a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>&bookname=<%= URLEncoder.encode(rowset.getString(1), "UTF-8")%>&coverpath=<%= URLEncoder.encode(rowset.getString("coverPath"), "UTF-8")%>&author=<%= URLEncoder.encode(rowset.getString("author"), "UTF-8")%>">View Details</a></p>
+                                                </div>
+                                                <div class="card-reveal">
+                                                    <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i><%= rowset.getString(1)%></span>
+                                                    <p><%= rowset.getString("author")%></p>
+                                                </div>
                                             </div>
                                         </div>
+                                        <%                        }
+                                            }
+                                        %>
+                                        </p>
+
                                     </div>
-                                    <%                        }
-                                        }
-                                    %>
-                                    </p>
                                 </div>
                                 <%
                                     } catch (SQLException e) {
@@ -117,16 +125,17 @@
                                     }
                                 %>
                             </div>
-                            <div class="col hide-on-small-only m3 l2">
-                                <ul id="toc" class="section table-of-contents">
-                                    <li><a href="#ratings">My Ratings</a></li>
-                                    <li><a href="#recommendations">Recommendations</a></li>
+                            <div class="col hide-on-med-and-down m3 l1">
+                                <ul id="toc" class="section table-of-contents black-text">
+                                    <li><a href="#ratings" class="black-text">My Ratings</a></li>
+                                    <li><a href="#recommendations" class="black-text">Recommendations</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    %>
-                    <%                        }
+                    <%                        } else {
+
+                        }
                     %>
                 </c:when>
                 <c:otherwise>

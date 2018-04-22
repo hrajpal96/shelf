@@ -29,24 +29,21 @@
         <br>
         <br>
         <main>
+
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
-                    <!--                <div id="test-swipe-1" class="col                         </div>-->
-                    <!--                <div id="test-swipe-1">
-                                        <div class="card col s12 "><center><h2>Your Recommendations</h2></center>
-                    <% if (session.getAttribute("recommendations") != null) {
-
-                    %>    
-                    <%--<%@include file="generaterecommendations.jsp" %>--%>
-                    <%                            }
-                    %>
-            </div>
-        </div>-->
+                    <script>
+                        var toastHTML = '<span>You have one book return due</span><button class="btn-flat toast-action">Dismiss</button>';
+                    </script>
                     <div id="test-swipe-1">
                         <%@include file="recommendations.jsp" %>
                     </div>
                     <div id="test-swipe-2">
-                       Hello World
+                        <%--<%@include file="arrivals.jsp" %>--%>
+                        
+                    </div>
+                    <div id="test-swipe-3">
+                        My Books
                     </div>
                 </c:when>
                 <c:otherwise>
