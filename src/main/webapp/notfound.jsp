@@ -20,7 +20,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <%@include file="base.html" %>
-    <body background="materialize/images/008-404_asis_patel-x2.gif">
+    <body background="materialize/images/008-404_asis_patel-x2.gif" class="responsive-img">
     <center>
 
         <h1 class="white-text text-center">Oops Look like we are lost</h1>

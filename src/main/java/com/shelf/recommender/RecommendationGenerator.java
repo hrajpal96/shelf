@@ -22,12 +22,13 @@ import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
+
 /**
  *
  * @author Lenovo
  */
 public class RecommendationGenerator implements Runnable {
-    
+
     private final Thread generator;
     private final HttpSession session;
     private DataModel dataModel;
@@ -35,21 +36,20 @@ public class RecommendationGenerator implements Runnable {
     DataSource tasteDS;
     private List<RecommendedItem> list = null;
     private UserNeighborhood neighborhood = null;
-    
-    public RecommendationGenerator(HttpSession session, DataSource tasteDS) {
+
+    public RecommendationGenerator(HttpSession session, DataSource tasteDS) throws TasteException {
         System.out.println("Inside Recommendation Generator");
         System.out.println(tasteDS);
         this.session = session;
         this.tasteDS = tasteDS;
 //        UserBean user = (UserBean) session.getAttribute("user");
         USER_ID = (Integer) session.getAttribute("uid");
-//        System.out.println("UserID: " + user.getUID());
+//        session.setAttribute("tasteDS", dataModel);
         generator = new Thread(this);
         generator.setPriority(Thread.MAX_PRIORITY);
-//        this.context.setAttribute("", new PrimeDetails());
         this.session.setAttribute("continue", true);
     }
-    
+
     @Override
     public void run() {
         do {
@@ -64,7 +64,6 @@ public class RecommendationGenerator implements Runnable {
                 if (list != null) {
                     System.out.println("List is not empty...Generated Recommendations");
                     session.setAttribute("Recommendations", list);
-                    session.setAttribute("ratedItems", dataModel.getItemIDsFromUser(USER_ID));
                     session.setAttribute("ratings", dataModel.getPreferencesFromUser(USER_ID));
                     System.out.println(list);
                 }
@@ -72,12 +71,12 @@ public class RecommendationGenerator implements Runnable {
                 Logger.getLogger(RecommendationGenerator.class.getName()).log(Level.SEVERE, null, ex);
             }
         } while (list == null);
-        
+
     }
-    
+
     private List<RecommendedItem> returnList() {
         return list;
-        
+
     }
-    
+
 }

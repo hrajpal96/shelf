@@ -35,9 +35,9 @@
 
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
-                    <%                            log("Recommendations Page");
+                    <%                        
                         if (session.getAttribute("Recommendations") != null) {
-                            System.out.println("If is true");
+                            log("Recommendations Page");
                             try {
                                 ConnectionBean conn = (ConnectionBean) request.getServletContext().getAttribute("db");
 
@@ -52,13 +52,13 @@
                                 <div id="ratings" class="section scrollspy">
                                     <p> 
                                         <%
-                                            FastIDSet ratedItems = (FastIDSet) session.getAttribute("ratedItems");
+//                                            FastIDSet ratedItems = (FastIDSet) session.getAttribute("ratedItems");
                                             PreferenceArray ratings = (PreferenceArray) session.getAttribute("ratings");
-                                            Iterator itr = ratedItems.iterator();
+//                                            Iterator itr = ratedItems.iterator();
                                             int i = 0;
-                                            while (itr.hasNext() && i < ratings.length()) {
+                                            while (i < ratings.length()) {
 
-                                                rowset.setCommand("SELECT bookName,author,averageRating,coverPath from book where bookid=" + itr.next().toString());
+                                                rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where bookid=" + ratings.getItemID(i));
                                                 rowset.execute();
                                                 if (rowset.next()) {
                                                     rowset.absolute(1);
@@ -68,11 +68,10 @@
                                         <li class="collection-item">
                                             <div  class="collection-item avatar">
                                                 <img src="<%= rowset.getString("coverPath")%>" alt="" class="materialboxed circle">
-                                                <span class="title"><%= rowset.getString(1)%></span><br>
-                                                <%= rowset.getString("author")%> <br><br>
-                                                <a href="">View</a>
-
-                                                <div  class="secondary-content"><%= ratings.getValue(i)%><i class="material-icons right">grade</i></div>
+                                                <span class="title flow-text"><%= rowset.getString(1)%></span><br>
+                                                <p><%= rowset.getString("author")%></p>
+                                                <a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a>
+                                                <p><div  class="secondary-content flow-text"><%= ratings.getValue(i)%><i class="material-icons right">grade</i></div></p>
                                             </div>
                                         </li>
                                     </div>
@@ -104,7 +103,7 @@
                                                 </div>
                                                 <div class="card-content">
                                                     <span class="card-title activator grey-text text-darken-4"><%= rowset.getString(1)%><i class="material-icons right">more_vert</i></span>
-                                                    <p><a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>&bookname=<%= URLEncoder.encode(rowset.getString(1), "UTF-8")%>&coverpath=<%= URLEncoder.encode(rowset.getString("coverPath"), "UTF-8")%>&author=<%= URLEncoder.encode(rowset.getString("author"), "UTF-8")%>">View Details</a></p>
+                                                    <p><a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a></p>
                                                 </div>
                                                 <div class="card-reveal">
                                                     <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i><%= rowset.getString(1)%></span>

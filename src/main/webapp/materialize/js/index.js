@@ -3,17 +3,36 @@
 
 $(document).ready(function () {
 
+    $('input.autocomplete').autocomplete({
+        data: {
+            "Apple": null,
+            "Microsoft": null,
+            "Google": 'https://placehold.it/250x250'
+        },
+        limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+        onAutocomplete: function (val) {
+            // Callback function when value is autcompleted.
+        },
+        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+    });
+    
     $('.slider').slider({
         interval: 6000,
         transition: 1000,
     });
-    
+
     window.onresize = function (event) {
         var height = $(window).height() - 50;
         $(".main").height(height);
     };
-    
-    
+
+    window.onload = function () {
+        function checkRating() {
+            var rating = document.ratingsform.value;
+            document.getElementById("ratingalert").innerHTML = rating;
+        }
+
+    }
     //Initializations
     $('.editbtn').removeClass("disabled");
     $('.modal').modal({opacity: .1, ending_top: '50%'});
@@ -35,7 +54,7 @@ $(document).ready(function () {
     $('.dropdown-button').dropdown({hover: true, constrainWidth: false});
     //For loading recommendations 
     $('#showrecommendations').click(function () {
-        $('#test-swipe-1').load('recommendations.jsp#container', function () {
+        $('test-swipe-1').load('recommendations.jsp#container', function () {
             $('.scrollspy').scrollSpy();
         });
 
@@ -46,7 +65,7 @@ $(document).ready(function () {
         });
     }
 
-    
+
     var height = $(window).height() - 50;
 
     $('input#search').focus(function () {
@@ -166,5 +185,7 @@ function checkExist() {
         }
     }
 }
+
+
 
 (jQuery());

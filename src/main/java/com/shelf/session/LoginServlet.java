@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+import org.apache.mahout.cf.taste.common.TasteException;
 
 /**
  *
@@ -47,7 +48,7 @@ public class LoginServlet extends HttpServlet {
      * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException, InterruptedException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, InterruptedException, TasteException {
         response.setContentType("text/html;charset=UTF-8");
         String emailID = request.getParameter("emailID");
         String password = request.getParameter("password");
@@ -55,6 +56,7 @@ public class LoginServlet extends HttpServlet {
         UserBean user = logincontroller.authenticate(emailID, password, this.getServletContext());
         HttpSession session = request.getSession(true);
         session.setAttribute("user", user);
+//        this.getServletContext().setAttribute("tasteDS", tasteDS);
         if (user.isDoesexist()) {
             scheduler = Executors.newScheduledThreadPool(20);
             session.setAttribute("uid", user.getUID());
@@ -89,7 +91,7 @@ public class LoginServlet extends HttpServlet {
         try {
             processRequest(request, response);
 
-        } catch (ClassNotFoundException | SQLException | InterruptedException ex) {
+        } catch (ClassNotFoundException | SQLException | InterruptedException | TasteException ex) {
             Logger.getLogger(LoginServlet.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,7 +111,7 @@ public class LoginServlet extends HttpServlet {
         try {
             processRequest(request, response);
 
-        } catch (ClassNotFoundException | SQLException | InterruptedException ex) {
+        } catch (ClassNotFoundException | SQLException | InterruptedException | TasteException ex) {
             Logger.getLogger(LoginServlet.class
                     .getName()).log(Level.SEVERE, null, ex);
         }

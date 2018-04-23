@@ -45,7 +45,6 @@
                             </li>
                         </ul>
                     </div>
-
                     <%@include file="loginmodal.jsp" %>
                     <%@include file="signuphandler.jsp" %>
                 </c:when>

@@ -23,7 +23,6 @@
 
     </head>
     <body>
-
         <%@include file="cachecontroller.jsp" %>
         <header><%@include file="basetemplate.jsp" %></header>
         <br>

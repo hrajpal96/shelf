@@ -32,6 +32,10 @@
             <param-value>org.apache.mahout.cf.taste.web.RecommenderWrapper</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateRatingServlet</servlet-name>
+        <servlet-class>com.shelf.ratings.UpdateRatingServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RecommenderServlet</servlet-name>
         <url-pattern>/recommenderservlet.do</url-pattern>
@@ -77,7 +81,7 @@
         <param-name>DB_URL</param-name>
         <param-value>jdbc:mysql://localhost:3306/</param-value>
     </context-param>
-    <context-param> 
+    <context-param>
         <param-name>DB_DATABASE</param-name>
         <param-value>shelf</param-value>
     </context-param>
@@ -87,8 +91,12 @@
     </context-param>
     <context-param>
         <param-name>DB_PASSWORD</param-name>
-        <param-value></param-value>
+        <param-value/>
     </context-param>
+    <servlet-mapping>
+        <servlet-name>UpdateRatingServlet</servlet-name>
+        <url-pattern>/updaterating.do</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             15

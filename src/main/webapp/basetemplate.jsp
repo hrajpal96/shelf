@@ -42,7 +42,7 @@
                             <form class="search-input black-text" action="search.do">
                                 <div class="search-wrapper card">
                                     <div class="input-field ">
-                                        <input id="search" type="search"  name="search"/>
+                                        <input id="search" type="search"  name="search" class="autocomplete"/>
                                         <label for="search"><i class="material-icons black-text">search</i></label>
                                     </div>
                                 </div>
@@ -66,8 +66,8 @@
                 <c:if test="${sessionScope.user ne null}">
                     <div class="nav-content">
                         <ul id="tabs-swipe-demo" class="tabs tabs-transparent">
-                            <li class="tab col s3"><a id="newarrivals" href="test-swipe-2" onclick="M.toast({html: toastHTML})"><i class="material-icons">fiber_new</i>New Arrivals</a></li>
-                            <li class="tab"><a id="showrecommendations" href="#test-swipe-1"><i class="material-icons">rate_review</i>Recommendations</a></li>
+                            <li class="tab col s3"><a id="newarrivals" href="test-swipe-2">New Arrivals</a></li>
+                            <li class="tab"><a id="showrecommendations" href="#test-swipe-1">Recommendations</a></li>
                             <li class="tab"><a href="#test-swipe-3">My Books</a></li>
                         </ul>
                     </div>
