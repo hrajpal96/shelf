@@ -5,37 +5,32 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
-
+    <%@include file="cachecontroller.jsp" %>
     <body>
-        <%@include file="cachecontroller.jsp" %>
         <%@include file="mobilebase.html" %>
-        <nav class="red accent-4">
+        <nav class="nav-extended red accent-4">
             <div class="nav-wrapper">
                 <a href="#!" class="brand-logo" ><h5>Shelf</h5></a>
                 <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul class="right"> 
                     <li><a href="mobilelogin.jsp"><i class="material-icons">account_circle</i></a></li>
                 </ul>
-
             </div>
-        </nav>
-        <nav class="red accent-4">
-            <div class="nav-wrapper">
-                <div class="row">
-                    <ul id="search" >
-                        <form class="search-input black-text">
-                            <div class="search-wrapper card">
-                                <div class="input-field ">
-                                    <input id="search" type="search"  name="search"/>
-                                    <label for="search"><i class="material-icons black-text">search</i></label>
-                                </div>
+            <div class="nav-content">
+                <ul id="search" class="col s4">
+                    <form class="search-input black-text" action="search.do">
+                        <div class="search-wrapper card">
+                            <div class="input-field ">
+                                <input id="search" type="search"  name="search" placeholder="Digital Fortress, The Alchemist"/>
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                             </div>
-                        </form>
-                        <br>
-                    </ul>
-                </div>
+                        </div>
+                    </form>
+                </ul>
+                <br>
             </div>
         </nav>
         <main>

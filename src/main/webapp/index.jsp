@@ -19,21 +19,21 @@
                                 <img src="materialize/images/para1.jpg"> <!-- random image -->
                                 <div class="caption center-align">
                                     <h3>An app that is completely focused to improve user's recommendations.</h3>
-                                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                                    <h5 class="light grey-text text-lighten-3"></h5>
                                 </div>
                             </li>
                             <li>
-                                <img src="materialize/images/para.jpg"> <!-- random image -->
+                                <img src="materialize/images/clip_image0012.jpg"> <!-- random image -->
                                 <div class="caption left-align">
-                                    <h3>Left Aligned Caption</h3>
-                                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                                    <h3>Books can be dangerous, the best ones should be labeled, “This could change your life.”</h3>
+                                    <h5 class="light grey-text text-lighten-3"></h5>
                                 </div>
                             </li>
                             <li>
                                 <img src="materialize/images/parallax1.jpg"> <!-- random image -->
                                 <div class="caption right-align">
                                     <h3>Right Aligned Caption</h3>
-                                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                                    <h5 class="light grey-text text-lighten-3"></h5>
                                 </div>
                             </li>
                             <li>

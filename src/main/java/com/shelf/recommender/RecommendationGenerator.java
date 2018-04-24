@@ -38,13 +38,9 @@ public class RecommendationGenerator implements Runnable {
     private UserNeighborhood neighborhood = null;
 
     public RecommendationGenerator(HttpSession session, DataSource tasteDS) throws TasteException {
-        System.out.println("Inside Recommendation Generator");
-        System.out.println(tasteDS);
         this.session = session;
         this.tasteDS = tasteDS;
-//        UserBean user = (UserBean) session.getAttribute("user");
         USER_ID = (Integer) session.getAttribute("uid");
-//        session.setAttribute("tasteDS", dataModel);
         generator = new Thread(this);
         generator.setPriority(Thread.MAX_PRIORITY);
         this.session.setAttribute("continue", true);

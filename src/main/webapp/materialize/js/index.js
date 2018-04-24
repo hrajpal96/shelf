@@ -19,6 +19,7 @@ $(document).ready(function () {
     $('.slider').slider({
         interval: 6000,
         transition: 1000,
+        indicators:false
     });
 
     window.onresize = function (event) {
@@ -54,7 +55,7 @@ $(document).ready(function () {
     $('.dropdown-button').dropdown({hover: true, constrainWidth: false});
     //For loading recommendations 
     $('#showrecommendations').click(function () {
-        $('test-swipe-1').load('recommendations.jsp#container', function () {
+        $('#test-swipe-1').load('recommendations.jsp#container', function () {
             $('.scrollspy').scrollSpy();
         });
 
