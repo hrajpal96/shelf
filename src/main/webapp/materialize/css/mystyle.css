@@ -2,7 +2,7 @@
     color: #d1d1d1;
 }
 body {
-    
+
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,11 @@ main {
 }
 
 
-
+.brand-logo img {
+    height: 70px;
+    width: 80px;
+    
+}
 /* rating starts css start
 animation
 */
@@ -482,7 +486,7 @@ html {
     position: absolute;
     left: 0;
     right: 0;
-    top: 160px;
+    top: 120px;
     margin-top: 1px;
     padding: 1px 0 0 0;
     z-index: 2;
@@ -670,9 +674,21 @@ input[id="search"] {
     padding: 0 45px 0 15px;
     border: 0;
     margin-top: 1.1%;
-    margin-bottom: 5px;
-    background-color: white;
+    margin-bottom: 1%;
+    background-color: #fafafa;
     border-radius: 2px;
+}
+.nav-wrapper .input-field input#search:focus{
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: white;
+}
+.nav-wrapper .input-field i.material-icons {
+    position: absolute;
+    top: -14%;
+    right: 10px;
+    cursor: pointer;
 }
 #slide-out li.search .search-wrapper {
     margin: 0 12px;
@@ -687,6 +703,7 @@ input[id="search"] {
 nav .input-field label{
     top: -12%;
     left: 0;
+    cursor: pointer;
 }
 *, ::before, ::after {
     -webkit-box-sizing: inherit;
@@ -699,17 +716,19 @@ nav .input-field label{
 #toc {
     position: fixed;
     font-size: 20px;
-    
+    line-height: 0.5px;
+
 }
 
-.scrollspy {
-    position: relative;
+
+ul.table-of-contents a.active{
+    color: black;
 }
 
 #login{
     /*max-width: 30%;*/
-    width: 25%;
-    hedight 40%;
+    width: 30%;
+    height 40%;
     overflow: hidden !important;
     margin-top: 5%;
 }
@@ -743,6 +762,7 @@ nav .input-field label{
     max-height: calc(120vh - 340px) !important;
     overflow-y: scroll;
     overflow-style: scrollbar;
+    overflow-x: hidden;
 }
 #checkpass{
     margin-bottom: 2em;
@@ -925,19 +945,24 @@ html {
 }
 
 .card {
-  text-align: center;
+    text-align: center;
 }
 
-@media (max-width: 990px) {
-  .resizeimg {
-    height: auto;
-  }
+/*@media (max-width: 990px) {
+    .resizeimg {
+        height: auto;
+    }
 }
 
 @media (min-width: 1000px) {
-  .resizeimg {
-    width: auto;
-    height: 350px;
-  }
+    .resizeimg {
+        width: auto;
+        height: 350px;
+    }*/
+.card {
+    text-align: center;
 }
+
+
+/*}*/
 

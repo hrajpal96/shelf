@@ -8,31 +8,12 @@
 
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>Shelf</title>
+    </head>
     <%@include file="cachecontroller.jsp" %>
     <body>
-        <%@include file="mobilebase.html" %>
-        <nav class="nav-extended red accent-4">
-            <div class="nav-wrapper">
-                <a href="#!" class="brand-logo" ><h5>Shelf</h5></a>
-                <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul class="right"> 
-                    <li><a href="mobilelogin.jsp"><i class="material-icons">account_circle</i></a></li>
-                </ul>
-            </div>
-            <div class="nav-content">
-                <ul id="search" class="col s4">
-                    <form class="search-input black-text" action="search.do">
-                        <div class="search-wrapper card">
-                            <div class="input-field ">
-                                <input id="search" type="search"  name="search" placeholder="Digital Fortress, The Alchemist"/>
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                            </div>
-                        </div>
-                    </form>
-                </ul>
-                <br>
-            </div>
-        </nav>
+        <%@include file="mobilenav.jsp" %>
         <main>
             <div class="slider">
                 <ul class="slides">

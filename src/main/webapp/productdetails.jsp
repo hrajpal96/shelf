@@ -21,15 +21,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Book Details</title>
+        <%@include file="basetemplate.jsp" %>
+        <%@include file="cachecontroller.jsp" %>
+
     </head>
     <body>
-        <header>
-            <%@include file="basetemplate.jsp" %>
-            <%@include file="cachecontroller.jsp" %>
-            <c:if test="${sessionScope.user eq null}">
-                <%@include file="loginmodal.jsp" %>
-                <%@include file="signuphandler.jsp" %>
-            </c:if>    
+        <header>    
         </header>
         <br>
         <br>
@@ -48,7 +45,10 @@
             </c:otherwise>
         </c:choose>
         <main>
-
+            <c:if test="${sessionScope.user eq null}">
+                <%@include file="loginmodal.jsp" %>
+                <%@include file="signuphandler.jsp" %>
+            </c:if>
             <center>
                 <%
                     String bookID = request.getParameter("bookid");

@@ -2,24 +2,17 @@
 
 
 $(document).ready(function () {
-
     $('input.autocomplete').autocomplete({
         data: {
             "Apple": null,
             "Microsoft": null,
-            "Google": 'https://placehold.it/250x250'
-        },
-        limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
-        onAutocomplete: function (val) {
-            // Callback function when value is autcompleted.
-        },
-        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            "Google": 'http://placehold.it/250x250',
+        }
     });
-    
     $('.slider').slider({
         interval: 6000,
         transition: 1000,
-        indicators:false
+        indicators: false
     });
 
     window.onresize = function (event) {
@@ -53,6 +46,7 @@ $(document).ready(function () {
 
     //Account Information Dropdown Button
     $('.dropdown-button').dropdown({hover: true, constrainWidth: false});
+
     //For loading recommendations 
     $('#showrecommendations').click(function () {
         $('#test-swipe-1').load('recommendations.jsp#container', function () {
@@ -60,11 +54,17 @@ $(document).ready(function () {
         });
 
     });
-
-    function loadarrivals() {
-        $('#test-swipe-2').load('arrivals.jsp', function () {
+    $('#mybooks').click(function () {
+        $('#test-swipe-3').load('mybooks.jsp', function () {
         });
-    }
+
+    });
+
+
+    $('#newarrivals').click(function () {
+        $('#test-swipe-2').load('arrivals.jsp#container', function () {
+        });
+    });
 
 
     var height = $(window).height() - 50;

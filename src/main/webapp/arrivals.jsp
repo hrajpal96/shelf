@@ -12,37 +12,16 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div class="slider fullscreen">
-            <ul class="slides">
-                <li>
-                    <img src="materialize/images/para1.jpg"> <!-- random image -->
-                    <div class="caption center-align">
-                        <h3>An app that is completely focused to improve user's recommendations.</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                    </div>
-                </li>
-                <li>
-                    <img src="materialize/images/para.jpg"> <!-- random image -->
-                    <div class="caption left-align">
-                        <h3>Left Aligned Caption</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                    </div>
-                </li>
-                <li>
-                    <img src="materialize/images/parallax1.jpg"> <!-- random image -->
-                    <div class="caption right-align">
-                        <h3>Right Aligned Caption</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                    </div>
-                </li>
-                <li>
-                    <img src="materialize/images/parallax1_1.png"> <!-- random image -->
-                    <div class="caption center-align">
-                        <h3>This is our big Tagline!</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <main>
+            <div class="container" style="width: 90%">
+                <div class="carousel">
+                    <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/250/250/nature/1"></a>
+                    <a class="carousel-item" href="#two!"><img src="https://lorempixel.com/250/250/nature/2"></a>
+                    <a class="carousel-item" href="#three!"><img src="https://lorempixel.com/250/250/nature/3"></a>
+                    <a class="carousel-item" href="#four!"><img src="https://lorempixel.com/250/250/nature/4"></a>
+                    <a class="carousel-item" href="#five!"><img src="https://lorempixel.com/250/250/nature/5"></a>
+                </div>
+            </div>
+        </main>
     </body>
 </html>

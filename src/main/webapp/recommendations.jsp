@@ -46,14 +46,12 @@
                     %>
                     <div class="container" style="width: 90%">
                         <div class="row">
-                            <h2>My Rated Books</h2>
                             <div class="col s12 m9 l10" id="bodybox">
                                 <div id="ratings" class="section scrollspy">
+                                    <h2>My Rated Books</h2>
                                     <p> 
                                         <%
-//                                            FastIDSet ratedItems = (FastIDSet) session.getAttribute("ratedItems");
                                             PreferenceArray ratings = (PreferenceArray) session.getAttribute("ratings");
-//                                            Iterator itr = ratedItems.iterator();
                                             int i = 0;
                                             while (i < ratings.length()) {
 
@@ -94,14 +92,14 @@
                                                 rowset.absolute(1);
                                                 //                        String imagepath = rowset.getString("coverPath");
                                         %>
-                                    <div class="">
-                                        <div class="card hoverable flow-text">
+                                    <div class="col s3">
+                                        <div class="card medium hoverable">
                                             <div class="card-image waves-effect waves-block waves-light">
                                                 <img class="activator" src="<%= rowset.getString("coverPath")%>">
                                             </div>
                                             <div class="card-content">
                                                 <span class="card-title activator grey-text text-darken-4"><%= rowset.getString(1)%><i class="material-icons right">more_vert</i></span>
-                                                <p><a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a></p>
+                                                <a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a>
                                             </div>
                                             <div class="card-reveal">
                                                 <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i><%= rowset.getString(1)%></span>
@@ -113,7 +111,6 @@
                                         }
                                     %>
                                     </p>
-
                                 </div>
                                 <%
                                     } catch (SQLException e) {
@@ -122,9 +119,9 @@
                                 %>
                             </div>
                             <div class="col hide-on-med-and-down m3 l1">
-                                <ul id="toc" class="section table-of-contents black-text">
-                                    <li><a href="#ratings" class="black-text">My Ratings</a></li>
-                                    <li><a href="#recommendations" class="black-text">Recommendations</a></li>
+                                <ul id="toc" class="section table-of-contents">
+                                    <li><a href="#ratings" >My Ratings</a></li>
+                                    <li><a href="#recommendations" >Recommendations</a></li>
                                 </ul>
                             </div>
                         </div>
