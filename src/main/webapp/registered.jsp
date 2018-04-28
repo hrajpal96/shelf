@@ -7,9 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
         <title>Registration Successful</title>
-        <%@include file="base.html" %>
+        <jsp:include page="base.html" ></jsp:include>
     </head>
     <body>
         <div class="row">

@@ -59,9 +59,9 @@ $(document).ready(function () {
         });
 
     });
-    $('#searchtab').click(function () {
-        $('ul.tabs').tabs('select_tab', 'test-swipe-4');
-    });
+//    $('#searchtab').click(function () {
+//        $('ul.tabs').tabs('select_tab', 'test-swipe-4');
+//    });
 
     $('#newarrivals').click(function () {
         $('#test-swipe-2').load('arrivals.jsp#container', function () {

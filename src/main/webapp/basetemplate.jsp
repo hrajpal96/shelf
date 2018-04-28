@@ -5,10 +5,9 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="base.html" %>
-<%@include file="cachecontroller.jsp" %>
-
-<div class="navbar-fixed">
+<jsp:include page="base.html" ></jsp:include>
+<jsp:include page="cachecontroller.jsp"></jsp:include>
+    <div class="navbar-fixed">
     <c:choose>
         <c:when test="${sessionScope.user ne null}">
             <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -38,7 +37,7 @@
                         <!--                <ul class="left hide-on-med-and-down">
                                         <li><a href="#" data-activates="slide-out" class="logo-collapse">My Shelf</a></li>
                                         </ul>-->
-                        <!--<a href="#" class="brand-logo left"><img class="responsive-img" id="logo" src="materialize/images/4aac96d760f89cf7ebcf9162033e11cf.png"/></a>-->
+                        <a href="#" class="brand-logo left"><img class="responsive-img" id="logo" src="materialize/images/shelfico.png"/></a>
                     </div>
                     <ul id="searchip" >
                         <div class="col s7">

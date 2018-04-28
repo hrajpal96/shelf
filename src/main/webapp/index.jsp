@@ -8,8 +8,10 @@
 
     </head>
     <body onload="setTimeout('redirect()', 100)">
-        <header><%@include file="basetemplate.jsp" %></header>
-        <main>
+        <header>
+            <jsp:include page="basetemplate.jsp" ></jsp:include>
+            </header>
+            <main>
             <c:choose>
                 <c:when test="${sessionScope.user eq null}">
                     <%@include file="cachecontroller.jsp" %>
@@ -45,14 +47,13 @@
                             </li>
                         </ul>
                     </div>
-                    <%@include file="loginmodal.jsp" %>
-                    <%@include file="signuphandler.jsp" %>
+                    <jsp:include page="loginmodal.jsp" ></jsp:include>
+                    <jsp:include page="signuphandler.jsp" ></jsp:include>
                 </c:when>
                 <c:otherwise>
                     <c:redirect url="success.jsp"/>
                 </c:otherwise>
             </c:choose>
         </main>
-        <!--<script src="js/zxcvbn.js"></script>-->
     </body>
 </html>         

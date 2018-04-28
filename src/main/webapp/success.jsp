@@ -23,11 +23,13 @@
 
     </head>
     <body>
-        <%@include file="cachecontroller.jsp" %>
-        <header><%@include file="basetemplate.jsp" %></header>
-        <br>
-        <br>
-        <main>
+        <jsp:include page="cachecontroller.jsp" ></jsp:include>
+            <header>
+            <jsp:include page="basetemplate.jsp" ></jsp:include>
+            </header>
+            <br>
+            <br>
+            <main>
 
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
@@ -42,7 +44,6 @@
                         <%--<%@include file="recommendations.jsp" %>--%>
                     </div>
                     <div id="test-swipe-3">
-                        My Books
                     </div>
                     <div id="test-swipe-4">
                         <%--<%@include file="results.jsp" %>--%>

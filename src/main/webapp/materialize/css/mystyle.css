@@ -726,9 +726,9 @@ ul.table-of-contents a.active{
 }
 
 #login{
-    /*max-width: 30%;*/
-    width: 30%;
-    height 40%;
+    max-width: 28%;
+    /*width: 30%;*/
+    /*height: 40%;*/
     overflow: hidden !important;
     margin-top: 5%;
 }

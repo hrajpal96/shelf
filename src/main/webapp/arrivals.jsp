@@ -9,11 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
     </head>
     <body>
         <main>
-             <div id="test-swipe-2">
+            <div id="test-swipe-2">
             </div>
             <div id="test-swipe-1">
             </div>

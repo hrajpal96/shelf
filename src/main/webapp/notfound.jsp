@@ -19,7 +19,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <%@include file="base.html" %>
+    <jsp:include page="base.html" ></jsp:include>
     <body background="materialize/images/008-404_asis_patel-x2.gif" class="responsive-img">
     <center>
 

@@ -24,6 +24,7 @@
         </header>
 
         <main>
+
             <br>
             <script>
                 $(document).ready(function () {
@@ -59,10 +60,10 @@
                             JdbcRowSetImpl rowset = new JdbcRowSetImpl(con);
                             if (booknames != null) {
                                 for (String bookname : booknames) {
-                                    if(bookname.contains("'")){
-                                        bookname=bookname.replace("\'", "\\'");
+                                    if (bookname.contains("'")) {
+                                        bookname = bookname.replace("\'", "\\'");
                                     }
-                                    System.out.println(bookname+"\n");
+                                    System.out.println(bookname + "\n");
                                     rowset.setCommand("SELECT * FROM book where bookName='" + bookname + "'");
                                     rowset.execute();
                                     System.out.println("SELECT Executed");
@@ -100,6 +101,7 @@
                 </div>
             </div>
         </div>
+        <jsp:include page="checksession.jsp"></jsp:include>
         <script src="materialize/js/index.js"></script>
     </main>
 </body>

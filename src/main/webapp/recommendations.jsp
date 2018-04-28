@@ -25,17 +25,17 @@
         <title>${sessionScope.user.firstName}-Recommendations</title>
     </head>
     <body>
-        <%@include file="cachecontroller.jsp" %>
-        <!--<header> </header>-->
-        <main>
-            <div id="test-swipe-2">
-            </div>
-            <div id="test-swipe-1">
-            </div>
-            <div id="test-swipe-3">
-            </div>
-            <div id="test-swipe-4">
-            </div>
+        <jsp:include page="cachecontroller.jsp" ></jsp:include>
+            <!--<header> </header>-->
+            <main>
+                <div id="test-swipe-2">
+                </div>
+                <div id="test-swipe-1">
+                </div>
+                <div id="test-swipe-3">
+                </div>
+                <div id="test-swipe-4">
+                </div>
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
                     <%                        if (session.getAttribute("Recommendations") != null) {
@@ -94,7 +94,7 @@
                                             if (rowset.next()) {
                                                 rowset.absolute(1);
                                                 //                        String imagepath = rowset.getString("coverPath");
-%>
+                                        %>
                                     <div class="col s3">
                                         <div class="card medium hoverable">
                                             <div class="card-image waves-effect waves-block waves-light">
