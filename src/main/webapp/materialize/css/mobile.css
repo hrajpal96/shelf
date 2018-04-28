@@ -525,7 +525,7 @@ html {
 }
 
 .nav-extended{
-    background: linear-gradient(to bottom, #d50000  0%, #ff1744  55%,#ff1744   100%);
+    background: linear-gradient(to bottom, #d50000  0%, #d50000  55%,#ff6d00 100%);
     background-size: cover;
 
 }

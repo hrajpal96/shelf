@@ -9,6 +9,7 @@
 <html>
     <%@include file="mobilebase.html" %>
     <header>
+        <%@include file="cachecontroller.jsp" %>
         <nav class="nav-extended ">
             <div class="nav-wrapper">
                 <a href="#!" class="brand-logo" ><h5>Shelf</h5></a>

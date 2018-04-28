@@ -39,10 +39,13 @@
                     </div>
 
                     <div id="test-swipe-1">
-                        <%@include file="recommendations.jsp" %>
+                        <%--<%@include file="recommendations.jsp" %>--%>
                     </div>
                     <div id="test-swipe-3">
                         My Books
+                    </div>
+                    <div id="test-swipe-4">
+                        <%--<%@include file="results.jsp" %>--%>
                     </div>
                 </c:when>
                 <c:otherwise>
@@ -50,6 +53,7 @@
                 </c:otherwise>
             </c:choose>
         </main>
-        <script src="js/zxcvbn.js"></script>
+        <script src="materialize/js/searchenable.js"></script>
+        <!--<script src="js/zxcvbn.js"></script>-->
     </body>
 </html>

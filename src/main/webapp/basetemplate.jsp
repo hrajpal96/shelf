@@ -38,9 +38,9 @@
                         <!--                <ul class="left hide-on-med-and-down">
                                         <li><a href="#" data-activates="slide-out" class="logo-collapse">My Shelf</a></li>
                                         </ul>-->
-                        <a href="#" class="brand-logo left"><img class="responsive-img" id="logo" src="materialize/images/4aac96d760f89cf7ebcf9162033e11cf.png"/></a>
+                        <!--<a href="#" class="brand-logo left"><img class="responsive-img" id="logo" src="materialize/images/4aac96d760f89cf7ebcf9162033e11cf.png"/></a>-->
                     </div>
-                    <ul id="search" >
+                    <ul id="searchip" >
                         <div class="col s7">
                             <form class="search-input black-text" action="search.do">
                                 <div class="search-wrapper card">
@@ -68,78 +68,84 @@
                 </div
 
                 <c:if test="${sessionScope.user ne null}">
+                    <%                        String uri = request.getRequestURI();
+
+                        String pageName = uri.substring(uri.lastIndexOf("/") + 1);
+                    %>
                     <div class="nav-content">
                         <ul id="tabs-swipe-demo" class="tabs tabs-transparent">
                             <li class="tab col s3"><a id="newarrivals" href="test-swipe-2">New Arrivals</a></li>
                             <li class="tab"><a id="showrecommendations" href="#test-swipe-1">Recommendations</a></li>
                             <li class="tab"><a id="mybooks" href="#test-swipe-3">My Books</a></li>
+                            <li class="tab"><a id="searchtab" href="#test-swipe-4">Search</a></li>
                         </ul>
                     </div>
                 </c:if>
             </div>
         </nav>
 
-<ul id="slide-out" class="side-nav">
-    <li class="search" >
-        <form action="search.do">
-            <div class="search-wrapper card ">
-                <input id="search" name="search" class="" ><i class="material-icons" >search</i>
-                <div class="search-results"></div>
-            </div>
-        </form>
-    </li>
-    <c:if test="${sessionScope.user eq null}">
-        
-    </c:if>
-    <c:if test="${sessionScope.user ne null}">
-        <li><div class="user-view">
-                <div class="background">
-                    <img src="materialize/images/yuna.jpg">
-                </div>
-                <a href="#!user"><img class="circle" src="materialize/images/abc.jpg"></a>
-                <a href=""><span class="white-text name">${sessionScope.user.firstName}</span></a>
-                <a href=""><span class="white-text email">${sessionScope.user.emailID}</span></a>
-                    <c:if test="${sessionScope.user eq null}">
-                    <a href=""><span class="white-text email">Login</span></a>
+        <ul id="slide-out" class="side-nav">
+            <li class="search" >
+                <form action="search.do">
+                    <div class="search-wrapper card ">
+                        <input id="search" name="search" class="" ><i class="material-icons" >search</i>
+                        <div class="search-results"></div>
+                    </div>
+                </form>
+            </li>
+            <c:if test="${sessionScope.user eq null}">
+
+            </c:if>
+            <c:if test="${sessionScope.user ne null}">
+                <li><div class="user-view">
+                        <div class="background">
+                            <img src="materialize/images/yuna.jpg">
+                        </div>
+                        <a href="#!user"><img class="circle" src="materialize/images/abc.jpg"></a>
+                        <a href=""><span class="white-text name">${sessionScope.user.firstName}</span></a>
+                        <a href=""><span class="white-text email">${sessionScope.user.emailID}</span></a>
+                            <c:if test="${sessionScope.user eq null}">
+                            <a href=""><span class="white-text email">Login</span></a>
+                        </c:if>
+                    </div>
+                </li>
+                <br>
+                <br>
+                <br>
+                <li class="divider"></li>
                 </c:if>
-            </div>
-        </li>
-        <br>
-        <br>
-        <br>
-        <li class="divider"></li>
-        </c:if>
 
-    <c:if test="${sessionScope.user ne null}">
+            <c:if test="${sessionScope.user ne null}">
 
-        <li><a href="#!"><i class="material-icons">account_circle</i>My Account</a></li>
-        <li><a href="#!"><i class="material-icons">notifications</i>Notifications<span class = "new badge"></span></a></li>
-        <li><a href="#!"><i class="material-icons">account_circle</i>My Cart</a></li>
-        </c:if>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <li><a href="#!"><i class="material-icons">info</i>About</a></li>
-    <li><a href="#!"><i class="material-icons">help</i>Help</a></li>
-    <li><a href="#!"><i class="material-icons">security</i>Privacy Policy</a></li>
+                <li><a href="#!"><i class="material-icons">account_circle</i>My Account</a></li>
+                <li><a href="#!"><i class="material-icons">notifications</i>Notifications<span class = "new badge"></span></a></li>
+                <li><a href="#!"><i class="material-icons">account_circle</i>My Cart</a></li>
+                </c:if>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <li><a href="#!"><i class="material-icons">info</i>About</a></li>
+            <li><a href="#!"><i class="material-icons">help</i>Help</a></li>
+            <li><a href="#!"><i class="material-icons">security</i>Privacy Policy</a></li>
 
-    <c:if test="${sessionScope.user ne null}">
-        <li><a href="logout.do"><i class="material-icons">keyboard_tab</i>Logout</a></li>
-        </c:if>
-</ul>
-<script type="text/javascript">
-
-    $('input.autocomplete').autocomplete({
-        data: {
-            "Apple": null,
-            "Microsoft": null,
-            "Google": 'http://placehold.it/250x250',
-        }
-    });
-
-</script>
-<script src="materialize/js/mobileredirect.js"></script>
-<script src="materialize/js/index.js"></script>
+            <c:if test="${sessionScope.user ne null}">
+                <li><a href="logout.do"><i class="material-icons">keyboard_tab</i>Logout</a></li>
+                </c:if>
+        </ul>
+        <script>
+            $(document).ready(function () {
+                $('input.autocomplete').autocomplete({
+                    data: {
+                        "Apple": null,
+                        "Microsoft": null,
+                        "Google": null,
+                        "Gargle": null
+                    }
+                });
+            });
+        </script>       
+        <script src="materialize/js/mobileredirect.js"></script>
+        <script src="materialize/js/index.js"></script>
