@@ -9,9 +9,15 @@ https://github.com/apache/mahout
 
 Used for creating a recommender web service to provide recommendations to the user upon login, based on the similarity of users.
 
+### goodbooks-10k
 
-#### To Create a dataset use Movielens Book Crossing Dataset and migrate it to your preferred database system.
-The format for ratings dataset is in the createtable.sql file for getting the structure of database ready for importing data.
+https://github.com/zygmuntz/goodbooks-10k
+
+#### To Create a dataset use goodbooks dataset and migrate it to your preferred database system.
+
+
+The format for ratings dataset is in the shelf.sql file for getting the structure of database ready for importing data.
+
 
 ### Materialize CSS
 
