@@ -54,6 +54,7 @@
                 </c:otherwise>
             </c:choose>
         </main>
+        <script src="materialize/js/index.js"></script>
         <script src="materialize/js/searchenable.js"></script>
         <!--<script src="js/zxcvbn.js"></script>-->
     </body>

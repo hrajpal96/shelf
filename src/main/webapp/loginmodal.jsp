@@ -13,6 +13,21 @@
     </div>
     <div class="body">
         <center>
+            <style>
+                .input-field input[type=date]:focus + label,
+                .input-field input[type=text]:focus + label,
+                .input-field input[type=email]:focus + label,
+                .input-field input[type=password]:focus + label {
+                    color: #1a237e;
+                }
+                .input-field input[type=date]:focus,
+                .input-field input[type=text]:focus,
+                .input-field input[type=email]:focus,
+                .input-field input[type=password]:focus {
+                    border-bottom: 2px solid #1a237e;
+                    box-shadow: none;
+                }
+            </style>
             <div class="row modal-form-row">
                 <form class="col s12" id="loginform" method="POST" name="loginform">
                     <div class='row'>
@@ -21,14 +36,14 @@
                     </div>
 
                     <div class='row'>
-                        <div class='input-field col s12'>
+                        <div class='input-field '><i class="material-icons prefix ">email</i>
                             <input id="email_field" type="email" name="emailID" class="validate" required>
                             <label for="email_field" >Email</label>
                         </div>
                     </div>
 
                     <div class='row'>
-                        <div class='input-field col s12'>
+                        <div class='input-field'><i class="material-icons prefix ">lock</i>
                             <input  id="Pass" type="password" name ="password"  required>
                             <label for="Pass">Password</label>
                         </div>

@@ -21,18 +21,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Book Details</title>
-        <jsp:include page="basetemplate.jsp" ></jsp:include>
-        <jsp:include page="cachecontroller.jsp" ></jsp:include>
-
-        </head>
-        <body>
-            <header>    
-            </header>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+    </head>
+    <body>
+        <header>    
+        </header>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <%            int uid = 0;
             UserBean user = (UserBean) session.getAttribute("user");
             if (user != null) {
@@ -43,29 +40,29 @@
         %>
     <c:choose>
         <c:when test="${sessionScope.user ne null}">
-
         </c:when>
         <c:otherwise>
-
         </c:otherwise>
     </c:choose>
-    <main>
+    <header>        <jsp:include page="basetemplate.jsp" ></jsp:include>
+        <jsp:include page="cachecontroller.jsp" ></jsp:include></header>
+        <main>
 
 
-        <div id="test-swipe-2">
-        </div>
-        <div id="test-swipe-1">
-        </div>
-        <div id="test-swipe-3">
-        </div>
-        <div id="test-swipe-4">
-        </div>
+            <div id="test-swipe-2">
+            </div>
+            <div id="test-swipe-1">
+            </div>
+            <div id="test-swipe-3">
+            </div>
+            <div id="test-swipe-4">
+            </div>
 
 
-        <div class="container" style="width: 90%">
-            <div class="row">
-                <div class="col s12 m9 l10" id="bodybox">
-                    <center>
+            <div class="container" style="width: 90%">
+                <div class="row">
+                    <div class="col s12 m9 l10" id="bodybox">
+                        <center>
                         <%
                             String bookID = request.getParameter("bookid");
                             try {

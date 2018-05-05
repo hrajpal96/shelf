@@ -12,14 +12,6 @@
     </head>
     <body>
         <main>
-            <div id="test-swipe-2">
-            </div>
-            <div id="test-swipe-1">
-            </div>
-            <div id="test-swipe-3">
-            </div>
-            <div id="test-swipe-4">
-            </div>
             <div class="container" style="width: 90%">
                 <div class="carousel">
                     <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/250/250/nature/1"></a>

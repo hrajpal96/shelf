@@ -54,6 +54,7 @@
                     <c:redirect url="success.jsp"/>
                 </c:otherwise>
             </c:choose>
+                <script src="materialize/js/index.js"></script>
         </main>
     </body>
 </html>         

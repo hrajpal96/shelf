@@ -18,7 +18,7 @@ main {
 .brand-logo img {
     height: 70px;
     width: 80px;
-    
+
 }
 /* rating starts css start
 animation
@@ -486,7 +486,7 @@ html {
     position: absolute;
     left: 0;
     right: 0;
-    top: 120px;
+    top: 155px;
     margin-top: 1px;
     padding: 1px 0 0 0;
     z-index: 2;
@@ -726,9 +726,11 @@ ul.table-of-contents a.active{
 }
 
 #login{
-    max-width: 28%;
-    /*width: 30%;*/
-    /*height: 40%;*/
+
+    max-width: 90%;
+    max-height: 90%;
+    width: 28%;
+    left:0; right:0; top:0; bottom:0; margin:auto;
     overflow: hidden !important;
     margin-top: 5%;
 }

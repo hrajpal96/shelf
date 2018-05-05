@@ -15,7 +15,8 @@
         <header>
             <%@include file="basetemplate.jsp" %>
             <%@include file="cachecontroller.jsp" %>
-            <script src="js/index.js"></script>
+            <script src="materialize/js/account.js"></script>
+            <script src="materialize/js/index.js"></script>
         </header>
         <br>
         <br>
@@ -24,15 +25,18 @@
         <br>
         <br>
         <main>
-            <div class="card">
+            <br>
+            <br>
+            <div class="card col s5">
                 <form action="" class="col m2 col offset-m1" method="POST" >
-                    <a class="halfway-fab btn-floating btn-large waves-effect waves-light red removeEdit"><i class="material-icons" >edit</i></a>
+                    <a class="halfway-fab btn-floating btn-large waves-effect waves-light red removeEdit"data-label="firstname"><i class="material-icons" >edit</i></a>
 
-                    <fieldset id="fieldsetEnable" disabled>
+                    <fieldset id="fieldsetEnable" >
                         <div class="row">
-                            <div class="input-field col s5 "> <i class="material-icons prefix">person</i>
-                                <input id="firstname" type="text" name="firstName" class="validate" required >
-                                <label for="firstname">First Name</label>
+                            <div class="input-field col s5 "> 
+                                
+                                <!--<input id="firstname" type="text" name="firstName" class="validate" required >-->
+                                <i class="material-icons prefix">person</i><label for="firstname">${sessionScope.user.firstName}</label>
                             </div>
                         </div>
                         
@@ -68,7 +72,7 @@
                                 </center>
                             </div>
                         </div>
-                    </fieldset>
+                    <!--</fieldset>-->
                 </form>
             </div>
         </main>

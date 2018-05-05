@@ -28,14 +28,6 @@
         <jsp:include page="cachecontroller.jsp" ></jsp:include>
             <!--<header> </header>-->
             <main>
-                <div id="test-swipe-2">
-                </div>
-                <div id="test-swipe-1">
-                </div>
-                <div id="test-swipe-3">
-                </div>
-                <div id="test-swipe-4">
-                </div>
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
                     <%                        if (session.getAttribute("Recommendations") != null) {
@@ -139,10 +131,12 @@
                 </c:otherwise>
             </c:choose>
         </main>
+        
         <script>
             $(document).ready(function () {
                 $('.materialboxed').materialbox();
             });
         </script>
+        <script src="materialize/js/searchenable.js"></script>
     </body>
 </html>

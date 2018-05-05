@@ -2,13 +2,16 @@
 
 
 $(document).ready(function () {
-    $('input.autocomplete').autocomplete({
-        data: {
-            "Apple": null,
-            "Microsoft": null,
-            "Google": 'http://placehold.it/250x250',
-        }
+    $(function () {
+        $('input.autocomplete').autocomplete({
+            data: {
+                "Apple": null,
+                "Microsoft": null,
+                "Google": 'http://placehold.it/250x250'
+            }
+        });
     });
+
     $('.slider').slider({
         interval: 6000,
         transition: 1000,
@@ -32,6 +35,7 @@ $(document).ready(function () {
     $('.modal').modal({opacity: .1, ending_top: '50%'});
     $('.collapsible').collapsible();
     $(".logo-collapse").sideNav();
+    $(".brand-logo").sideNav();
     $('.parallax').parallax();
     $('.carousel').carousel();
     $('.tooltipped').tooltip({delay: 50});
@@ -42,27 +46,30 @@ $(document).ready(function () {
         closeOnClick: true
 
     });
-
+    
+    //Login Modal width and height: responsive
+    $("#login").width($(".modal").width());
+    $("#login").height($(".modal").height()); 
 
     //Account Information Dropdown Button
     $('.dropdown-button').dropdown({hover: true, constrainWidth: false});
 
-    //For loading recommendations 
+    //For loading recommendations tab
     $('#showrecommendations').click(function () {
         $('#test-swipe-1').load('recommendations.jsp#container', function () {
             $('.scrollspy').scrollSpy();
         });
 
     });
+    
+    //For loading mybooks tab
     $('#mybooks').click(function () {
         $('#test-swipe-3').load('mybooks.jsp', function () {
         });
 
     });
-//    $('#searchtab').click(function () {
-//        $('ul.tabs').tabs('select_tab', 'test-swipe-4');
-//    });
-
+    
+    //For loading new arrivals tab
     $('#newarrivals').click(function () {
         $('#test-swipe-2').load('arrivals.jsp#container', function () {
         });
@@ -83,12 +90,12 @@ $(document).ready(function () {
 
 
 
-    var edit = document.querySelector(".removeEdit");
-    edit.addEventListener('click', function () {
-        document.getElementById('fieldsetEnable').removeAttribute('disabled');
-        edit.classList.add('disabled');
-        edit.classList.remove('btn-floating');
-    });
+//    var edit = document.querySelector(".removeEdit");
+//    edit.addEventListener('click', function () {
+//        document.getElementById('fieldsetEnable').removeAttribute('disabled');
+//        edit.classList.add('disabled');
+//        edit.classList.remove('btn-floating');
+//    });
 
 
 
@@ -189,7 +196,3 @@ function checkExist() {
         }
     }
 }
-
-
-
-(jQuery());
