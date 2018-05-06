@@ -54,13 +54,11 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         LoginController logincontroller = new LoginController();
         UserBean user = logincontroller.authenticate(emailID, password, this.getServletContext());
-        HttpSession session = request.getSession(true);
-        session.setAttribute("user", user);
-//        this.getServletContext().setAttribute("tasteDS", tasteDS);
         if (user.isDoesexist()) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("user", user);
             scheduler = Executors.newScheduledThreadPool(20);
             session.setAttribute("uid", user.getUID());
-//            ScheduledExecutorService scheduler = (ScheduledExecutorService) this.getServletContext().getAttribute("executor");
             System.out.println("Created Scheduler");
             scheduler.schedule(new RecommendationGenerator(session, tasteDS), 0, TimeUnit.SECONDS);
             System.out.println("Scheduled Recommendation Task");
@@ -72,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 //            response.setHeader("Refresh", "2");
 //            dispatcher.forward(request, response);
         } else {
-            request.getRequestDispatcher("/index.jsp").include(request, response);
+            request.getRequestDispatcher("index.jsp").include(request, response);
         }
     }
 

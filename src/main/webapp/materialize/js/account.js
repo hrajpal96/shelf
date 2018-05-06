@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function () {
-    $("a").click(function () {
-        var tar_id = $(this).attr("data-label");
-        var tar = $("label[for='" + tar_id + "']");
-        var val = tar.text();
-        tar.replaceWith("<input type='text' name='" + tar_id + "' id='" + tar_id + "' value='" + val + "' class=\"\'validate\'\" required/>");
-    });
-});
 
+var edit = document.querySelector('.removeEdit');
+edit.addEventListener('click', function () {
+    document.querySelector('#fieldsetEnable').removeAttribute('disabled');
+    edit.classList.add('disabled');
+    edit.classList.remove('btn');
+    edit.classList.remove('btn-flat');
+
+    document.querySelector('.removeEdit').textContent = "";
+});
+d

@@ -14,7 +14,7 @@
                 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
                 <script src="materialize/js/materialize.min.js"></script>
                 <ul id="dropdown1" class="dropdown-content black-text">
-                    <li><a href="#!" class="black-text"><i class="material-icons">account_circle</i>Profile</a></li>
+                    <li><a href="account.jsp" class="black-text"><i class="material-icons">account_circle</i>Profile</a></li>
                     <li><a href="#!"class="black-text"><i class="material-icons">settings</i>Settings</a></li>
                     <li class="divider" tabindex="-1"></li>
                     <li><a href="logout.do"class="black-text"><i class="material-icons">keyboard_tab</i>Logout</a></li>
@@ -58,7 +58,7 @@
                                     <li><a class="dropdown-button col-s4" data-activates="dropdown1" href="#"><span><i class="material-icons left">account_circle</i></span> ${sessionScope.user.firstName}</a></li>
                                                 </c:when>
                                                 <c:otherwise>
-                                    <li><a class="modal-trigger" href="#login">Login</a></li>        
+                                        <li><a class="modal-trigger" id="log" onclick="Materialize.toast('Successfully Updated', 2000)" href="#login">Login</a></li>        
                                     </c:otherwise>
                                 </c:choose>
                         </ul>
@@ -103,7 +103,7 @@
         </li>
         <c:if test="${sessionScope.user ne null}">
 
-            <li><a href="#!"><i class="material-icons">account_circle</i>My Account</a></li>
+            <li><a href="account.jsp"><i class="material-icons">account_circle</i>My Profile</a></li>
             <li><a href="#!"><i class="material-icons">notifications</i>Notifications<span class = "new badge"></span></a></li>
             <li><a href="#!"><i class="material-icons">account_circle</i>My Cart</a></li>
             </c:if>

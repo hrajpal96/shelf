@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.shelf.recommender;
+package com.shelf.session;
 
+import static com.oracle.util.Checksums.update;
 import java.io.IOException;
-import java.util.Queue;
-import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.mahout.cf.taste.web.RecommenderWrapper;
+
 /**
  *
  * @author Lenovo
  */
-//@WebServlet("/printrecommendations.do")
-public class PrintRecommendationServlet extends HttpServlet {
+public class UpdateAccountDetailsServlet extends HttpServlet {
+    
+    UpdateAccountDetailsController update;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,25 +30,19 @@ public class PrintRecommendationServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-//        AsyncContext aCtx=request.startAsync(request, response);
-        HttpSession session = request.getSession();
-        if (session.getAttribute("user") != null) {
-            Queue<AsyncContext> name = (Queue<AsyncContext>) session.getAttribute("recommendationService");
-            //            request.getRequestDispatcher("success.jsp").forward(request, response);
-        } else {
-            System.out.println("User session is null");
-        }
-
+        String email = request.getParameter("emailID");
+        String firstName = request.getParameter("first_name");
+        String lastName = request.getParameter("last_name");
+        String phoneNumber = request.getParameter("phone_num");
+        HttpSession session = request.getSession(true);
+        UserBean user = (UserBean) session.getAttribute("user");
+        update = new UpdateAccountDetailsController();
+        update.updateUser(email, firstName, lastName, phoneNumber, user, this.getServletContext());
+        session.setAttribute("isupdated", true);
+        response.sendRedirect("account.jsp");
     }
-    //        try (PrintWriter out = response.getWriter()) {
-//            out.println("<h2>Calculated " + primeRef.getPrimeCounter() + " prime</h2><br>");
-//            out.println("<h2>Number " + primeRef.getLastprime() + "</h2><br>");
-//            response.setHeader("Refresh", "1");
-//        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

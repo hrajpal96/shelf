@@ -28,6 +28,18 @@
         <jsp:include page="cachecontroller.jsp" ></jsp:include>
             <!--<header> </header>-->
             <main>
+                <div id="test-swipe-2">
+                <%--<%@include file="arrivals.jsp" %>--%>
+            </div>
+
+            <div id="test-swipe-1">
+                <%--<%@include file="recommendations.jsp" %>--%>
+            </div>
+            <div id="test-swipe-3">
+            </div>
+            <div id="test-swipe-4">
+                <%--<%@include file="results.jsp" %>--%>
+            </div>
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
                     <%                        if (session.getAttribute("Recommendations") != null) {
@@ -42,41 +54,44 @@
                     <div class="container" style="width: 90%">
                         <div class="row">
                             <div class="col s12 m9 l10" id="bodybox">
+                                <h2>My Rated Books</h2>
                                 <div id="ratings" class="section scrollspy">
-                                    <h2>My Rated Books</h2>
-                                    <p> 
-                                        <%
-                                            PreferenceArray ratings = (PreferenceArray) session.getAttribute("ratings");
-                                            int i = 0;
-                                            while (i < ratings.length()) {
-
-                                                rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where bookid=" + ratings.getItemID(i));
-                                                rowset.execute();
-                                                if (rowset.next()) {
-                                                    rowset.absolute(1);
-
+                                    <p> <%
+                                        PreferenceArray ratings = (PreferenceArray) session.getAttribute("ratings");
+                                        rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where category= \'Romance\' order by RAND() LIMIT 10");
+                                        rowset.execute();
+                                        rowset.absolute(1);
+                                        while (rowset.next()) {
                                         %>
-                                    <div class="collection">
-                                        <li class="collection-item">
-                                            <div  class="collection-item avatar">
-                                                <img src="<%= rowset.getString("coverPath")%>" alt="" class="materialboxed circle">
-                                                <span class="title flow-text"><%= rowset.getString(1)%></span><br>
-                                                <p><%= rowset.getString("author")%></p>
-                                                <a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a>
-                                                <p><div  class="secondary-content flow-text"><%= ratings.getValue(i)%><i class="material-icons right">grade</i></div></p>
+                                    <div class="col s3">
+                                        <div class="card medium hoverable">
+                                            <div class="card-image waves-effect waves-block waves-light">
+                                                <img class="activator" src="<%= rowset.getString("coverPath")%>">
                                             </div>
-                                        </li>
+                                            <div class="card-content">
+                                                <span class="card-title activator grey-text text-darken-4"><%= rowset.getString(1)%><i class="material-icons right">more_vert</i></span>
+                                                <a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a>
+                                            </div>
+                                            <div class="card-reveal">
+                                                <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i><%= rowset.getString(1)%></span>
+                                                <p><%= rowset.getString("author")%></p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <%
-                                            }
-                                            i++;
-                                        }%>
+                                        }
+                                    %>
                                     </p>
+                                    <br>
                                 </div>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
                                 <div id="recommendations" class="section scrollspy">
                                     <h4 class="text-center">My Recommendations</h4>
-                                    <p><%
-                                        List< RecommendedItem> list = (List<RecommendedItem>) session.getAttribute("Recommendations");
+
+                                    <p><%                                        List< RecommendedItem> list = (List<RecommendedItem>) session.getAttribute("Recommendations");
                                         Iterator<RecommendedItem> iter = list.iterator();
                                         int size = list.size() - 1;
                                         while (iter.hasNext()) {
@@ -131,7 +146,7 @@
                 </c:otherwise>
             </c:choose>
         </main>
-        
+
         <script>
             $(document).ready(function () {
                 $('.materialboxed').materialbox();

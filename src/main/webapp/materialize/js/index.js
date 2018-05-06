@@ -29,7 +29,7 @@ $(document).ready(function () {
             document.getElementById("ratingalert").innerHTML = rating;
         }
 
-    }
+    };
     //Initializations
     $('.editbtn').removeClass("disabled");
     $('.modal').modal({opacity: .1, ending_top: '50%'});
@@ -46,10 +46,7 @@ $(document).ready(function () {
         closeOnClick: true
 
     });
-    
-    //Login Modal width and height: responsive
-    $("#login").width($(".modal").width());
-    $("#login").height($(".modal").height()); 
+
 
     //Account Information Dropdown Button
     $('.dropdown-button').dropdown({hover: true, constrainWidth: false});
@@ -61,17 +58,17 @@ $(document).ready(function () {
         });
 
     });
-    
+
     //For loading mybooks tab
     $('#mybooks').click(function () {
         $('#test-swipe-3').load('mybooks.jsp', function () {
         });
 
     });
-    
+
     //For loading new arrivals tab
     $('#newarrivals').click(function () {
-        $('#test-swipe-2').load('arrivals.jsp#container', function () {
+        $('#test-swipe-2').load('arrivals.jsp', function () {
         });
     });
 
@@ -107,6 +104,11 @@ $(document).ready(function () {
         ($(this).val() === '') ? $(this).addClass('empty') : $(this).removeClass('empty');
     });
 });
+
+
+//Login Modal width and height: responsive
+$("#login").width($("#login").width());
+$("#login").height($("#login").height());
 
 //Password Verification function
 $("#password").on("keyup", function (e) {

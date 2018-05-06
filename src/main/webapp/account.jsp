@@ -1,7 +1,7 @@
 <%-- 
-    Document   : sampleform
-    Created on : 25 Mar, 2018, 5:17:51 PM
-    Author     : Lenovo
+Document   : sampleform
+Created on : 25 Mar, 2018, 5:17:51 PM
+Author     : Lenovo
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,68 +13,77 @@
     </head>
     <body>
         <header>
+            <%--<%@include file="basetemplate.jsp" %>--%>
             <%@include file="basetemplate.jsp" %>
             <%@include file="cachecontroller.jsp" %>
-            <script src="materialize/js/account.js"></script>
-            <script src="materialize/js/index.js"></script>
+            <%@include file="checksession.jsp" %>
         </header>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+
         <main>
-            <br>
-            <br>
-            <div class="card col s5">
-                <form action="" class="col m2 col offset-m1" method="POST" >
-                    <a class="halfway-fab btn-floating btn-large waves-effect waves-light red removeEdit"data-label="firstname"><i class="material-icons" >edit</i></a>
+            <div class="col s0.8" >&nbsp;</div>
+            <div class="row">
+                <div class="col s0.8" >&nbsp</div>
+                <%@include file="templates/leftMyProfile.html" %>
+                <% if (session.getAttribute("isupdated") != null) {
+                %>
+                <style>
+                    #toast-container {
+                        top: auto !important;
+                        right: auto !important;
+                        bottom: 10%;
+                        left:7%;  
+                    }
+                </style>
+                <script>Materialize.toast('Successfully Updated', 2000, 'bottom')</script>
+                <%
+                        session.removeAttribute("isupdated");
+                    }
+                %>
+                <div class="col s0.1" >&nbsp</div>
+                <div class="card col s8">
+                    <div class="col s10" >&nbsp</div>
+                    <div class="col s2 offset s-10" style="padding-left: 83px"><a class="removeEdit halfway-fab btn-floating btn-large red text-darken-5"><i class="material-icons">edit</i></a></div>
 
-                    <fieldset id="fieldsetEnable" >
-                        <div class="row">
-                            <div class="input-field col s5 "> 
-                                
-                                <!--<input id="firstname" type="text" name="firstName" class="validate" required >-->
-                                <i class="material-icons prefix">person</i><label for="firstname">${sessionScope.user.firstName}</label>
+                    <form action="updateprofile.do" method="POST">
+                        <fieldset id="fieldsetEnable" disabled>
+                            <div class="col s10"><h5 class="red-text text-darken-1 col s5">Personal Information</h5></div>
+                            <div class="col s2" >&nbsp;</div>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix red-text text-darken-5">account_circle</i>
+                                <input id="icon_prefix" type="text" class="validate" name="first_name" value="${sessionScope.user.firstName}">
+                                <label for="icon_prefix">First Name</label>
                             </div>
-                        </div>
-                        
-                            <div class="input-field col s5"> <i class="material-icons prefix">person_outline</i>
-                                <input id="lastname" type="text" name="lastName" class="validate" required >
-                                <label for="lastname">Last Name</label>
-                                <span class="error_form" id="sname_error_message"></span>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix red-text text-darken-5">account_circle</i>
+                                <input id="icon_prefix" type="text" class="validate" name="last_name" value="${sessionScope.user.lastName}">
+                                <label for="icon_prefix">Last Name</label>
                             </div>
-                            <div class="input-field col s5"> <i class="material-icons prefix">email</i>
-                                <input id="email" type="email" name="emailID" class="validate" onblur="checkExist()" required >
-                                <label for="email" class="tooltipped" data-tooltip="Enter a valid ID" data-position="top" data-delay="10" data-error="Please enter a valid email-ID." data-success="">Email</label>
-                            </div>
-                            <span id="isE"></span>
-                            <div class="input-field "> <i class="material-icons prefix ">phone_iphone</i>
-                                <input id="contactnumber"  type="tel"  name ="contactNumber"  pattern="^[789]\d{9}$" class="validate" required >
-                                <label for="contactnumber" class="tooltipped"  data-delay="10" data-tooltip ="Enter a valid 10-digit number" data-position="top" data-error="Enter a valid 10-digit number">Contact Number</label>
-                            </div>
-                            <div class="input-field" >
-                                <i class="material-icons prefix ">list</i>
-                                <select class="icons" multiple>
-                                    <option value="" disabled selected>Shelf recommends the best content to suit your needs. Pick 3 topics you want to learn about. (You can change these later.)</option>
-                                    <option value="" data-icon="images/abc.png" class="right circle">example 1</option>
-                                    <option value="" data-icon="images/abc.jpg" class="right circle">example 2</option>
-                                    <option value="" data-icon="images/yuna.jpg" class="right circle">example 3</option>
 
-                                </select>
-                                <label>Preferences</label>
+                            <div class="col s12" >&nbsp;</div>
+
+                            <div class="input-field col s5">
+                                <i class="material-icons prefix red-text text-darken-5">email</i>
+                                <input id="email" type="email" class="validate" name="emailID" value="${sessionScope.user.emailID}">
+                                <label for="email" data-error="Please enter valid email address" data-success="right">Email</label>
                             </div>
-                            <div>
-                                <center>
-                                    <button id="editdone" class="btn waves-effect waves-light red accent-4 btn-primary center-align" 
-                                            type="submit" formaction="register.do"  name="action">Save <i class="material-icons left">person_add</i> </button>
-                                </center>
+                            <div class="col s12" >&nbsp;</div>
+                            <div class="input-field col s5">
+                                <i class="material-icons prefix red-text text-darken-5">phone</i>
+                                <input id="icon_telephone" type="tel" class="validate" name="phone_num" value="${sessionScope.user.contactNumber}">
+                                <label for="icon_telephone">Mobile</label>
                             </div>
-                        </div>
-                    <!--</fieldset>-->
-                </form>
+                            <div class="col s12" >&nbsp;</div>
+                            <div  class="col s12" >
+                                <button onclick="" class="btn waves-effect waves-light red darken-5"
+                                        type="submit">Save<i class="material-icons left">save</i></button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col s12" >&nbsp;</div>
             </div>
+            <script type="text/javascript" src="materialize/js/account.js"></script>
+            <script src="materialize/js/index.js"></script>
         </main>
     </body>
 </html>

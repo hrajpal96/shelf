@@ -678,6 +678,7 @@ input[id="search"] {
     background-color: #fafafa;
     border-radius: 2px;
 }
+fieldset { border:none; }
 .nav-wrapper .input-field input#search:focus{
     outline: none;
     -webkit-box-shadow: none;
@@ -730,6 +731,7 @@ ul.table-of-contents a.active{
     max-width: 90%;
     max-height: 90%;
     width: 28%;
+    height: 50%;
     left:0; right:0; top:0; bottom:0; margin:auto;
     overflow: hidden !important;
     margin-top: 5%;

@@ -5,19 +5,22 @@
  */
 package com.shelf.recommender;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
+import org.apache.mahout.cf.taste.eval.RecommenderEvaluator;
+import org.apache.mahout.cf.taste.impl.eval.AverageAbsoluteDifferenceRecommenderEvaluator;
 import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.model.jdbc.ReloadFromJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.CachingUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.LogLikelihoodSimilarity;
-import org.apache.mahout.cf.taste.impl.similarity.TanimotoCoefficientSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
@@ -59,11 +62,18 @@ public class RecommendationGenerator implements Runnable {
                 Recommender recommender = new GenericUserBasedRecommender(dataModel, userneighborhood, similarity);
                 list = recommender.recommend(USER_ID, 10);
                 if (list != null) {
+                    long[] users = neighborhood.getUserNeighborhood(USER_ID);
+                    System.out.print("\nSimilar Users: ");
+                    System.out.println(Arrays.toString(users));
                     System.out.println("List is not empty...Generated Recommendations");
                     session.setAttribute("Recommendations", list);
                     session.setAttribute("ratings", dataModel.getPreferencesFromUser(USER_ID));
                     System.out.println(list);
                 }
+                RecommenderEvaluator evaluator = new AverageAbsoluteDifferenceRecommenderEvaluator();
+                RecommenderBuilder builder = null;
+                double result = evaluator.evaluate(builder, null, dataModel, 0.9, 1.0);
+                System.out.println("Result: "+ result+"\n");
             } catch (TasteException | ClassNotFoundException ex) {
                 Logger.getLogger(RecommendationGenerator.class.getName()).log(Level.SEVERE, null, ex);
             }

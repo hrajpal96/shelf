@@ -36,6 +36,10 @@
         <servlet-name>UpdateRatingServlet</servlet-name>
         <servlet-class>com.shelf.ratings.UpdateRatingServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateAccountDetailsServlet</servlet-name>
+        <servlet-class>com.shelf.session.UpdateAccountDetailsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RecommenderServlet</servlet-name>
         <url-pattern>/recommenderservlet.do</url-pattern>
@@ -96,6 +100,10 @@
     <servlet-mapping>
         <servlet-name>UpdateRatingServlet</servlet-name>
         <url-pattern>/updaterating.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccountDetailsServlet</servlet-name>
+        <url-pattern>/updateprofile.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
