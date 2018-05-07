@@ -62,26 +62,28 @@
             <div class="container" style="width: 90%">
                 <div class="row">
                     <div class="col s12 m9 l10" id="bodybox">
-                        <center>
-                        <%
-                            String bookID = request.getParameter("bookid");
-                            try {
-                                ConnectionBean conn = (ConnectionBean) request.getServletContext().getAttribute("db");
-                                Connection con = conn.getConnection();
-                                JdbcRowSetImpl rowset = new JdbcRowSetImpl(con);
-                                rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where bookid=" + bookID);
-                                rowset.execute();
-                                rowset.absolute(1);
-                                System.out.println(rowset.getDouble("averageRating"));
-                        %>
-                        <br>
-                        <br>
-                        <div class="row">
-                            <img class="materialboxed responsive-img" width="350" height="450" src="<%= rowset.getString("coverPath")%>">
-                            <h4><%= rowset.getString("bookName")%></h4>
-                            <h4><%= rowset.getString("author")%></h4>
-                        </div>
-                    </center>
+                    <%
+                        String bookID = request.getParameter("bookid");
+                        try {
+                            ConnectionBean conn = (ConnectionBean) request.getServletContext().getAttribute("db");
+                            Connection con = conn.getConnection();
+                            JdbcRowSetImpl rowset = new JdbcRowSetImpl(con);
+                            rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where bookid=" + bookID);
+                            rowset.execute();
+                            rowset.absolute(1);
+                            System.out.println(rowset.getDouble("averageRating"));
+                    %>
+                    <br>
+                    <br>
+                    <div class="row col s12>"
+                        <img class="materialboxed responsive-img" width="350" height="450" src="<%= rowset.getString("coverPath")%>">
+                        <h4><%= rowset.getString("bookName")%></h4>
+                        <h4><%= rowset.getString("author")%></h4>
+                        <button class="btn waves-effect waves-light blue darken-5 btn-primary center-align" 
+                                type="submit"  name="addtocart">Add To Cart<i class="material-icons left">shopping_cart</i> </button>
+
+                    </div>
+
                     <div class="container">
                         <div class="hreview-aggregate">
                             <div class="row">

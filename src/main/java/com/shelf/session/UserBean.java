@@ -21,11 +21,39 @@ public class UserBean implements Serializable {
     private String lastName;
     private long contactNumber;
     private String password;
-    private final String VERIFICATIONKEY;
+
+    private String verificationkey;
+
     private boolean doesexist;
+    private boolean updated = false;
+
+    public UserBean(Integer UID, String emailID, String firstName, String lastName, String password, String verificationKey) {
+        this.UID = UID;
+        this.emailID = emailID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.verificationkey = verificationKey;
+    }
 
     public void setDoesexist(boolean doesexist) {
         this.doesexist = doesexist;
+    }
+
+    public String getVerificationkey() {
+        return verificationkey;
+    }
+
+    public void setVerificationkey(String verificationkey) {
+        this.verificationkey = verificationkey;
+    }
+
+    public boolean isUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(boolean updated) {
+        this.updated = updated;
     }
 
     public boolean isDoesexist() {
@@ -42,24 +70,11 @@ public class UserBean implements Serializable {
 
     //Ctors added on 18-3-2018
     public UserBean() {
-        this.VERIFICATIONKEY = null;
-    }
-
-    public UserBean(Integer UID, String emailID, String firstName, String lastName, String password, String verificationKey) {
-        this.UID = UID;
-        this.emailID = emailID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.VERIFICATIONKEY = verificationKey;
+        this.verificationkey = null;
     }
 
     /*public UserBean() {
     }*/
-    public String getVERIFICATIONKEY() {
-        return VERIFICATIONKEY;
-    }
-
     private boolean isValid = false;
 
     public String getEmailID() {

@@ -10,7 +10,5 @@ edit.addEventListener('click', function () {
     edit.classList.add('disabled');
     edit.classList.remove('btn');
     edit.classList.remove('btn-flat');
-
     document.querySelector('.removeEdit').textContent = "";
 });
-d

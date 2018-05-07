@@ -83,7 +83,7 @@
                         <br>
                         <br>
                         New to Shelf?<br><br>
-                        <a class="login-register btn blue accent-4 modal-trigger" href="signupform.jsp"  name="action">Sign Up <i class="material-icons left">person_add</i> </a>
+                        <a class="login-register btn blue accent-4 modal-trigger" href="mobilesignup.jsp"  name="action">Sign Up <i class="material-icons left">person_add</i> </a>
                     </center>
                 </div>
 

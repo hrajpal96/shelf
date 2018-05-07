@@ -43,10 +43,12 @@ public class RegistrationServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String password = request.getParameter("password");
         String contactNumber = request.getParameter("contactNumber");
+        String[] preferenceIDs = request.getParameterValues("preferences");
+
         RegistrationController controller = new RegistrationController();
         System.out.println(emailID);
         if (validateEmail(emailID)) {
-            UserBean user = controller.addUser(firstName, lastName, emailID, contactNumber, password, this.getServletContext());
+            UserBean user = controller.addUser(firstName, lastName, emailID, contactNumber, preferenceIDs, password, this.getServletContext());
             if (!(user == null)) {
                 sendVerificationMail(user);
                 request.setAttribute("isregistered", true);
@@ -85,7 +87,7 @@ public class RegistrationServlet extends HttpServlet {
 //            //   generateMailMessage.addRecipient(Message.RecipientTmaype.CC, new InternetAddress(emailTo));
 //            generateMailMessage.setSubject("Verification mail from Shelf");
         verificationMessage = "http://localhost:8084/RecommenderApplication/verify.do?key="
-                + aUser.getVERIFICATIONKEY() + "&"
+                + aUser.getVerificationkey()+ "&"
                 + "uid=" + aUser.getUID();
 //            String emailBody = verificationMessage;
 //            generateMailMessage.setContent(emailBody, "text/html");

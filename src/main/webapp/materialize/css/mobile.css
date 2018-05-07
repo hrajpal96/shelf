@@ -701,6 +701,10 @@ input[id="search"] {
     border-radius: 3pt;
     border-bottom: none;
 }
+
+.nav-wrapper, .nav-wrapper form, .nav-wrapper form .input-field{
+    height: 100%;
+}
 .nav-wrapper .input-field input#search {
     display: block;
     font-size: 16px;

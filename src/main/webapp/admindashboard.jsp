@@ -19,13 +19,15 @@
         <%@include file="basetemplate.jsp" %>
         <%@include file="cachecontroller.jsp" %>
         <main>
+            <script src="materialize/js/index.js"></script>
+
             <!-- DAILY STATS SECTION -->
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
                     <section class="section section-daily-stats center">
                         <div class="row">
                             <div class="col l3 m6 s12">
-                                <div class="card-panel red lighten-1 white-text center">
+                                <div class="card-panel blue accent-4 white-text center">
                                     <i class="material-icons medium">show_chart</i>
                                     <h5>Visitors Today</h5>
                                     <h3 class="count">114893</h3>
@@ -35,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="col l3 m6 s12">
-                                <div class="card-panel red lighten-5 center">
+                                <div class="card-panel blue accent-4 white-text center">
                                     <i class="material-icons medium">person_add</i>
                                     <h5>New Users</h5>
                                     <h3 class="count">1203</h3>
@@ -45,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="col l3 m6 s12">
-                                <div class="card-panel red lighten-1 white-text center">
+                                <div class="card-panel green accent-4 white-text center">
                                     <i class="material-icons medium">assignment</i>
                                     <h5>New Posts</h5>
                                     <h3 class="count">2867</h3>
@@ -55,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="col l3 m6 s12">
-                                <div class="card-panel red lighten-5 center">
+                                <div class="card-panel yellow accent-4 white-text center">
                                     <i class="material-icons medium">comment</i>
                                     <h5>New Comments</h5>
                                     <h3 class="count">6931</h3>
@@ -270,7 +272,7 @@
 
                     <!-- FOOTER -->
                     <footer class="section red darken-2 white-text center">
-                        <p>@2018 All right reserved. Design By Abhilash</p>
+                        <p>@2018 All right reserved. Shelf</p>
                     </footer>
 
                     <!-- FAB -->
@@ -313,21 +315,6 @@
                             </form>
                             <div class="modal-footer">
                                 <a href="#!" class="modal-action modal-close btn yellow darken-3 black-text">Submit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PRELOADER -->
-                    <div class="loader preloader-wrapper big active">
-                        <div class="spinner-layer spinner-red only">
-                            <div class="circle-clipper left">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="gap-patch">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="circle-clipper right">
-                                <div class="circle"></div>
                             </div>
                         </div>
                     </div>

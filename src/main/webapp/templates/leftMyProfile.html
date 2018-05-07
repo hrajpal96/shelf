@@ -11,20 +11,21 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div class="col s3  ">
+        <div class="col s3  hide-on-small-and-down">
 
             <div class="col s12 ">
 
                 <div class="card-panel">
 
-                    <div class="row">
-                        <div class="col s3">
-                            <img class="circle"  src="materialize/images/man.png">
+                    <center>
+                        <div class="row">
+                            <div class="">
+                                <img class="circle"  src="materialize/images/man.png">
+                            </div>
                         </div>
-                        &nbsp;&nbsp;Hello,<br>
-                        <strong>&nbsp; ${sessionScope.user.firstName} ${sessionScope.user.lastName}</strong>
+                        <strong style="font-size: 20px"> ${sessionScope.user.firstName} ${sessionScope.user.lastName}</strong>
 
-                    </div>
+                    </center>
 
                 </div>
             </div>

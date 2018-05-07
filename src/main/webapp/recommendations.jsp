@@ -4,6 +4,8 @@
     Author     : Lenovo
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.shelf.session.UserBean"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="org.apache.mahout.cf.taste.model.PreferenceArray"%>
 <%@page import="org.apache.mahout.cf.taste.impl.common.LongPrimitiveIterator"%>
@@ -28,18 +30,6 @@
         <jsp:include page="cachecontroller.jsp" ></jsp:include>
             <!--<header> </header>-->
             <main>
-                <div id="test-swipe-2">
-                <%--<%@include file="arrivals.jsp" %>--%>
-            </div>
-
-            <div id="test-swipe-1">
-                <%--<%@include file="recommendations.jsp" %>--%>
-            </div>
-            <div id="test-swipe-3">
-            </div>
-            <div id="test-swipe-4">
-                <%--<%@include file="results.jsp" %>--%>
-            </div>
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
                     <%                        if (session.getAttribute("Recommendations") != null) {
@@ -50,46 +40,55 @@
                                 Connection con = conn.getConnection();
 
                                 JdbcRowSetImpl rowset = new JdbcRowSetImpl(con);
+                                UserBean user = (UserBean) session.getAttribute("user");
                     %>
                     <div class="container" style="width: 90%">
                         <div class="row">
                             <div class="col s12 m9 l10" id="bodybox">
-                                <h2>My Rated Books</h2>
-                                <div id="ratings" class="section scrollspy">
-                                    <p> <%
-                                        PreferenceArray ratings = (PreferenceArray) session.getAttribute("ratings");
-                                        rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where category= \'Romance\' order by RAND() LIMIT 10");
-                                        rowset.execute();
-                                        rowset.absolute(1);
-                                        while (rowset.next()) {
-                                        %>
-                                    <div class="col s3">
-                                        <div class="card medium hoverable">
-                                            <div class="card-image waves-effect waves-block waves-light">
-                                                <img class="activator" src="<%= rowset.getString("coverPath")%>">
-                                            </div>
-                                            <div class="card-content">
-                                                <span class="card-title activator grey-text text-darken-4"><%= rowset.getString(1)%><i class="material-icons right">more_vert</i></span>
-                                                <a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a>
-                                            </div>
-                                            <div class="card-reveal">
-                                                <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i><%= rowset.getString(1)%></span>
-                                                <p><%= rowset.getString("author")%></p>
+                                <h2>Based on Preferences</h2>
+                                <div class="row">
+                                    <div id="ratings" class="section scrollspy">
+                                        <p> <%                                        PreferenceArray ratings = (PreferenceArray) session.getAttribute("ratings");
+                                            rowset.setCommand("SELECT preferenceID from userpreferences where uid=" + user.getUID());
+                                            rowset.execute();
+                                            rowset.absolute(0);
+                                            ArrayList<Integer> preferences = new ArrayList<>();
+                                            while (rowset.next()) {
+                                                preferences.add(rowset.getInt("preferenceID"));
+                                            }
+                                            for (Integer preference : preferences) {
+                                                System.out.println(preference);
+                                                rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where preferenceID=" + preference + " order by RAND() LIMIT 3");
+                                                rowset.execute();
+                                                rowset.absolute(1);
+                                                while (rowset.next()) {
+
+                                            %>
+                                        <div class="col m4">
+                                            <div class="card medium hoverable">
+                                                <div class="card-image waves-effect waves-block waves-light">
+                                                    <img class="activator" src="<%= rowset.getString("coverPath")%>">
+                                                </div>
+                                                <div class="card-content">
+                                                    <span class="card-title activator grey-text text-darken-4"><%= rowset.getString(1)%><i class="material-icons right">more_vert</i></span>
+                                                    <a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a>
+                                                </div>
+                                                <div class="card-reveal">
+                                                    <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i><%= rowset.getString(1)%></span>
+                                                    <p><%= rowset.getString("author")%></p>
+                                                </div>
                                             </div>
                                         </div>
+                                        <%
+                                                }
+                                            }
+
+                                        %>
+                                        </p>
                                     </div>
-                                    <%
-                                        }
-                                    %>
-                                    </p>
-                                    <br>
                                 </div>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
                                 <div id="recommendations" class="section scrollspy">
-                                    <h4 class="text-center">My Recommendations</h4>
+                                    <h2 class="text-center">Users also read</h2>
 
                                     <p><%                                        List< RecommendedItem> list = (List<RecommendedItem>) session.getAttribute("Recommendations");
                                         Iterator<RecommendedItem> iter = list.iterator();
@@ -102,7 +101,7 @@
                                                 rowset.absolute(1);
                                                 //                        String imagepath = rowset.getString("coverPath");
                                         %>
-                                    <div class="col s3">
+                                    <div class="col m4">
                                         <div class="card medium hoverable">
                                             <div class="card-image waves-effect waves-block waves-light">
                                                 <img class="activator" src="<%= rowset.getString("coverPath")%>">

@@ -11,6 +11,7 @@
         <div class="navbar-fixed">
         <c:choose>
             <c:when test="${sessionScope.user ne null}">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
                 <script src="materialize/js/materialize.min.js"></script>
                 <ul id="dropdown1" class="dropdown-content black-text">
@@ -22,8 +23,10 @@
                 <ul id="dropdown2" class="dropdown-content black-text">
                     <li><a href="#!" class="black-text"><span class="new badge red">4</span>&nbsp;&nbsp;Notifications</a></li>
                     <li class="divider"></li>
-                    <li><a href="#!" class="black-text"><i class="small material-icons circle yellow blue-text">shopping_cart</i>New Items in Cart</a></li>
-                    <li><a href="#!" class="black-text"><i class="small material-icons circle green white-text">attach_money</i>Fine Due</a></li>
+                    <li><a href="#!" class="black-text"><i class="medium material-icons circle yellow blue-text">shopping_cart</i>New Items in Cart</a></li>
+                    <li><a href="#!" class="black-text"><i class="fa fa-inr small circl green-text"></i>Due Payments</a></li>
+                    <li><a href="#!" class="black-text"><i class="medium material-icons circle blue white-text">library_books</i>New Recommendations</a></li>
+
                 </ul>
                 <nav class="nav-extended"> 
                 </c:when>
@@ -58,7 +61,7 @@
                                     <li><a class="dropdown-button col-s4" data-activates="dropdown1" href="#"><span><i class="material-icons left">account_circle</i></span> ${sessionScope.user.firstName}</a></li>
                                                 </c:when>
                                                 <c:otherwise>
-                                        <li><a class="modal-trigger" id="log" onclick="Materialize.toast('Successfully Updated', 2000)" href="#login">Login</a></li>        
+                                    <li><a class="modal-trigger" id="log" href="#login">Login</a></li>        
                                     </c:otherwise>
                                 </c:choose>
                         </ul>
@@ -96,10 +99,12 @@
         <br>
         <li class="divider"></li>
         <li class="search">
-            <div class="search-wrapper card ">
-                <input id="search"><i class="material-icons">search</i>
-                <div class="search-results"></div>
-            </div>
+            <form action="search.do">
+                <div class="search-wrapper card ">
+                    <input id="search" name="search"><i class="material-icons">search</i>
+                    <div class="search-results"></div>
+                </div>
+            </form>
         </li>
         <c:if test="${sessionScope.user ne null}">
 
@@ -116,17 +121,5 @@
             </c:if>
 
     </ul>
-
     <script src="materialize/js/mobileredirect.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('input.autocomplete').autocomplete({
-                data: {
-                    "Apple": null,
-                    "Microsoft": null,
-                    "Google": 'http://placehold.it/250x250',
-                }
-            });
-        });
-    </script>
 </body>

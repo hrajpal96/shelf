@@ -24,8 +24,6 @@ Author     : Lenovo
             <div class="row">
                 <div class="col s0.8" >&nbsp</div>
                 <%@include file="templates/leftMyProfile.html" %>
-                <% if (session.getAttribute("isupdated") != null) {
-                %>
                 <style>
                     #toast-container {
                         top: auto !important;
@@ -34,8 +32,16 @@ Author     : Lenovo
                         left:7%;  
                     }
                 </style>
-                <script>Materialize.toast('Successfully Updated', 2000, 'bottom')</script>
+                <% if (session.getAttribute("isupdated") != null) {
+                        if ((Boolean) session.getAttribute("isupdated")) {
+                %>
+                <script>Materialize.toast('Successfully Updated', 2000, 'bottom');</script>
                 <%
+                } else {
+                %>
+                <script>Materialize.toast('E-Mail ID or Phone number is already Registered', 3000, 'bottom')</script>
+                <%
+                        }
                         session.removeAttribute("isupdated");
                     }
                 %>
@@ -61,16 +67,17 @@ Author     : Lenovo
 
                             <div class="col s12" >&nbsp;</div>
 
-                            <div class="input-field col s5">
-                                <i class="material-icons prefix red-text text-darken-5">email</i>
-                                <input id="email" type="email" class="validate" name="emailID" value="${sessionScope.user.emailID}">
-                                <label for="email" data-error="Please enter valid email address" data-success="right">Email</label>
+                            <div class="input-field col s6"> <i class="material-icons red-text prefix">email</i>
+                                <input id="email" type="email" name="emailID" class="validate" onblur="checkExist()" value="${sessionScope.user.emailID}"required>
+                                <label for="email" class="tooltipped" data-tooltip="Enter a valid ID" data-position="top" data-delay="10" data-error="Please enter a valid email-ID." data-success="">Email</label>
                             </div>
+                            <span id="isE"></span>
+
                             <div class="col s12" >&nbsp;</div>
-                            <div class="input-field col s5">
-                                <i class="material-icons prefix red-text text-darken-5">phone</i>
-                                <input id="icon_telephone" type="tel" class="validate" name="phone_num" value="${sessionScope.user.contactNumber}">
-                                <label for="icon_telephone">Mobile</label>
+
+                            <div class="input-field col s6"> <i class="material-icons red-text prefix ">phone_iphone</i>
+                                <input id="contactnumber"  type="tel"  name ="phone_num"  pattern="^[789]\d{9}$" value="${sessionScope.user.contactNumber}" class="validate" required>
+                                <label for="contactnumber" class="tooltipped"  data-delay="10" data-tooltip ="Enter a valid 10-digit number" data-position="top" data-error="Enter a valid 10-digit number">Contact Number</label>
                             </div>
                             <div class="col s12" >&nbsp;</div>
                             <div  class="col s12" >

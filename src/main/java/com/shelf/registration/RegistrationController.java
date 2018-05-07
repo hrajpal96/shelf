@@ -21,11 +21,11 @@ public class RegistrationController {
     public RegistrationController() {
     }
 
-    public UserBean addUser(String firstName, String lastName, String emailID, String contactNumber, String password, ServletContext context) throws SQLException, ClassNotFoundException {
+    public UserBean addUser(String firstName, String lastName, String emailID, String contactNumber, String[] preferenceIDs, String password, ServletContext context) throws SQLException, ClassNotFoundException {
         Integer uid;
         String verificationKey = null;
         ConnectionBean conn = (ConnectionBean) context.getAttribute("db");
-        System.out.println("Connection : "+conn.getConnection());
+        System.out.println("Connection : " + conn.getConnection());
         try (final JdbcRowSet rowSet = new JdbcRowSetImpl(conn.getConnection())) {
             rowSet.setType(RowSet.TYPE_SCROLL_SENSITIVE);
             rowSet.setConcurrency(RowSet.CONCUR_UPDATABLE);
@@ -51,16 +51,27 @@ public class RegistrationController {
             verificationKey = UUID.randomUUID().toString();
 
             rowSet.moveToInsertRow();
-            rowSet.updateInt(1, uid);  // Use column number
-            rowSet.updateString(2, firstName);
-            rowSet.updateString(3, lastName);
-            rowSet.updateString(4, emailID);
-            rowSet.updateString(5, password);
+            rowSet.updateInt("uid", uid);  // Use column number
+            rowSet.updateInt("typeID", 2);
+            rowSet.updateString("firstName", firstName);
+            rowSet.updateString("lastName", lastName);
+            rowSet.updateString("emailID", emailID);
+            rowSet.updateString("password", password);
             //Added on 18-3-2018
-            rowSet.updateLong(6, Long.parseLong(contactNumber));
-            rowSet.updateBoolean(7, false);
-            rowSet.updateString(8, verificationKey);
+            rowSet.updateLong("contactNumber", Long.parseLong(contactNumber));
+            rowSet.updateBoolean("isValid", false);
+            rowSet.updateString("verification_key", verificationKey);
             rowSet.insertRow();
+            for (String preference : preferenceIDs) {
+                rowSet.setCommand("SELECT *FROM userpreferences");
+                rowSet.execute();
+                rowSet.absolute(1);
+                rowSet.moveToInsertRow();
+                rowSet.updateInt(1, uid);
+                rowSet.updateInt(2, Integer.parseInt(preference));
+                rowSet.insertRow();
+                System.out.println("RowSet Inserted");
+            }
             user = new UserBean(uid, emailID, firstName, lastName, password, verificationKey);
             user.setIsValid(false);
 //Commented on 18-3-2018            user.setEmailID(rowSet.getString("emailID"));

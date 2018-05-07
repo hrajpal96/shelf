@@ -6,6 +6,10 @@
 package com.shelf.session;
 
 import static com.oracle.util.Checksums.update;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +22,7 @@ import javax.servlet.http.HttpSession;
  * @author Lenovo
  */
 public class UpdateAccountDetailsServlet extends HttpServlet {
-    
+
     UpdateAccountDetailsController update;
 
     /**
@@ -39,9 +43,30 @@ public class UpdateAccountDetailsServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         UserBean user = (UserBean) session.getAttribute("user");
         update = new UpdateAccountDetailsController();
-        update.updateUser(email, firstName, lastName, phoneNumber, user, this.getServletContext());
-        session.setAttribute("isupdated", true);
+        user = update.updateUser(email, firstName, lastName, phoneNumber, user, this.getServletContext());
+        if (user.isUpdated()) {
+            session.setAttribute("isupdated", true);
+            sendVerificationMail(user);
+        } else {
+            session.setAttribute("isupdated", false);
+        }
         response.sendRedirect("account.jsp");
+    }
+
+    private void sendVerificationMail(UserBean aUser) throws IOException {
+        String verificationMessage = verificationMessage = "http://localhost:8084/RecommenderApplication/verify.do?key="
+                + aUser.getVerificationkey() + "&"
+                + "uid=" + aUser.getUID();
+        try {
+            SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+            Request req = new Request();
+            req.setMethod(Method.POST);
+            req.setEndpoint("mail/send");
+            req.setBody("{\"personalizations\":[{\"to\":[{\"email\":\"" + aUser.getEmailID() + "\"}],\"subject\":\"Shelf: Change of Primary E-Mail Account\"}],\"from\":{\"email\":\"hrajpal96@gmail.com\"},\"content\":[{\"type\":\"text/plain\",\"value\": \"" + verificationMessage + "\"}]}");
+            Response resp = sg.api(req);
+        } catch (IOException e) {
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

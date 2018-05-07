@@ -42,23 +42,9 @@
                             <label for="contactnumber" class="tooltipped"  data-delay="10" data-tooltip ="Enter a valid 10-digit number" data-position="top" data-error="Enter a valid 10-digit number">Contact Number</label>
                         </div>
 
-
-                        <div class="input-field"> <i class="material-icons prefix ">lock_open</i>
-                            <input id="password"   type="password" name ="password" required>
-                            <label for="password" class="tooltipped" data-delay="30" data-tooltip ="Enter a 13-character Password" data-postition="bottom-right">Password</label>
-                            <meter max="4" id="password-strength-meter"></meter>
-                            <p id="password-strength-text"></p>
-                        </div>
-
-
-                        <div class="input-field "> <i class="material-icons prefix ">lock_outline</i>
-                            <input  id="checkpass" type="password" name = "checkpass" class="validate" required>
-                            <label for="checkpass" data-error="Passwords do not match" data-success="Passwords match" >Re-enter Password</label>
-
-                        </div>
                         <div class="input-field" >
                             <i class="material-icons prefix ">list</i>
-                            <select class="icons" multiple>
+                            <select class="icons" multiple name="preferences">
                                 <option value="" disabled selected>Your book preferences</option>
 
                             <%
@@ -85,6 +71,20 @@
                         </select>
                         <label >Your Preferences</label>
                     </div>
+                    <div class="input-field"> <i class="material-icons prefix ">lock_open</i>
+                        <input id="password"   type="password" name ="password" required>
+                        <label for="password" class="tooltipped" data-delay="30" data-tooltip ="Enter a 13-character Password" data-postition="bottom-right">Password</label>
+                        <meter max="4" id="password-strength-meter"></meter>
+                        <p id="password-strength-text"></p>
+                    </div>
+
+
+                    <div class="input-field "> <i class="material-icons prefix ">lock_outline</i>
+                        <input  id="checkpass" type="password" name = "checkpass" class="validate" required>
+                        <label for="checkpass" data-error="Passwords do not match" data-success="Passwords match" >Re-enter Password</label>
+
+                    </div>
+
                     <div>
                         <center>
 
@@ -97,7 +97,7 @@
         </div>
         <p class="red-text">${message}</p>
         <script>
-            $('select').select({dropdownOptions: {container: '.modal-content', }});
+            $('select').select({dropdownOptions: {container: '.modal-content'}});
         </script>
         <script src="materialize/js/index.js"></script>
     </div>

@@ -34,7 +34,9 @@
                             <li>
                                 <img src="materialize/images/parallax1.jpg"> <!-- random image -->
                                 <div class="caption right-align">
-                                    <h3>Right Aligned Caption</h3>
+                                    <h3>“92% of respondents reported that a positive recommendation from a friend,
+family member, or someone they trust is the biggest influence on whether they buy a product or service.”
+― Paul M. Rand</h3>
                                     <h5 class="light grey-text text-lighten-3"></h5>
                                 </div>
                             </li>
@@ -54,7 +56,10 @@
                     <c:redirect url="success.jsp"/>
                 </c:otherwise>
             </c:choose>
-                <script src="materialize/js/index.js"></script>
+            <script src="materialize/js/index.js"></script>
         </main>
+        <footer class="section red darken-2 white-text center">
+            <p>@2018 All right reserved. Shelf</p>
+        </footer>
     </body>
 </html>         

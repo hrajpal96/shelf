@@ -36,7 +36,8 @@ public class EmailVerificationServlet extends HttpServlet {
         String validationKey = request.getParameter("key");
         ServletContext context = getServletContext();
         ConnectionBean conn = (ConnectionBean) context.getAttribute("db");
-        try (final JdbcRowSet rowset = new JdbcRowSetImpl(conn.getConnection())) {
+        try {
+            final JdbcRowSet rowset = new JdbcRowSetImpl(conn.getConnection());
             rowset.setType(JdbcRowSet.TYPE_SCROLL_SENSITIVE);
             rowset.setConcurrency(JdbcRowSet.CONCUR_UPDATABLE);
             rowset.setReadOnly(false);
