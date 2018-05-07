@@ -29,4 +29,4 @@ A modern material design based framework.Materialize CSS is used for providing a
 
 https://github.com/sendgrid/sendgrid-java
 
-Used majorly for verification purposes and notifications (coming soon...) .
+Used majorly for verification purposes and notifications through e-mails .
