@@ -62,38 +62,6 @@
                             }%>
                         </p>
                     </div>
-                    <div id="recommendations" class="section scrollspy">
-                        <h4 class="text-center">My Recommendations</h4>
-                        <p><%
-                            List< RecommendedItem> list = (List<RecommendedItem>) session.getAttribute("Recommendations");
-                            Iterator<RecommendedItem> iter = list.iterator();
-                            int size = list.size() - 1;
-                            while (iter.hasNext()) {
-                                RecommendedItem item = iter.next();
-                                rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where bookid=" + item.getItemID());
-                                rowset.execute();
-                                if (rowset.next()) {
-                                    rowset.absolute(1);
-                                    //                        String imagepath = rowset.getString("coverPath");
-%>
-                        <div class="card hoverable flow-text">
-                            <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator responsive-img" src="<%= rowset.getString("coverPath")%>">
-                            </div>
-                            <div class="card-content">
-                                <span class="card-title activator grey-text text-darken-4"><%= rowset.getString(1)%><i class="material-icons right">more_vert</i></span>
-                                <p><a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a></p>
-                            </div>
-                            <div class="card-reveal">
-                                <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i><%= rowset.getString(1)%></span>
-                                <p><%= rowset.getString("author")%></p>
-                            </div>
-                        </div>
-                        <%                        }
-                            }
-                        %>
-                        </p>
-                    </div>
                     <%
                         } catch (SQLException e) {
                             System.out.println(e);

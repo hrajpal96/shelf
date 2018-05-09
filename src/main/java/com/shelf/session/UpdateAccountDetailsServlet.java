@@ -5,7 +5,6 @@
  */
 package com.shelf.session;
 
-import static com.oracle.util.Checksums.update;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;

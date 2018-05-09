@@ -55,13 +55,13 @@
 
                                     JdbcRowSetImpl rowset = new JdbcRowSetImpl(con);
 
-                                    rowset.setCommand("SELECT DISTINCT(category) from book");
+                                    rowset.setCommand("SELECT *from preferencetypes");
                                     rowset.execute();
                                     rowset.absolute(1);
                                     System.out.println(rowset.toString());
                                     while (rowset.next()) {
                             %>
-                            <option value="" class="right circle"><%= rowset.getString("category")%></option>
+                            <option value="<%= rowset.getInt("preferenceID") %>" class="right circle"><%= rowset.getString("preferenceName")%></option>
                             <%
                                     }
                                 } catch (SQLException e) {

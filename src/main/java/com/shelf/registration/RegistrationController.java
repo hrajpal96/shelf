@@ -26,7 +26,8 @@ public class RegistrationController {
         String verificationKey = null;
         ConnectionBean conn = (ConnectionBean) context.getAttribute("db");
         System.out.println("Connection : " + conn.getConnection());
-        try (final JdbcRowSet rowSet = new JdbcRowSetImpl(conn.getConnection())) {
+        try {
+            final JdbcRowSet rowSet = new JdbcRowSetImpl(conn.getConnection());
             rowSet.setType(RowSet.TYPE_SCROLL_SENSITIVE);
             rowSet.setConcurrency(RowSet.CONCUR_UPDATABLE);
             rowSet.setReadOnly(false);
@@ -62,13 +63,16 @@ public class RegistrationController {
             rowSet.updateBoolean("isValid", false);
             rowSet.updateString("verification_key", verificationKey);
             rowSet.insertRow();
+            rowSet.setType(RowSet.TYPE_SCROLL_SENSITIVE);
+            rowSet.setConcurrency(RowSet.CONCUR_UPDATABLE);
+
+            rowSet.setCommand("SELECT *FROM userpreferences");
+            rowSet.execute();
+            rowSet.absolute(1);
             for (String preference : preferenceIDs) {
-                rowSet.setCommand("SELECT *FROM userpreferences");
-                rowSet.execute();
-                rowSet.absolute(1);
                 rowSet.moveToInsertRow();
-                rowSet.updateInt(1, uid);
-                rowSet.updateInt(2, Integer.parseInt(preference));
+                rowSet.updateInt(2, uid);
+                rowSet.updateInt(3, Integer.parseInt(preference));
                 rowSet.insertRow();
                 System.out.println("RowSet Inserted");
             }

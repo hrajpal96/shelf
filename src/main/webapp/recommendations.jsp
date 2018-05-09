@@ -57,7 +57,6 @@
                                                 preferences.add(rowset.getInt("preferenceID"));
                                             }
                                             for (Integer preference : preferences) {
-                                                System.out.println(preference);
                                                 rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where preferenceID=" + preference + " order by RAND() LIMIT 3");
                                                 rowset.execute();
                                                 rowset.absolute(1);
@@ -100,7 +99,7 @@
                                             if (rowset.next()) {
                                                 rowset.absolute(1);
                                                 //                        String imagepath = rowset.getString("coverPath");
-                                        %>
+%>
                                     <div class="col m4">
                                         <div class="card medium hoverable">
                                             <div class="card-image waves-effect waves-block waves-light">

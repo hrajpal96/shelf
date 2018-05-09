@@ -16,6 +16,7 @@
     </head>
     <body>
         <main>
+            
             <%
                 try {
                     ConnectionBean conn = (ConnectionBean) request.getServletContext().getAttribute("db");
@@ -25,26 +26,23 @@
                     JdbcRowSetImpl rowset = new JdbcRowSetImpl(con);
             %>
             <center><h2>New Arrivals</h2></center>
-            <div class="container" >
-                <center>
-                    <!--<div class="card large">-->
-                    <div class="carousel">
+            <div class="container" style="width: 90%">
+                <!--<div class="card large">-->
+                <div class="carousel">
+                    <%
+                        rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book order by RAND() LIMIT 10");
+                        rowset.execute();
+                        rowset.absolute(1);
+                        while (rowset.next()) {
+                    %>
+                    <a class="carousel-item" href=""><img src="<%= rowset.getString("coverPath")%>"><%= rowset.getString("bookName")%></a>
                         <%
-                            rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book order by RAND() LIMIT 10");
-                            rowset.execute();
-                            rowset.absolute(1);
-                            while (rowset.next()) {
-                        %>
-                        <a class="carousel-item" href=""><img src="<%= rowset.getString("coverPath")%>"><%= rowset.getString("bookName")%></a>
-                            <%
-                                    }
-                                } catch (SQLException e) {
-                                    log(e.getMessage());
                                 }
-                            %>  
-                    </div>
-                    <!--</div>-->
-                </center>
+                            } catch (SQLException e) {
+                                log(e.getMessage());
+                            }
+                        %>  
+                </div>
             </div>
 
         </main>

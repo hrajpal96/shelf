@@ -69,7 +69,7 @@
                     <c:if test="${sessionScope.user ne null}">
                         <div class="nav-content">
                             <ul id="tabs-swipe-demo" class="tabs tabs-transparent">
-                                <li class="tab col s3"><a id="newarrivals" href="test-swipe-2">New Arrivals</a></li>
+                                <li class="tab"><a id="newarrivals" href="#test-swipe-2">New Arrivals</a></li>
                                 <li class="tab"><a id="showrecommendations" href="#test-swipe-1">Recommendations</a></li>
                                 <li class="tab"><a id="mybooks" href="#test-swipe-3">My Books</a></li>
                                 <li class="tab"><a id="searchtab" href="#test-swipe-4">Search</a></li>

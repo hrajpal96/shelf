@@ -49,7 +49,7 @@
                             <div class="col l3 m6 s12">
                                 <div class="card-panel green accent-4 white-text center">
                                     <i class="material-icons medium">assignment</i>
-                                    <h5>New Posts</h5>
+                                    <h5>New Books</h5>
                                     <h3 class="count">2867</h3>
                                     <div class="progress grey lighten-1">
                                         <div class="determinate white" style="width:80%;"></div>
@@ -318,9 +318,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-                    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+                    <!--<script type="text/javascript" src="materialize/js/index.js"></script>-->
+                    <!--<script type="text/javascript" src="materialize/js/materialize.min.js"></script>-->
                     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                     <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
                     <script src="materialize/js/charts.js"></script>
