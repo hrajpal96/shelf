@@ -37,7 +37,7 @@ public class SearchServlet extends HttpServlet {
         searchResult searchresullt = new searchResult();
         String result = searchresullt.lookUP(search, context);
         System.out.println(result);
-        response.setHeader("Refresh", "1");
+        request.getRequestDispatcher("success.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
