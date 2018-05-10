@@ -14,7 +14,7 @@ https://github.com/zygmuntz/goodbooks-10k
 
 #### To Create a dataset use goodbooks dataset and migrate it to your preferred database system.
 
-#####Steps:-
+##### Steps:-
 1. Create the database structure for storing books information and book ratings by executing the sql file in your preferred database system.
 2. Migrate the data from books.csv file in the goodbooks-10k dataset and the ratings of books from the ratings.csv file to your respective database (note that the application expects the rating to be stored in a table named taste_preferences with composite primary key of user_id and item_id, in our case book ids.
 3. Ensure that the complete data is migrated for best results use an sql admin provider such as phpMyAdmin to bulk import data.
