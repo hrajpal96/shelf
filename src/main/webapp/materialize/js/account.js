@@ -5,8 +5,10 @@
  */
 
 var edit = document.querySelector('.removeEdit');
+var email = document.querySelector('.email');
 edit.addEventListener('click', function () {
     document.querySelector('#fieldsetEnable').removeAttribute('disabled');
+    $('input[type="email"]').attr("disabled", "disabled");
     edit.classList.add('disabled');
     edit.classList.remove('btn');
     edit.classList.remove('btn-flat');

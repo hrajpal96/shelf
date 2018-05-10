@@ -66,7 +66,7 @@ Author     : Lenovo
                             </div>
 
                             <div class="col s12" >&nbsp;</div>
-                            <div class="input-field col s6" disabled> <i class="material-icons red-text prefix">email</i>
+                            <div class="input-field col s6 email"> <i class="material-icons red-text prefix">email</i>
                                 <input id="email" type="email" name="emailID" class="validate" onblur="checkExist()" value="${sessionScope.user.emailID}"required>
                                 <label for="email" class="tooltipped" data-tooltip="Enter a valid ID" data-position="top" data-delay="10" data-error="Please enter a valid email-ID." data-success="">Email</label>
                             </div>

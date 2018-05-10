@@ -42,7 +42,7 @@
                     <div id="test-swipe-3">
                     </div>
                     <div id="test-swipe-4">
-                        <%--<%@include file="results.jsp" %>--%>
+                        <%@include file="results.jsp" %>
                     </div>
                 </c:when>
                 <c:otherwise>

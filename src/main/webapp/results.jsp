@@ -19,7 +19,7 @@
     </head>
     <body>
         <header>
-            <%@include file="basetemplate.jsp" %>
+            <%--<%@include file="basetemplate.jsp" %>--%>
             <%@include file="cachecontroller.jsp" %>
         </header>
 

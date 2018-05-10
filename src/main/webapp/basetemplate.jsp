@@ -48,7 +48,7 @@
                                 <form class="search-input black-text" action="search.do">
                                     <div class="search-wrapper card">
                                         <div class="input-field ">
-                                            <input id="search" type="search"  class="autocomplete" name="search" placeholder="Digital Fortress, The Alchemist"><i class="material-icons black-text">search</i>
+                                            <input id="search" type="search"  formaction="_self" class="autocomplete" name="search" placeholder="Digital Fortress, The Alchemist"><i class="material-icons black-text">search</i>
                                         </div>
                                     </div>
                                 </form>
@@ -67,7 +67,7 @@
                         </ul>
                     </div>
                     <c:if test="${sessionScope.user ne null}">
-                        <div class="nav-content">
+                        <div class="nav-content fixed">
                             <ul id="tabs-swipe-demo" class="tabs tabs-transparent">
                                 <li class="tab"><a id="newarrivals" href="#test-swipe-2">New Arrivals</a></li>
                                 <li class="tab"><a id="showrecommendations" href="#test-swipe-1">Recommendations</a></li>

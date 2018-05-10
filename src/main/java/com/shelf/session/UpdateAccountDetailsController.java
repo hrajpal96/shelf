@@ -33,18 +33,21 @@ public class UpdateAccountDetailsController {
             rowSet.setCommand("SELECT  * FROM `user` WHERE uid = " + user.getUID());
             rowSet.execute();
             rowSet.first();
-            rowSet.updateString("emailID", email);
+            if (email != null) {
+                rowSet.updateString("emailID", email);
+                if (!email.equals(user.getEmailID())) {
+                    verificationKey = UUID.randomUUID().toString();
+                    rowSet.updateString("verification_key", verificationKey);
+                    if (user.isIsValid()) {
+                        rowSet.updateBoolean("isValid", false);
+                    }
+                    user.setUpdated(true);
+                }
+
+            }
             rowSet.updateString("firstName", firstName);  // Use column number
             rowSet.updateString("lastName", lastName);
             rowSet.updateString("contactNumber", phoneNumber);
-            if (!email.equals(user.getEmailID())) {
-                verificationKey = UUID.randomUUID().toString();
-                rowSet.updateString("verification_key", verificationKey);
-                if (user.isIsValid()) {
-                    rowSet.updateBoolean("isValid", false);
-                }
-                user.setUpdated(true);
-            }
             rowSet.updateRow();
             rowSet.absolute(-1);
             user.setUID(rowSet.getInt("uid"));
