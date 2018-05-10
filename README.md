@@ -1,6 +1,5 @@
-# shelf
+# Shelf - A Mahout based J2EE application for book recommendations.
 A small maven J2EE recommendation application based on Apache Mahout.
-
 ### Mahout
 
 https://mahout.apache.org/
@@ -23,10 +22,11 @@ The format for ratings dataset is in the shelf.sql file for getting the structur
 
 https://github.com/Dogfalo/materialize
 
-A modern material design based framework.Materialize CSS is used for providing a clean, elegant and robust layout for recommendations to the user.
+A modern material design framework base on Google's Material Design guidelines.
+Materialize CSS is used for providing a clean, elegant and robust layout for recommendations to the user.
 
 ### Sendgrid
 
 https://github.com/sendgrid/sendgrid-java
-
-Used majorly for verification purposes and notifications through e-mails .
+Sendgrid is a communication platform allowing users and orgranizations to send bulk emails for marketing campaigns as well as notifcations.Its developer APIs support a vast majority of programming languages.
+Sendgrid is used here majorly for account verification purposes and sending notifications through e-mails .
