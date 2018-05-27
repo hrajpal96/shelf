@@ -17,6 +17,7 @@ Author     : Lenovo
             <%@include file="basetemplate.jsp" %>
             <%@include file="cachecontroller.jsp" %>
             <%@include file="checksession.jsp" %>
+            <%@include file="changepassword.jsp" %>
         </header>
 
         <main>
@@ -44,6 +45,14 @@ Author     : Lenovo
                         }
                         session.removeAttribute("isupdated");
                     }
+                    if (session.getAttribute("passchanged") != null) {
+                        if ((Boolean) session.getAttribute("passchanged") == true) {
+                            session.removeAttribute("passchanged");
+                %>
+                <script>Materialize.toast('Password Changed successfully', 3000, 'bottom')</script>
+                <%
+                        }
+                    }
                 %>
                 <div class="col s0.1" >&nbsp</div>
                 <div class="card col s8">
@@ -67,22 +76,30 @@ Author     : Lenovo
 
                             <div class="col s12" >&nbsp;</div>
                             <div class="input-field col s6 email"> <i class="material-icons red-text prefix">email</i>
-                                <input id="email" type="email" name="emailID" class="validate" onblur="checkExist()" value="${sessionScope.user.emailID}"required>
+                                <input id="email" type="email" name="emailID" class="validate" onblur="checkExist()" value="${sessionScope.user.emailID}" required> 
                                 <label for="email" class="tooltipped" data-tooltip="Enter a valid ID" data-position="top" data-delay="10" data-error="Please enter a valid email-ID." data-success="">Email</label>
                             </div>
+
                             <span id="isE"></span>
 
-                            <div class="col s12" >&nbsp;</div>
 
                             <div class="input-field col s6"> <i class="material-icons red-text prefix ">phone_iphone</i>
                                 <input id="contactnumber"  type="tel"  name ="phone_num"  pattern="^[789]\d{9}$" value="${sessionScope.user.contactNumber}" class="validate" required>
                                 <label for="contactnumber" class="tooltipped"  data-delay="10" data-tooltip ="Enter a valid 10-digit number" data-position="top" data-error="Enter a valid 10-digit number">Contact Number</label>
                             </div>
                             <div class="col s12" >&nbsp;</div>
+
+                            <div class="input-field col s5"><i class="material-icons red-text prefix ">vpn_key</i>
+                                <input id="password"  type="password"  name ="userpassword"   value="${sessionScope.user.password}" class="validate" required>
+                                <label for="password" class="tooltipped"  data-delay="10">Password</label>
+                            </div>
+                            <div class="col s12" >&nbsp;</div>
+
                             <div  class="col s12" >
                                 <button onclick="" class="btn waves-effect waves-light red darken-5"
                                         type="submit">Save<i class="material-icons left">save</i></button>
                             </div>
+
                         </fieldset>
                     </form>
                 </div>

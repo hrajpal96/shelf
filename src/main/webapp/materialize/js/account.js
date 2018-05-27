@@ -9,8 +9,31 @@ var email = document.querySelector('.email');
 edit.addEventListener('click', function () {
     document.querySelector('#fieldsetEnable').removeAttribute('disabled');
     $('input[type="email"]').attr("disabled", "disabled");
+    $('input[type="password"]').attr("disabled", "disabled");
+    $('a').removeClass("disabled");
     edit.classList.add('disabled');
     edit.classList.remove('btn');
     edit.classList.remove('btn-flat');
     document.querySelector('.removeEdit').textContent = "";
+});
+
+
+$(".change-password").click(function () {
+    $("#changepassword").modal('open');
+});
+
+//Password Verification function
+$("#pass").on("keyup", function (e) {
+    if ($(this).val() !== $("#checkpass").val() && $("#checkpass").val() !== "") {
+        $("#checkpass").removeClass('valid').addClass('invalid');
+    } else if ($("#checkpass").val() !== "") {
+        $("#checkpass").removeClass('invalid').addClass('valid');
+    }
+});
+$("#checkpass").on("keyup", function (e) {
+    if (($("#password").val() !== $(this).val())) {
+        $(this).removeClass('valid').addClass('invalid');
+    } else {
+        $(this).removeClass('invalid').addClass('valid');
+    }
 });
