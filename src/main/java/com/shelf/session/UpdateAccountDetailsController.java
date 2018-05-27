@@ -41,7 +41,9 @@ public class UpdateAccountDetailsController {
                     if (user.isIsValid()) {
                         rowSet.updateBoolean("isValid", false);
                     }
-                    user.setUpdated(true);
+                    if (!(firstName.equals(user.getFirstName())) || !(lastName.equals(user.getLastName())) || !(phoneNumber.equals(user.getContactNumber()))) {
+                        user.setUpdated(true);
+                    }
                 }
 
             }

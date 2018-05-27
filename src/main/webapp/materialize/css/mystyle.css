@@ -639,10 +639,7 @@ ul, menu, dir {
 ::-moz-placeholder {
     color: #d1d1d1;
 }
-.container .row {
-    margin-left: -.75rem;
-    margin-right: -.75rem;
-}
+
 input[id="search"] {
     height: 45px !important;
     margin-top: 1%;
@@ -723,7 +720,7 @@ ul.table-of-contents a.active{
     max-width: 90%;
     max-height: 90%;
     width: 28%;
-    height: 50%;
+    height: 54%;
     left:0; right:0; top:0; bottom:0; margin:auto;
     overflow: hidden !important;
     margin-top: 5%;
@@ -732,10 +729,6 @@ ul.table-of-contents a.active{
 #isE{
     margin-top: 0em;
     margin-left: 3em;
-}
-.carousel .carousel-item{
-    width:40%;
-    height: 50%;
 }
 .tabs {
     position: relative;

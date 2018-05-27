@@ -5,14 +5,18 @@
 --%>
 
 <!--Account Modal Structure-->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="base.html" ></jsp:include>
 <jsp:include page="cachecontroller.jsp" ></jsp:include>
-<div id="login" class="modal">
-    <div class="collapsible-header btn red accent-4 active"><i class="material-icons prefix ">account_circle</i>
-        Sign In
-    </div>
-    <div class="body">
-        <center>
+    <div id="login" class="modal">
+        <div class="collapsible-header btn red accent-4 active"><i class="material-icons prefix ">account_circle</i>
+            Sign In
+        </div>
+        <div class="body">
+            <center>
+            <c:if test="${requestScope.pass eq 'incorrect'}">
+                <br><div class="red-text">Either E-Mail ID or password is incorrect!</div>
+            </c:if>
             <style>
                 .input-field input[type=date]:focus + label,
                 .input-field input[type=text]:focus + label,

@@ -6,10 +6,9 @@
 
 $(document).ready(function () {
     $('#search').focus(function () {
-
         $('#searchtab').removeClass("disabled").addClass("");
         $('ul.tabs').tabs('select_tab', 'test-swipe-4');
-//        $('#test-swipe-4').load('results.jsp', function () {
-//        });
+        $('#test-swipe-4').load('results.jsp', function () {
+        });
     });
 });

@@ -33,11 +33,11 @@
 
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
-                    <div id="test-swipe-1">
-                        <%--<%@include file="recommendations.jsp" %>--%>
-                    </div>
                     <div id="test-swipe-2">
                         <%@include file="arrivals.jsp" %>
+                    </div>
+                    <div id="test-swipe-1">
+                        <%--<%@include file="recommendations.jsp" %>--%>
                     </div>
                     <div id="test-swipe-3">
                     </div>

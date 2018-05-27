@@ -20,6 +20,12 @@
                     <li class="divider" tabindex="-1"></li>
                     <li><a href="logout.do"class="black-text"><i class="material-icons">keyboard_tab</i>Logout</a></li>
                 </ul>
+                <div class="tap-target" data-activates="dropdown1">
+                    <div class="tap-target-content">
+                        <h5>Account Information and Settings</h5>
+                        <p>Hey, you can click on the profile tab to view the the account information and logout from the drop-down here. :)</p>
+                    </div>
+                </div>
                 <ul id="dropdown2" class="dropdown-content black-text">
                     <li><a href="#!" class="black-text"><span class="new badge red">4</span>&nbsp;&nbsp;Notifications</a></li>
                     <li class="divider"></li>
@@ -69,10 +75,10 @@
                     <c:if test="${sessionScope.user ne null}">
                         <div class="nav-content fixed">
                             <ul id="tabs-swipe-demo" class="tabs tabs-transparent">
-                                <li class="tab"><a id="newarrivals" href="#test-swipe-2">New Arrivals</a></li>
-                                <li class="tab"><a id="showrecommendations" href="#test-swipe-1">Recommendations</a></li>
-                                <li class="tab"><a id="mybooks" href="#test-swipe-3">My Books</a></li>
-                                <li class="tab"><a id="searchtab" href="#test-swipe-4">Search</a></li>
+                                <li class="tab col s3"><a id="newarrivals" class="active" href="#test-swipe-2">New Arrivals</a></li>
+                                <li class="tab col s3"><a id="showrecommendations" href="#test-swipe-1">Recommendations</a></li>
+                                <li class="tab col s3"><a id="mybooks" href="#test-swipe-3">My Books</a></li>
+                                <li class="tab col s3"><a id="searchtab" href="#test-swipe-4">Search</a></li>
                             </ul>
                         </div>
                     </c:if>

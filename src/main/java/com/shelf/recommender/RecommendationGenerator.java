@@ -20,12 +20,13 @@ import org.apache.mahout.cf.taste.impl.model.jdbc.ReloadFromJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.CachingUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
-import org.apache.mahout.cf.taste.impl.similarity.LogLikelihoodSimilarity;
+import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
+import org.apache.mahout.common.RandomUtils;
 
 /**
  *
@@ -37,7 +38,7 @@ public class RecommendationGenerator implements Runnable {
     private final HttpSession session;
     private DataModel dataModel;
     private final Integer USER_ID;
-    DataSource tasteDS;
+    private final DataSource tasteDS;
     private List<RecommendedItem> list = null;
     private UserNeighborhood neighborhood = null;
 
@@ -56,24 +57,28 @@ public class RecommendationGenerator implements Runnable {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 dataModel = new ReloadFromJDBCDataModel(new MySQLJDBCDataModel(tasteDS, "shelf.taste_preferences", "user_id", "item_id", "preference", null));
-                UserSimilarity similarity = new LogLikelihoodSimilarity(dataModel);
+                UserSimilarity similarity = new PearsonCorrelationSimilarity(dataModel);
                 neighborhood = new NearestNUserNeighborhood(5, similarity, dataModel);
-                CachingUserNeighborhood userneighborhood = new CachingUserNeighborhood(neighborhood, dataModel);
+                final CachingUserNeighborhood userneighborhood = new CachingUserNeighborhood(neighborhood, dataModel);
                 Recommender recommender = new GenericUserBasedRecommender(dataModel, userneighborhood, similarity);
                 list = recommender.recommend(USER_ID, 10);
                 if (list != null) {
                     long[] users = neighborhood.getUserNeighborhood(USER_ID);
-                    System.out.print("\nSimilar Users: ");
-                    System.out.println(Arrays.toString(users));
-                    System.out.println("List is not empty...Generated Recommendations");
                     session.setAttribute("Recommendations", list);
                     session.setAttribute("ratings", dataModel.getPreferencesFromUser(USER_ID));
-                    System.out.println(list);
                 }
+                RandomUtils.useTestSeed();
                 RecommenderEvaluator evaluator = new AverageAbsoluteDifferenceRecommenderEvaluator();
-                RecommenderBuilder builder = null;
-                double result = evaluator.evaluate(builder, null, dataModel, 0.9, 1.0);
-                System.out.println("Result: "+ result+"\n");
+//                RecommenderBuilder builder = new RecommenderBuilder() {
+//                    @Override
+//                    public Recommender buildRecommender(DataModel dataModel) throws TasteException {
+//                        UserSimilarity similarity = new PearsonCorrelationSimilarity(dataModel);
+//                        UserNeighborhood neighborhood = new NearestNUserNeighborhood(5, similarity, dataModel);
+//                        return new GenericUserBasedRecommender(dataModel, userneighborhood, similarity);
+//                    }
+//                };
+//                double score = evaluator.evaluate(builder, null, dataModel, 0.9, 0.7);
+//                System.out.println("Score: " + score);
             } catch (TasteException | ClassNotFoundException ex) {
                 Logger.getLogger(RecommendationGenerator.class.getName()).log(Level.SEVERE, null, ex);
             }

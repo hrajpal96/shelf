@@ -25,11 +25,12 @@ class LoginController {
             ConnectionBean conn = (ConnectionBean) context.getAttribute("db");
             final JdbcRowSet rowSet = new JdbcRowSetImpl(conn.getConnection());
 //            rowSet.setReadOnly(true);
-            System.out.println("Login "+ emailID);
+            System.out.println("Login " + emailID);
             rowSet.setCommand("SELECT * FROM user where emailID = '" + emailID + "'");
             rowSet.execute();
             if (rowSet.first()) {
                 System.out.println("executed query");
+                user.setDoesexist(true);
                 if (password.equals(rowSet.getString("password"))) {
                     System.out.println("Success");
                     user.setUID(rowSet.getInt("uid"));
@@ -38,11 +39,10 @@ class LoginController {
                     user.setLastName(rowSet.getString("lastName"));
                     user.setContactNumber(rowSet.getLong("contactNumber"));
                     user.setIsValid(rowSet.getBoolean("isValid"));
-                    user.setDoesexist(true);
-                }
-                else{
+                    user.setPassword(rowSet.getString("password"));
+                } else {
                     user.setIsValid(false);
-                    System.out.println("Is the user valid? "+user.isIsValid());
+                    System.out.println("Is the user valid? " + user.isIsValid());
                 }
             }
         } catch (SQLException ex) {

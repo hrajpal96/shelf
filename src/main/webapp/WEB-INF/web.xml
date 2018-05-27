@@ -49,6 +49,10 @@
         <servlet-name>UpdateAccountDetailsServlet</servlet-name>
         <servlet-class>com.shelf.session.UpdateAccountDetailsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <servlet-class>com.shelf.session.ChangePasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RecommenderServlet</servlet-name>
         <url-pattern>/recommenderservlet.do</url-pattern>
@@ -113,6 +117,10 @@
     <servlet-mapping>
         <servlet-name>UpdateAccountDetailsServlet</servlet-name>
         <url-pattern>/updateprofile.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <url-pattern>/changepassword.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

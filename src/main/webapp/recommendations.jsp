@@ -30,6 +30,7 @@
         <jsp:include page="cachecontroller.jsp" ></jsp:include>
             <!--<header> </header>-->
             <main>
+               
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
                     <%                        if (session.getAttribute("Recommendations") != null) {
@@ -87,19 +88,23 @@
                                     </div>
                                 </div>
                                 <div id="recommendations" class="section scrollspy">
-                                    <h2 class="text-center">Users also read</h2>
 
                                     <p><%                                        List< RecommendedItem> list = (List<RecommendedItem>) session.getAttribute("Recommendations");
                                         Iterator<RecommendedItem> iter = list.iterator();
                                         int size = list.size() - 1;
+                                        if (iter != null) {
+                                        %>
+                                    <h2 class="text-center">Users also read</h2>
+
+                                    <%
+                                        }
                                         while (iter.hasNext()) {
                                             RecommendedItem item = iter.next();
                                             rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where bookid=" + item.getItemID());
                                             rowset.execute();
                                             if (rowset.next()) {
-                                                rowset.absolute(1);
-                                                //                        String imagepath = rowset.getString("coverPath");
-%>
+                                                         String imagepath = rowset.getString("coverPath");
+                                    %>
                                     <div class="col m4">
                                         <div class="card medium hoverable">
                                             <div class="card-image waves-effect waves-block waves-light">
@@ -128,8 +133,8 @@
                             </div>
                             <div class="col hide-on-med-and-down m3 l1">
                                 <ul id="toc" class="section table-of-contents">
-                                    <li><a href="#ratings" >My Ratings</a></li>
-                                    <li><a href="#recommendations" >Recommendations</a></li>
+                                    <li><a href="#ratings" >Preference Based</a></li>
+                                    <li><a href="#recommendations" >Similar Users Read</a></li>
                                 </ul>
                             </div>
                         </div>

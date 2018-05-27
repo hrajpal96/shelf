@@ -1,6 +1,3 @@
-/* global strength */
-
-
 $(document).ready(function () {
     $('input.autocomplete').autocomplete({
         data: {
@@ -51,16 +48,26 @@ $(document).ready(function () {
     });
 
 
+
+
     //Account Information Dropdown Button
     $('.dropdown-button').dropdown({hover: true, constrainWidth: false});
 
     //For loading recommendations tab
     $('#showrecommendations').click(function () {
-        $('#test-swipe-1').load('recommendations.jsp#container', function () {
-            $('.scrollspy').scrollSpy();
-        });
+        $.ajax({url: 'recommendations.jsp#container', success: function (result) {
+                $('#test-swipe-1').html(result);
+                $('.scrollspy').scrollSpy();
+
+            }});
 
     });
+    /*
+     *         $('#test-swipe-1').load('recommendations.jsp#container', function () {
+     $('.scrollspy').scrollSpy();
+     });
+     */
+
 
     //For loading mybooks tab
     $('#mybooks').click(function () {
@@ -71,9 +78,13 @@ $(document).ready(function () {
 
     //For loading new arrivals tab
     $('#newarrivals').click(function () {
-        $('#test-swipe-2').load('arrivals.jsp', function () {
-        });
+        $.ajax({url: 'arrivals.jsp#carousel', success: function (result) {
+                $('#test-swipe-2').html(result);
+                $('.scrollspy').scrollSpy();
+
+            }});
     });
+
 
 
 

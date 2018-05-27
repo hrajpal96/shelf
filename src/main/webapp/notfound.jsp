@@ -15,7 +15,7 @@ and open the template in the editor.
 
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Humans do make mistakes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -29,7 +29,6 @@ and open the template in the editor.
                     type="submit"  name="action">Let's get back home <i class="material-icons left">home</i> </button>
         </form>
     </center>
-
 </body>
 </html>
 
