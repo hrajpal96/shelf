@@ -39,14 +39,15 @@ public class NotificationService {
         try {
 
             rowSet.setCommand("SELECT * from usernotifications");
-//            System.out.println("query fired");
             rowSet.setReadOnly(false);
 //             Fills this RowSet object with data. 
             rowSet.execute();
             rowSet.moveToInsertRow();
-            rowSet.updateInt("user_id", notification.getUserId());
-            rowSet.updateString("message", notification.getMessage().get(timestamp));
-            rowSet.updateTimestamp("timestamp", timestamp);
+            rowSet.updateLong("uid", notification.getuserID());
+            rowSet.updateLong("notification_id", notification.getNotificationID());
+            rowSet.updateString("notification_message", notification.getMessage());
+            rowSet.updateTimestamp("generatedtimestamp", timestamp);
+            rowSet.setBoolean("readstatus", false);
             rowSet.insertRow();
             rowSet.first();
 
@@ -57,14 +58,13 @@ public class NotificationService {
 
     public UserNotificationBean addNotificationToBean(UserNotificationBean notification) {
         try {
-            rowSet.setCommand("SELECT * from usernotifications where user_id = " + notification.getUserId());
+            rowSet.setCommand("SELECT * from usernotifications where uid = " + notification.getuserID());
             rowSet.setReadOnly(false);
 //             Fills this RowSet object with data. 
             rowSet.execute();
-            Map<Timestamp, String> message = notification.getMessage();
+            String message = notification.getMessage();
             while (rowSet.next()) {
-                message.put(rowSet.getTimestamp("timestamp"), rowSet.getString("message"));
-
+//                message.put();
             }
             notification.setMessage(message);
             rowSet.first();

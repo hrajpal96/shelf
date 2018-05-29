@@ -33,6 +33,22 @@
 
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
+                    <style>
+                        #toast-container {
+                            top: auto !important;
+                            right: auto !important;
+                            bottom: 10%;
+                            left:7%;  
+                        }
+                    </style>
+                    <% if (session.getAttribute("validated") != null) {
+                            if (!(Boolean) session.getAttribute("validated")) {
+                    %>
+                    <script>Materialize.toast('Please verify your emailID to access important features.', 2000, 'bottom');</script>
+                    <%
+                            }
+                        }
+                    %>
                     <div id="test-swipe-2">
                         <%@include file="arrivals.jsp" %>
                     </div>

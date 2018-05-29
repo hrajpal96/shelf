@@ -7,36 +7,29 @@
         <title>Shelf</title>
 
     </head>
-    <body onload="setTimeout('redirect()', 100)" >
+    <body onload="setTimeout('redirect()', 000)" >
         <header>
             <div class="hide-on-med-and-down">
                 <jsp:include page="basetemplate.jsp" ></jsp:include>
-                </div>
-            </header>
-            <main>
-                <div class="hide-on-med-and-down">
+                <%@include file="cachecontroller.jsp" %>
+            </div>
+        </header>
+        <main>
+            <div class="hide-on-med-and-down">
                 <c:choose>
                     <c:when test="${sessionScope.user eq null}">
-                        <%@include file="cachecontroller.jsp" %>
                         <div class="slider fullscreen">
                             <ul class="slides">
                                 <li>
-                                    <img src="materialize/images/para1.jpg"> <!-- random image -->
+                                    <img src="materialize/images/index1.jpg"> <!-- random image -->
                                     <div class="caption center-align">
-                                        <h3>An app that is completely focused to improve user's recommendations.</h3>
+                                        <h3>An application that is completely focused to improve user's recommendations.</h3>
                                         <h5 class="light grey-text text-lighten-3"></h5>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="materialize/images/clip_image0012.jpg"> <!-- random image -->
+                                    <img src="materialize/images/para1.jpg"> <!-- random image -->
                                     <div class="caption left-align">
-                                        <h3>Books can be dangerous, the best ones should be labeled, “This could change your life.”</h3>
-                                        <h5 class="light grey-text text-lighten-3"></h5>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="materialize/images/parallax1.jpg"> <!-- random image -->
-                                    <div class="caption right-align">
                                         <h3>“92% of respondents reported that a positive recommendation from a friend,
                                             family member, or someone they trust is the biggest influence on whether they buy a product or service.”
                                             ― Paul M. Rand</h3>
@@ -46,8 +39,8 @@
                                 <li>
                                     <img src="materialize/images/parallax1_1.png"> <!-- random image -->
                                     <div class="caption center-align">
-                                        <h3>This is our big Tagline!</h3>
-                                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                                        <h3>The more you read, the better we recommend.</h3>
+                                        <h5 class="light grey-text text-lighten-3">An application which is tailored around the users.</h5>
                                     </div>
                                 </li>
                             </ul>

@@ -32,8 +32,8 @@
                     </div>
                     <div class='row'>
                         <div class='input-field'><i class="material-icons prefix ">lock</i>
-                            <input  id="checkpass" type="password" name ="confirmpassword"  required>
-                            <label for="checkpass" data-error="Passwords do not match" data-success="Passwords match" >Re-enter New Password</label>
+                            <input  id="checkpassword" type="password" name ="confirmpassword"  required>
+                            <label for="checkpassword" data-error="Passwords do not match" data-success="Passwords match" >Re-enter New Password</label>
                         </div>
                     </div>
                     <center>

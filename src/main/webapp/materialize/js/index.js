@@ -12,11 +12,7 @@ $(document).ready(function () {
         minLength: 1 // The minimum length of the input for the autocomplete to start. Default: 1.
     });
 
-    $('.slider').slider({
-        interval: 6000,
-        transition: 1000,
-        indicators: false
-    });
+    
 
     window.onresize = function (event) {
         var height = $(window).height() - 50;
@@ -45,6 +41,11 @@ $(document).ready(function () {
         menuWidth: 300, // Default is 300
         closeOnClick: true
 
+    });
+    $('.slider').slider({
+        interval: 6000,
+        transition: 1000,
+        indicators: false
     });
 
 

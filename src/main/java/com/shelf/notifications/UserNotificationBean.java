@@ -14,36 +14,52 @@ import java.util.Map;
  *
  * @author Harsh
  */
-public class UserNotificationBean implements Serializable{
-    private int userId;
-    Map<Timestamp,String> message;
-  
+public class UserNotificationBean implements Serializable {
 
-    public UserNotificationBean() {
-        message=new HashMap<>();
-        
+    private Integer userid;
+    private Integer notificationID;
+    private Timestamp generation_time;
+    private String message;
+    private Boolean readstatus;
+
+    public Integer getuserID() {
+        return userid;
     }
 
-    public int getCount()
-    {
-        return message.size();
-    }
-  
-    
-    public int getUserId() {
-        return userId;
+    public void setuserID(Integer userid) {
+        this.userid = userid;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public Integer getNotificationID() {
+        return notificationID;
     }
 
-    public Map<Timestamp,String> getMessage() {
+    public void setNotificationID(Integer notificationID) {
+        this.notificationID = notificationID;
+    }
+
+    public Timestamp getGeneration_time() {
+        return generation_time;
+    }
+
+    public void setGeneration_time(Timestamp generation_time) {
+        this.generation_time = generation_time;
+    }
+
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage(Map<Timestamp,String> message) {
+    public void setMessage(String message) {
         this.message = message;
     }
-    
+
+    public Boolean getReadstatus() {
+        return readstatus;
+    }
+
+    public void setReadstatus(Boolean readstatus) {
+        this.readstatus = readstatus;
+    }
+
 }

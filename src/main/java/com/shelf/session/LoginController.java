@@ -30,8 +30,8 @@ class LoginController {
             rowSet.execute();
             if (rowSet.first()) {
                 System.out.println("executed query");
-                user.setDoesexist(true);
                 if (password.equals(rowSet.getString("password"))) {
+                    user.setDoesexist(true);
                     System.out.println("Success");
                     user.setUID(rowSet.getInt("uid"));
                     user.setEmailID(rowSet.getString("emailID"));

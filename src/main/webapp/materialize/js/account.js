@@ -24,14 +24,14 @@ $(".change-password").click(function () {
 
 //Password Verification function
 $("#pass").on("keyup", function (e) {
-    if ($(this).val() !== $("#checkpass").val() && $("#checkpass").val() !== "") {
-        $("#checkpass").removeClass('valid').addClass('invalid');
-    } else if ($("#checkpass").val() !== "") {
-        $("#checkpass").removeClass('invalid').addClass('valid');
+    if ($(this).val() !== $("#checkpass").val() && $("#checkpassword").val() !== "") {
+        $("#checkpassword").removeClass('valid').addClass('invalid');
+    } else if ($("#checkpassword").val() !== "") {
+        $("#checkpassword").removeClass('invalid').addClass('valid');
     }
 });
-$("#checkpass").on("keyup", function (e) {
-    if (($("#password").val() !== $(this).val())) {
+$("#checkpassword").on("keyup", function (e) {
+    if (($("#pass").val() !== $(this).val())) {
         $(this).removeClass('valid').addClass('invalid');
     } else {
         $(this).removeClass('invalid').addClass('valid');
