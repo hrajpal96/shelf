@@ -4,6 +4,7 @@
     Author     : Lenovo
 --%>
 
+<%@page import="com.shelf.search.BookBean"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.Connection"%>
@@ -44,11 +45,10 @@
         <c:otherwise>
         </c:otherwise>
     </c:choose>
-    <header>        <jsp:include page="basetemplate.jsp" ></jsp:include>
+    <header>        
+        <jsp:include page="basetemplate.jsp" ></jsp:include>
         <jsp:include page="cachecontroller.jsp" ></jsp:include></header>
         <main>
-
-
             <div id="test-swipe-2">
             </div>
             <div id="test-swipe-1">
@@ -63,23 +63,28 @@
                 <div class="row">
                     <div class="col s12 m9 l10" id="bodybox">
                     <%
-                        String bookID = request.getParameter("bookid");
-                        try {
-                            ConnectionBean conn = (ConnectionBean) request.getServletContext().getAttribute("db");
-                            Connection con = conn.getConnection();
-                            JdbcRowSetImpl rowset = new JdbcRowSetImpl(con);
-                            rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where bookid=" + bookID);
-                            rowset.execute();
-                            rowset.absolute(1);
-                            System.out.println(rowset.getDouble("averageRating"));
+//                        String bookID = request.getParameter("bookid");
+//                        try {
+//                            ConnectionBean conn = (ConnectionBean) request.getServletContext().getAttribute("db");
+//                            Connection con = conn.getConnection();
+//                            JdbcRowSetImpl rowset = new JdbcRowSetImpl(con);
+//                            rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where bookid=" + bookID);
+//                            rowset.execute();
+//                            rowset.absolute(1);
+//                            System.out.println(rowset.getDouble("averageRating"));
+                        BookBean bookdetails = null;
+                        if (request.getAttribute("bookdetails") != null) {
+                            System.out.println("In ProductDetails page");
+                            bookdetails = (BookBean) request.getAttribute("bookdetails");
+                        }
                     %>
                     <br>
                     <br>
                     <center>
 
-                        <img class="materialboxed responsive-img" width="350" height="450" src="<%= rowset.getString("coverPath")%>">
-                        <h4><%= rowset.getString("bookName")%></h4>
-                        <h4><%= rowset.getString("author")%></h4>
+                        <img class="materialboxed responsive-img" width="350" height="450" src="<%= bookdetails.getCoverpath()%>">
+                        <h4><%= bookdetails.getBookname()%></h4>
+                        <h4><%= bookdetails.getAuthor()%></h4>
                         <button class="btn waves-effect waves-light blue darken-5 btn-primary center-align" 
                                 type="submit"  name="addtocart">Add To Cart<i class="material-icons left">shopping_cart</i> </button>
                         <br>
@@ -93,15 +98,15 @@
                                         <meta itemprop="reviewCount" content="1">
                                         <div class="row">
                                             <div class="score col s12">
-                                                <%= rowset.getDouble("averageRating")%>
+                                                <%= bookdetails.getAverageRating()%>
                                             </div>
-                                            <% rowset.setCommand("SELECT preference,COUNT(*) from taste_preferences where item_id=" + bookID + " GROUP BY preference");
-                                                rowset.execute();
-                                                if (rowset.next()) {
-                                                    rowset.absolute(5);
+                                            <%
+                                                if (bookdetails.getTotalratings() != null) {
+                                                    System.out.println(bookdetails.getTotalratings().toString());
+                                                }
                                             %>
                                             <form name="ratingsform" action="updaterating.do">
-                                                <input type="hidden" name="bookid" value="<%= URLEncoder.encode(bookID, "UTF-8")%>">
+                                                <input type="hidden" name="bookid" value="">
                                                 <div class="rating-stars col s12">
                                                     <input type="radio" name="stars" id="star-null">
                                                     <input type="radio" name="stars" id="star-1" saving="1" data-start="1" value="1" checked="" onclick="">
@@ -149,7 +154,7 @@
                                                     <br>
                                                     <br>
                                                     <br>
-                                                    <input type="hidden" name="bookid" value="<%= request.getParameter("bookid")%>">
+                                                    <input type="hidden" name="bookid" value="<%= bookdetails.getBookID()%>">
                                                     <input type="hidden" name="uid" value="<%= uid%>">
 
                                                     <button class="btn waves-effect waves-light red accent-4 btn-primary center-align" 
@@ -167,11 +172,12 @@
                                             <span class="bar">
                                             </span>
                                             <span class="bar-number">
-                                                <%=rowset.getInt(2)%>
+
+                                                <%= bookdetails.getTotalratings().get(5)%>
 
                                             </span>
                                         </div>
-                                        <% rowset.absolute(4);%>
+                                        <% // rowset.absolute(4);%>
                                         <div class="rating-bar-container four">
                                             <span class="bar-label">
                                                 <span class="star-tiny">
@@ -180,10 +186,11 @@
                                             <span class="bar">
                                             </span>
                                             <span class="bar-number">
-                                                <%=rowset.getInt(2)%>
+
+                                                <%= bookdetails.getTotalratings().get(4)%>
                                             </span>
                                         </div>
-                                        <% rowset.absolute(3);%>
+                                        <% // rowset.absolute(3);%>
                                         <div class="rating-bar-container tree">
                                             <span class="bar-label">
                                                 <span class="star-tiny">
@@ -192,10 +199,11 @@
                                             <span class="bar">
                                             </span>
                                             <span class="bar-number">
-                                                <%= rowset.getInt(2)%>
+
+                                                <%= bookdetails.getTotalratings().get(3)%>
                                             </span>
                                         </div>
-                                        <% rowset.absolute(2);%>
+                                        <% // rowset.absolute(2);%>
                                         <div class="rating-bar-container two">
                                             <span class="bar-label">
                                                 <span class="star-tiny">
@@ -204,10 +212,11 @@
                                             <span class="bar">
                                             </span>
                                             <span class="bar-number">
-                                                <%= rowset.getInt(2)%>
+
+                                                <%= bookdetails.getTotalratings().get(2)%>
                                             </span>
                                         </div>
-                                        <% rowset.absolute(1);%>
+                                        <% // rowset.absolute(1);%>
                                         <div class="rating-bar-container one">
                                             <span class="bar-label">
                                                 <span class="star-tiny">
@@ -216,19 +225,21 @@
                                             <span class="bar">
                                             </span>
                                             <span class="bar-number">
-                                                <%= rowset.getInt(2)%>
+
+                                                <%= bookdetails.getTotalratings().get(1)%>
                                             </span>
                                         </div>
                                     </div>
-                                    <%}
-                                        } catch (SQLException e) {
-                                            log(e.getMessage());
-                                        }
+                                    <% //}
+
+
                                     %>
                                 </div>
                                 <div id="ratingalert"></div>
                             </div>
                         </div>
+
+                        <h5> Date First Available: <%= bookdetails.getFirst_available()%> </h5>
                     </center>
                     <style>
                         #sidediv{
@@ -241,7 +252,7 @@
                     </style>
                 </div> 
 
-            </div>            
+            </div>
         </div>
         <jsp:include page="checksession.jsp"></jsp:include>
     </main>
