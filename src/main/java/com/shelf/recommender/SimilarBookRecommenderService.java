@@ -15,35 +15,33 @@ import org.apache.mahout.cf.taste.eval.RecommenderEvaluator;
 import org.apache.mahout.cf.taste.impl.eval.AverageAbsoluteDifferenceRecommenderEvaluator;
 import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.model.jdbc.ReloadFromJDBCDataModel;
-import org.apache.mahout.cf.taste.impl.neighborhood.CachingUserNeighborhood;
-import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
-import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
+import org.apache.mahout.cf.taste.impl.recommender.CachingRecommender;
+import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
-import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
-import org.apache.mahout.cf.taste.similarity.UserSimilarity;
+import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
 import org.apache.mahout.common.RandomUtils;
 
 /**
  *
  * @author Lenovo
  */
-public class RecommendationGenerator implements Runnable {
+public class SimilarBookRecommenderService implements Runnable {
 
     private final Thread generator;
     private final HttpSession session;
     private DataModel dataModel;
-    private final Integer USER_ID;
+    private final Integer BOOK_ID;
     private final DataSource tasteDS;
     private List<RecommendedItem> list = null;
-    private UserNeighborhood neighborhood = null;
+    private final Integer NO_OF_BOOKS_TO_BE_RECOMMENDED = 5;
 
-    public RecommendationGenerator(HttpSession session, DataSource tasteDS) throws TasteException {
+    public SimilarBookRecommenderService(HttpSession session, DataSource tasteDS) throws TasteException {
         this.session = session;
         this.tasteDS = tasteDS;
-        USER_ID = (Integer) session.getAttribute("uid");
+        BOOK_ID = (Integer) session.getAttribute("uid");
         generator = new Thread(this);
         generator.setPriority(Thread.MAX_PRIORITY);
         this.session.setAttribute("continue", true);
@@ -55,28 +53,16 @@ public class RecommendationGenerator implements Runnable {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 dataModel = new ReloadFromJDBCDataModel(new MySQLJDBCDataModel(tasteDS, "shelf.taste_preferences", "user_id", "item_id", "preference", null));
-                UserSimilarity similarity = new PearsonCorrelationSimilarity(dataModel);
-                neighborhood = new NearestNUserNeighborhood(5, similarity, dataModel);
-                final CachingUserNeighborhood userneighborhood = new CachingUserNeighborhood(neighborhood, dataModel);
-                Recommender recommender = new GenericUserBasedRecommender(dataModel, userneighborhood, similarity);
-                list = recommender.recommend(USER_ID, 10);
+                ItemSimilarity similarity = new PearsonCorrelationSimilarity(dataModel);
+                Recommender recommender = new GenericItemBasedRecommender(dataModel, similarity);
+                CachingRecommender cachingrecommender = new CachingRecommender(recommender);
+                list = cachingrecommender.recommend(BOOK_ID, NO_OF_BOOKS_TO_BE_RECOMMENDED);
                 if (list != null) {
-                    long[] users = neighborhood.getUserNeighborhood(USER_ID);
-                    session.setAttribute("Recommendations", list);
-                    session.setAttribute("ratings", dataModel.getPreferencesFromUser(USER_ID));
+                    System.out.println(list);
+                    session.setAttribute("similarbooks", list);
                 }
                 RandomUtils.useTestSeed();
                 RecommenderEvaluator evaluator = new AverageAbsoluteDifferenceRecommenderEvaluator();
-//                RecommenderBuilder builder = new RecommenderBuilder() {
-//                    @Override
-//                    public Recommender buildRecommender(DataModel dataModel) throws TasteException {
-//                        UserSimilarity similarity = new PearsonCorrelationSimilarity(dataModel);
-//                        UserNeighborhood neighborhood = new NearestNUserNeighborhood(5, similarity, dataModel);
-//                        return new GenericUserBasedRecommender(dataModel, userneighborhood, similarity);
-//                    }
-//                };
-//                double score = evaluator.evaluate(builder, null, dataModel, 0.9, 0.7);
-//                System.out.println("Score: " + score);
             } catch (TasteException | ClassNotFoundException ex) {
                 Logger.getLogger(RecommendationGenerator.class.getName()).log(Level.SEVERE, null, ex);
             }

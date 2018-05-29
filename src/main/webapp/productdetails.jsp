@@ -4,6 +4,9 @@
     Author     : Lenovo
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="org.apache.mahout.cf.taste.recommender.RecommendedItem"%>
 <%@page import="com.shelf.search.BookBean"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.sql.SQLException"%>
@@ -61,7 +64,7 @@
 
             <div class="container" style="width: 90%">
                 <div class="row">
-                    <div class="col s12 m9 l10" id="bodybox">
+                    <div class="col s12 m12 l10" id="bodybox">
                     <%
 //                        String bookID = request.getParameter("bookid");
 //                        try {
@@ -251,9 +254,54 @@
                         }
                     </style>
                 </div> 
+                <div class="card col hide-on-med-and-down s6 l2">
+                    <%  try {
+                            ConnectionBean conn = (ConnectionBean) request.getServletContext().getAttribute("db");
 
+                            Connection con = conn.getConnection();
+
+                            JdbcRowSetImpl rowset = new JdbcRowSetImpl(con);
+                            List< RecommendedItem> list = (List<RecommendedItem>) session.getAttribute("similarbooks");
+                            Iterator<RecommendedItem> iter = list.iterator();
+                            int size = list.size() - 1;
+                            if (iter != null) {
+                    %>
+                    <h4 class="text-center">Similar Books</h4>
+                    <%
+                        }
+                        while (iter.hasNext()) {
+                            RecommendedItem item = iter.next();
+                            rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where bookid=" + item.getItemID());
+                            rowset.execute();
+                            if (rowset.next()) {
+                                String imagepath = rowset.getString("coverPath");
+                    %>
+                    <div class="card hoverable">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="<%= rowset.getString("coverPath")%>">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4"><%= rowset.getString(1)%><i class="material-icons right">more_vert</i></span>
+                            <a href="viewbook.do?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i><%= rowset.getString(1)%></span>
+                            <p><%= rowset.getString("author")%></p>
+                        </div>
+                    </div>
+                    <%
+                                }
+                            }
+                        } catch (SQLException e) {
+                            System.out.println(e);
+                        }
+                    %>
+                </div>
             </div>
         </div>
+        <center>
+
+        </center>
         <jsp:include page="checksession.jsp"></jsp:include>
     </main>
     <script>

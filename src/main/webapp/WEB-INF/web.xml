@@ -57,6 +57,10 @@
         <servlet-name>ProductDetailServlet</servlet-name>
         <servlet-class>com.shelf.search.ProductDetailServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookSimilarityServlet</servlet-name>
+        <servlet-class>com.shelf.recommender.BookSimilarityServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RecommenderServlet</servlet-name>
         <url-pattern>/recommenderservlet.do</url-pattern>
@@ -94,6 +98,26 @@
         <servlet-name>PrintRecommendationServlet</servlet-name>
         <url-pattern>/printrecommendations.do</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRatingServlet</servlet-name>
+        <url-pattern>/updaterating.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccountDetailsServlet</servlet-name>
+        <url-pattern>/updateprofile.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <url-pattern>/changepassword.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <url-pattern>/viewbook.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookSimilarityServlet</servlet-name>
+        <url-pattern>/recommendsimilarbooks.do</url-pattern>
+    </servlet-mapping>
     <error-page>
         <error-code>404</error-code>
         <location>/notfound.jsp</location>
@@ -114,22 +138,6 @@
         <param-name>DB_PASSWORD</param-name>
         <param-value/>
     </context-param>
-    <servlet-mapping>
-        <servlet-name>UpdateRatingServlet</servlet-name>
-        <url-pattern>/updaterating.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateAccountDetailsServlet</servlet-name>
-        <url-pattern>/updateprofile.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ChangePasswordServlet</servlet-name>
-        <url-pattern>/changepassword.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProductDetailServlet</servlet-name>
-        <url-pattern>/viewbook.do</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             15
