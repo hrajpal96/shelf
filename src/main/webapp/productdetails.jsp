@@ -254,7 +254,7 @@
                         }
                     </style>
                 </div> 
-                <div class="card col hide-on-med-and-down s6 l2">
+                <div class="card col hide-on-med-and-down s4 l2">
                     <%  try {
                             ConnectionBean conn = (ConnectionBean) request.getServletContext().getAttribute("db");
 
