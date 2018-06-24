@@ -5,7 +5,6 @@
  */
 package com.shelf.notifications;
 
-import com.shelf.notifications.UserNotificationBean;
 import com.sun.rowset.JdbcRowSetImpl;
 import connectionproperties.ConnectionBean;
 import java.sql.SQLException;
@@ -15,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.sql.rowset.JdbcRowSet;
-import javax.sql.rowset.RowSetProvider;
 
 /**
  *
@@ -47,7 +45,7 @@ public class NotificationService {
             rowSet.updateLong("notification_id", notification.getNotificationID());
             rowSet.updateString("notification_message", notification.getMessage());
             rowSet.updateTimestamp("generatedtimestamp", timestamp);
-            rowSet.setBoolean("readstatus", false);
+            rowSet.updateBoolean("readstatus", false);
             rowSet.insertRow();
             rowSet.first();
 
@@ -60,15 +58,16 @@ public class NotificationService {
         try {
             rowSet.setCommand("SELECT * from usernotifications where uid = " + notification.getuserID());
             rowSet.setReadOnly(false);
+
 //             Fills this RowSet object with data. 
             rowSet.execute();
-            String message = notification.getMessage();
-            while (rowSet.next()) {
-//                message.put();
-            }
-            notification.setMessage(message);
+            Map<Timestamp, String> message = notification.getMessagecount();
             rowSet.first();
+            while (rowSet.next()) {
+                message.put(rowSet.getTimestamp("generatedtimestamp"), rowSet.getString("notification_message"));
 
+            }
+            notification.setMessagecount(message);
         } catch (SQLException ex) {
             Logger.getLogger(NotificationService.class.getName()).log(Level.SEVERE, null, ex);
         }

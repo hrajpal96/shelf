@@ -7,7 +7,6 @@ package com.shelf.notifications;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -21,7 +20,21 @@ public class UserNotificationBean implements Serializable {
     private Timestamp generation_time;
     private String message;
     private Boolean readstatus;
+    Map<Timestamp,String> messagecount;
+    int count;
 
+    public int getCount() {
+        return messagecount.size();
+    }
+
+
+    public Map<Timestamp, String> getMessagecount() {
+        return messagecount;
+    }
+
+    public void setMessagecount(Map<Timestamp, String> messagecount) {
+        this.messagecount = messagecount;
+    }
     public Integer getuserID() {
         return userid;
     }
