@@ -61,6 +61,10 @@
         <servlet-name>BookSimilarityServlet</servlet-name>
         <servlet-class>com.shelf.recommender.BookSimilarityServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NotificationServlet</servlet-name>
+        <servlet-class>com.shelf.notifications.NotificationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RecommenderServlet</servlet-name>
         <url-pattern>/recommenderservlet.do</url-pattern>
@@ -138,6 +142,10 @@
         <param-name>DB_PASSWORD</param-name>
         <param-value/>
     </context-param>
+    <servlet-mapping>
+        <servlet-name>NotificationServlet</servlet-name>
+        <url-pattern>/notification.do</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             15

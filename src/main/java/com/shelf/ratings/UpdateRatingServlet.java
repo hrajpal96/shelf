@@ -5,12 +5,16 @@
  */
 package com.shelf.ratings;
 
+import com.shelf.notifications.NotificationService;
+import com.shelf.notifications.UserNotificationBean;
+import com.shelf.search.BookBean;
 import com.shelf.session.UserBean;
 import com.sun.rowset.JdbcRowSetImpl;
 import connectionproperties.ConnectionBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.RowSet;
 import javax.sql.rowset.JdbcRowSet;
 
@@ -54,19 +59,38 @@ public class UpdateRatingServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             rowset.setCommand("SELECT *  FROM taste_preferences where user_id='" + user.getUID() + "' and item_id='" + Long.parseLong(bookid) + "'");
             rowset.execute();
-            if (rowset.next()) {
-                System.out.println(rowset.getLong("user_id"));
-                rowset.absolute(1);
-                rowset.updateFloat("preference", Float.parseFloat(rating));
-                rowset.updateRow();
-                System.out.println("Successfully updated");
-            } else {
-                rowset.moveToInsertRow();
-                rowset.updateLong("user_id", user.getUID());
-                rowset.updateLong("item_id", Long.parseLong(bookid));
-                rowset.updateFloat("preference", Float.parseFloat(rating));
-                rowset.insertRow();
-                System.out.println("Successfully inserted");
+            if (rowset != null) {
+                if (rowset.next()) {
+                    System.out.println(rowset.getLong("user_id"));
+                    rowset.absolute(1);
+                    rowset.updateFloat("preference", Float.parseFloat(rating));
+                    rowset.updateRow();
+                    System.out.println("Successfully updated");
+                } else {
+                    rowset.absolute(1);
+                    rowset.moveToInsertRow();
+                    rowset.updateLong("user_id", user.getUID());
+                    rowset.updateLong("item_id", Long.parseLong(bookid));
+                    rowset.updateFloat("preference", Float.parseFloat(rating));
+                    rowset.insertRow();
+                    System.out.println("Successfully inserted");
+                }
+
+                //Generating User Notification upon rating a book
+                HttpSession session = request.getSession();
+                Timestamp timestamp = new Timestamp(new java.util.Date().getTime());
+                UserNotificationBean notification = new UserNotificationBean();
+                notification.setuserID(user.getUID());
+                NotificationService notify = new NotificationService(getServletContext());
+                BookBean bookdetails = (BookBean) session.getAttribute("bookdetails");
+                System.out.println(bookdetails.getBookname());
+                notification.setNotificationID(2);
+                notification.setMessage("You rated a book: <a href=\"viewbook.do?bookid=" + rowset.getLong("item_id") + "\">" + bookdetails.getBookname() + "</a>" + " with a rating of " + rating + " stars");
+                notification.setGeneration_time(timestamp);
+                notification.setReadstatus(false);
+                notify.addNotificationToDatabase(notification, timestamp);
+                notify.addNotificationToBean(notification);
+
             }
 
         } catch (SQLException e) {
@@ -74,8 +98,12 @@ public class UpdateRatingServlet extends HttpServlet {
         } finally {
 
         }
-        RequestDispatcher rd = request.getRequestDispatcher("productdetails.jsp?bookid=" + bookid);
-        rd.include(request, response);
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Cache-Control", "no-store");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+        RequestDispatcher rd = request.getRequestDispatcher("/viewbook.do?bookid=" + bookid);
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

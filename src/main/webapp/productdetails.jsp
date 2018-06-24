@@ -109,7 +109,7 @@
                                                 }
                                             %>
                                             <form name="ratingsform" action="updaterating.do">
-                                                <input type="hidden" name="bookid" value="">
+                                                <input type="hidden" name="bookid" value="<%= bookdetails.getBookID()%>">
                                                 <div class="rating-stars col s12">
                                                     <input type="radio" name="stars" id="star-null">
                                                     <input type="radio" name="stars" id="star-1" saving="1" data-start="1" value="1" checked="" onclick="">
@@ -161,7 +161,7 @@
                                                     <input type="hidden" name="uid" value="<%= uid%>">
 
                                                     <button class="btn waves-effect waves-light red accent-4 btn-primary center-align" 
-                                                            type="submit"  name="action">Submit<i class="material-icons left">rate_review</i> </button>
+                                                            type="submit"  onclick="checkNotifications()" name="action">Submit<i class="material-icons left">rate_review</i> </button>
                                                 </center>
                                             </form>
                                         </div>
@@ -175,12 +175,14 @@
                                             <span class="bar">
                                             </span>
                                             <span class="bar-number">
-
+                                                <% if (bookdetails.getTotalratings().get(5) != null) {%>
                                                 <%= bookdetails.getTotalratings().get(5)%>
+                                                <% } else { %>
+                                                None Yet
+                                                <% } %>
 
                                             </span>
                                         </div>
-                                        <% // rowset.absolute(4);%>
                                         <div class="rating-bar-container four">
                                             <span class="bar-label">
                                                 <span class="star-tiny">
@@ -189,11 +191,13 @@
                                             <span class="bar">
                                             </span>
                                             <span class="bar-number">
-
+                                                <% if (bookdetails.getTotalratings().get(4) != null) {%>
                                                 <%= bookdetails.getTotalratings().get(4)%>
+                                                <% } else { %>
+                                                None Yet
+                                                <% } %>
                                             </span>
                                         </div>
-                                        <% // rowset.absolute(3);%>
                                         <div class="rating-bar-container tree">
                                             <span class="bar-label">
                                                 <span class="star-tiny">
@@ -202,11 +206,13 @@
                                             <span class="bar">
                                             </span>
                                             <span class="bar-number">
-
+                                                <% if (bookdetails.getTotalratings().get(3) != null) {%>
                                                 <%= bookdetails.getTotalratings().get(3)%>
+                                                <% } else { %>
+                                                None Yet
+                                                <% } %>
                                             </span>
                                         </div>
-                                        <% // rowset.absolute(2);%>
                                         <div class="rating-bar-container two">
                                             <span class="bar-label">
                                                 <span class="star-tiny">
@@ -215,11 +221,13 @@
                                             <span class="bar">
                                             </span>
                                             <span class="bar-number">
-
+                                                <% if (bookdetails.getTotalratings().get(2) != null) {%>
                                                 <%= bookdetails.getTotalratings().get(2)%>
+                                                <% } else { %>
+                                                None Yet
+                                                <% } %>
                                             </span>
                                         </div>
-                                        <% // rowset.absolute(1);%>
                                         <div class="rating-bar-container one">
                                             <span class="bar-label">
                                                 <span class="star-tiny">
@@ -228,8 +236,11 @@
                                             <span class="bar">
                                             </span>
                                             <span class="bar-number">
-
+                                                <% if (bookdetails.getTotalratings().get(1) != null) {%>
                                                 <%= bookdetails.getTotalratings().get(1)%>
+                                                <% } else { %>
+                                                None Yet
+                                                <% } %>
                                             </span>
                                         </div>
                                     </div>
@@ -309,6 +320,9 @@
 
             $('ul.tabs').tabs('select_tab', 'test-swipe-4');
         });
+        
+
+    });
     </script>
     <script src="materialize/js/index.js"></script>
 </body>

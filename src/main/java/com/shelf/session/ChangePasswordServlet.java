@@ -5,6 +5,10 @@
  */
 package com.shelf.session;
 
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
 import com.sun.rowset.JdbcRowSetImpl;
 import connectionproperties.ConnectionBean;
 import java.io.IOException;
@@ -58,6 +62,7 @@ public class ChangePasswordServlet extends HttpServlet {
                 rowset.absolute(-1);
                 user.setPassword(newPassword);
                 session.setAttribute("passchanged", true);
+                sendVerificationMail(user);
                 request.getRequestDispatcher("account.jsp").forward(request, response);
             } else {
                 System.out.println("Empty new password");
@@ -67,7 +72,23 @@ public class ChangePasswordServlet extends HttpServlet {
         }
 
     }
+    private void sendVerificationMail(UserBean aUser) throws IOException {
 
+        String verificationMessage;
+        verificationMessage = "http://localhost:8084/RecommenderApplication/verify.do?key="
+                + aUser.getVerificationkey()+ "&"
+                + "uid=" + aUser.getUID();
+        try {
+            SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+            Request req = new Request();
+            req.setMethod(Method.POST);
+            req.setEndpoint("mail/send");
+            req.setBody("{\"personalizations\":[{\"to\":[{\"email\":\"" + aUser.getEmailID() + "\"}],\"subject\":\"Password changed\"}],\"from\":{\"email\":\"hrajpal96@gmail.com\"},\"content\":[{\"type\":\"text/plain\",\"value\": \"Hey, "+aUser.getFirstName()+"\n Your Password has been changed successfully.\"}]}");
+            Response resp = sg.api(req);
+        } catch (IOException e) {
+
+        }
+    }
     /**
      * Handles the HTTP <code>GET</code> method.
      *

@@ -34,7 +34,8 @@ public class ProductDetailServlet extends HttpServlet {
         BookBean bookdetails = bookdetailservice.getBookDetails(this.getServletContext(), bookID);
         if (bookdetails != null) {
             request.setAttribute("bookdetails", bookdetails);
-            request.getRequestDispatcher("/recommendsimilarbooks.do").forward(request, response);
+            request.getSession().setAttribute("bookdetails", bookdetails);
+            request.getRequestDispatcher("recommendsimilarbooks.do").forward(request, response);
         }
     }
 

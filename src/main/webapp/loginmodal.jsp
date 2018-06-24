@@ -57,7 +57,7 @@
                     </div>
                     <center>
                         <div class='row'>
-                            <button type='submit' formaction="login.do" name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+                            <button type='submit' onclick="checkNotifications()" formaction="login.do" name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
                         </div>
                     </center>
                 </form>

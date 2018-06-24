@@ -44,7 +44,7 @@
                     <% if (session.getAttribute("validated") != null) {
                             if (!(Boolean) session.getAttribute("validated")) {
                     %>
-                    <script>Materialize.toast('Please verify your emailID to access important features.', 2000, 'bottom');</script>
+                    <script>Materialize.toast('Please verify your Email-Id to access important features.', 2000, 'bottom');</script>
                     <%
                             }
                         }
@@ -65,9 +65,9 @@
                     <c:redirect url="index.jsp"/>
                 </c:otherwise>
             </c:choose>
+            <script src="materialize/js/index.js"></script>
+            <script src="materialize/js/searchenable.js"></script>
         </main>
-        <script src="materialize/js/index.js"></script>
-        <script src="materialize/js/searchenable.js"></script>
-        <!--<script src="js/zxcvbn.js"></script>-->
+        <!--<script src="materialize/js/getnotifications.js"></script>-->
     </body>
 </html>

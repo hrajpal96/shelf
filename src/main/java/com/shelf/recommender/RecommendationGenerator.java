@@ -5,6 +5,7 @@
  */
 package com.shelf.recommender;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,6 +63,7 @@ public class RecommendationGenerator implements Runnable {
                 list = recommender.recommend(USER_ID, 10);
                 if (list != null) {
                     long[] users = neighborhood.getUserNeighborhood(USER_ID);
+                    System.out.println(Arrays.toString(users));
                     session.setAttribute("Recommendations", list);
                     session.setAttribute("ratings", dataModel.getPreferencesFromUser(USER_ID));
                 }

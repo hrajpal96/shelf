@@ -16,7 +16,7 @@
                 <script src="materialize/js/materialize.min.js"></script>
                 <ul id="dropdown1" class="dropdown-content black-text">
                     <li><a href="account.jsp" class="black-text"><i class="material-icons">account_circle</i>Profile</a></li>
-                    <li><a href="#!"class="black-text"><i class="material-icons">settings</i>Settings</a></li>
+                    <li><a href="account.jsp"class="black-text"><i class="material-icons">settings</i>Settings</a></li>
                     <li class="divider" tabindex="-1"></li>
                     <li><a href="logout.do"class="black-text"><i class="material-icons">keyboard_tab</i>Logout</a></li>
                 </ul>
@@ -27,12 +27,12 @@
                     </div>
                 </div>
                 <ul id="dropdown2" class="dropdown-content black-text">
-                    <li><a href="#!" class="black-text"><span class="new badge red">4</span>&nbsp;&nbsp;Notifications</a></li>
+                    <li><a href="notifications.jsp" id="notification_badge" class="black-text"><span class="new badge red">${sessionScope.notifications.getmessagecount}</span>&nbsp;&nbsp;Notifications</a></li>
                     <li class="divider"></li>
                     <li><a href="#!" class="black-text"><i class="medium material-icons circle yellow blue-text">shopping_cart</i>New Items in Cart</a></li>
                     <li><a href="#!" class="black-text"><i class="fa fa-inr small circl green-text"></i>Due Payments</a></li>
                     <li><a href="#!" class="black-text"><i class="medium material-icons circle blue white-text">library_books</i>New Recommendations</a></li>
-
+                     
                 </ul>
                 <nav class="nav-extended"> 
                 </c:when>
@@ -44,10 +44,7 @@
                     <div class="row">
                         <div class="col s2">
                             <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-                            <!--                <ul class="left hide-on-med-and-down">
-                                            <li><a href="#" data-activates="slide-out" class="logo-collapse">My Shelf</a></li>
-                                            </ul>-->
-                            <a href="#" data-activates="slide-out" class="brand-logo"><img class="responsive-img" id="logo" src="materialize/images/shelfico.png"/></a>
+                            <a href="index.jsp" data-activates="slide-out" class="brand-logo hide-on-med-and-down"><img class="responsive-img" id="logo" src="materialize/images/shelfico.png"/></a>
                         </div>
                         <ul id="searchip" >
                             <div class="col s7">
@@ -63,7 +60,7 @@
                         <ul class=" right hide-on-med-and-down">
                             <c:choose>
                                 <c:when test="${sessionScope.user ne null}">
-                                    <li><a class="dropdown-button col-s4" data-activates="dropdown2" href="#"><i class="material-icons notif">notifications_none</i><small class="notification-badge">5</small></a></li>
+                                    <li><a id="notificationcount" class="dropdown-button col-s4" data-activates="dropdown2" href="#"><i class="material-icons">notifications_none</i></a></li>
                                     <li><a class="dropdown-button col-s4" data-activates="dropdown1" href="#"><span><i class="material-icons left">account_circle</i></span> ${sessionScope.user.firstName}</a></li>
                                                 </c:when>
                                                 <c:otherwise>

@@ -29,7 +29,7 @@
             <center><h2>New Arrivals</h2></center>
             <div class="container" style="width: 90%">
                 <!--<div class="card large">-->
-                <div class="card large">
+                <div class="card arrivals large">
                     <div class="carousel" style="height: 450px">
                         <%
                             rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book order by RAND() LIMIT 10");
@@ -37,7 +37,7 @@
                             rowset.absolute(1);
                             while (rowset.next()) {
                         %>
-                        <a class="carousel-item" href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>"><img src="<%= rowset.getString("coverPath")%>"><%= rowset.getString("bookName")%></a>
+                        <a class="carousel-item" href="viewbook.do?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>"><img src="<%= rowset.getString("coverPath")%>"><%= rowset.getString("bookName")%></a>
                             <%
                                     }
                                 } catch (SQLException e) {
@@ -47,9 +47,7 @@
                     </div>
 
                 </div>
-
             </div>
-
         </main>
     </body>
 </html>

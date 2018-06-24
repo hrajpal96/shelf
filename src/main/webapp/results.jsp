@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="card-content">
                                     <span class="card-title activator grey-text text-darken-4"><%= rowset.getString(2)%><i class="material-icons right">more_vert</i></span>
-                                    <a href="productdetails.jsp?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a>
+                                    <a href="viewbook.do?bookid=<%= URLEncoder.encode(rowset.getString("bookid"), "UTF-8")%>">View Details</a>
                                 </div>
                                 <div class="card-reveal">
                                     <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i><%= rowset.getString(2)%></span>
@@ -104,16 +104,6 @@
             <jsp:include page="checksession.jsp"></jsp:include>
             <script src="materialize/js/index.js"></script>
         </main>
-        <footer>
-            <ul class="pagination">
-                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                <li class="active"><a href="#!">1</a></li>
-                <li class="waves-effect"><a href="#!">2</a></li>
-                <li class="waves-effect"><a href="#!">3</a></li>
-                <li class="waves-effect"><a href="#!">4</a></li>
-                <li class="waves-effect"><a href="#!">5</a></li>
-                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-            </ul>
-        </footer>
+       
     </body>
 </html>

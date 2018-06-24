@@ -5,6 +5,8 @@
  */
 package com.shelf.session;
 
+import com.shelf.notifications.NotificationService;
+import com.shelf.notifications.UserNotificationBean;
 import com.shelf.recommender.RecommendationGenerator;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -34,7 +36,8 @@ public class LoginServlet extends HttpServlet {
             authenticationType = Resource.AuthenticationType.APPLICATION,
             shareable = false)
     DataSource tasteDS;
-
+    UserNotificationBean notifications;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -54,7 +57,7 @@ public class LoginServlet extends HttpServlet {
         LoginController logincontroller = new LoginController();
         UserBean user = logincontroller.authenticate(emailID, password, this.getServletContext());
         if (user.isDoesexist()) {
-            
+
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
             scheduler = Executors.newScheduledThreadPool(20);
@@ -65,7 +68,7 @@ public class LoginServlet extends HttpServlet {
             String url = response.encodeRedirectURL("success.jsp");
             scheduler.shutdown();
             scheduler.awaitTermination(0, TimeUnit.HOURS);
-            if(!user.isIsValid()){
+            if (!user.isIsValid()) {
                 session.setAttribute("validated", false);
             }
             response.setHeader("Refresh", "1");

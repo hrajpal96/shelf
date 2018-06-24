@@ -5,7 +5,6 @@
 <html>
     <head>
         <title>Shelf</title>
-
     </head>
     <body onload="setTimeout('redirect()', 000)" >
         <header>
@@ -56,7 +55,7 @@
             </div>
         </main>
         <footer class="section red darken-2 white-text center">
-            <p>@2018 All right reserved. Shelf</p>
+            <p>2018 All right reserved. Shelf</p>
         </footer>
     </body>
 

@@ -1,4 +1,8 @@
+/* global checkForNotifications, checkNotifications */
+
 $(document).ready(function () {
+    setInterval(checkNotifications, 5000);
+
     $('input.autocomplete').autocomplete({
         data: {
             "Apple": null,
@@ -11,8 +15,6 @@ $(document).ready(function () {
         },
         minLength: 1 // The minimum length of the input for the autocomplete to start. Default: 1.
     });
-
-    
 
     window.onresize = function (event) {
         var height = $(window).height() - 50;
@@ -31,7 +33,6 @@ $(document).ready(function () {
     $('.modal').modal({opacity: .1, ending_top: '50%'});
     $('.collapsible').collapsible();
     $(".logo-collapse").sideNav();
-    $(".brand-logo").sideNav();
     $('.parallax').parallax();
     $('.carousel').carousel();
     $('.tooltipped').tooltip({delay: 50});
@@ -47,6 +48,7 @@ $(document).ready(function () {
         transition: 1000,
         indicators: false
     });
+
 
 
 
@@ -197,7 +199,7 @@ function checkExist() {
                     document.getElementById("isE").innerHTML = xmlhttp.responseText;
                 } else if (emailID.toString() == "") {
                     document.getElementById("isE").style.color = "red";
-                    document.getElementById("isE").innerHTML = "Cannot be empty"
+                    document.getElementById("isE").innerHTML = "Cannot be empty";
                 } else {
                     document.getElementById("isE").style.color = "green";
                     document.getElementById("isE").innerHTML = xmlhttp.responseText;
@@ -212,4 +214,19 @@ function checkExist() {
             alert("Unable to connect to server");
         }
     }
+}
+function checkNotifications() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "checknotifications.jsp";
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            if (xmlhttp.responseText.endsWith("0")) {
+
+            } else {
+                document.getElementById("notificationcount").innerHTML = xmlhttp.responseText;
+                document.getElementById("notification_badge").innerHTML = xmlhttp.responseText;
+            }
+        }
+    };
+
 }

@@ -30,7 +30,7 @@
         <jsp:include page="cachecontroller.jsp" ></jsp:include>
             <!--<header> </header>-->
             <main>
-               
+
             <c:choose>
                 <c:when test="${sessionScope.user ne null}">
                     <%                        if (session.getAttribute("Recommendations") != null) {
@@ -45,6 +45,17 @@
                     %>
                     <div class="container" style="width: 90%">
                         <div class="row">
+                            <% if ((List<RecommendedItem>)session.getAttribute("recommendations") == null) {
+                            %>
+                            <center>
+                                <img src="materialize/images/products--ratings-reviews.png"/><br>
+                                <h5>Please rate at least 3 books to start getting personalized recommendations</h5>
+                                <div class="progress" style="width: 20%">
+                                    <div class="determinate blue" style="width: 10%; height: 110%"></div>
+                                </div>
+                            </center>
+                            <%
+                                }%>
                             <div class="col s12 m9 l10" id="bodybox">
                                 <h2>Based on Preferences</h2>
                                 <div class="row">
@@ -103,7 +114,7 @@
                                             rowset.setCommand("SELECT bookName,author,averageRating,coverPath,bookid from book where bookid=" + item.getItemID());
                                             rowset.execute();
                                             if (rowset.next()) {
-                                                         String imagepath = rowset.getString("coverPath");
+                                                String imagepath = rowset.getString("coverPath");
                                     %>
                                     <div class="col m4">
                                         <div class="card medium hoverable">
@@ -139,8 +150,8 @@
                             </div>
                         </div>
                     </div>
-                    <%                        } else {
 
+                    <%
                         }
                     %>
                 </c:when>
