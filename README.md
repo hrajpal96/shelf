@@ -1,5 +1,7 @@
 # Shelf - A Mahout based J2EE application for book recommendations.
 A small maven J2EE recommendation application based on Apache Mahout.
+![alt text](https://github.com/hrajpal96/shelf/blob/master/PSD%2010%20(Desktop%2C%20Laptop%2C%20and%20Tablet).png "Shelf")
+
 ### Mahout
 
 https://mahout.apache.org/
